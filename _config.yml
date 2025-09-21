@@ -1,0 +1,10 @@
+# Configuración básica para Jekyll
+title: "Proyecto Guía - Diseño Digital 5"
+description: "Template base para el primer bloque del curso"
+baseurl: ""
+url: ""
+
+# Configuración básica de Jekyll
+markdown: kramdown
+highlighter: rouge
+theme: minima

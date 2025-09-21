@@ -1,25 +1,30 @@
-# Proyecto Guía · Bloque 1 · Diseño Digital 5
+# Proyecto Guía · Diseño Digital 5
 
-Template base para el primer bloque del curso.  
-Enseña jerarquización de información, HTML semántico y estilos responsive con Skeleton.  
-Reutiliza layouts e includes de Jekyll en GitHub Pages.
+Template básico para aprender diseño web con Jekyll y GitHub Pages.
 
-## Páginas
-- Home (`index.html`)
-- Manifiesto (`manifiesto.html`)
-- Guía de Estilo (`guia-estilo.html`)
-- Proyectos G1 (`proyectos-g1.html`)
-- Proyectos G2 (`proyectos-g2.html`)
-- Mood Board (`moodboard.html`)
+## ¿Qué incluye?
+- **Layouts**: Plantillas reutilizables en la carpeta `_layouts`
+- **Includes**: Componentes reutilizables en la carpeta `_includes`
+- **Páginas**: Archivos HTML que usan los layouts
+- **Estilos**: CSS personalizado con Skeleton
 
-## Tecnologías
-- HTML5 + CSS3
-- Skeleton + `styles.css`
-- Jekyll (layouts e includes)
+## Páginas del proyecto
+- `index.html` - Página principal
+- `manifiesto.html` - Manifiesto del curso
+- `guia-estilo.html` - Guía de estilos
+- `proyectos-g1.html` - Proyectos grupo 1
+- `proyectos-g2.html` - Proyectos grupo 2
+- `moodboard.html` - Mood board
 
-## Deploy en GitHub Pages
-1. Subir a GitHub.
-2. Settings → Pages → habilitar rama `main`.
-3. Verificar URL pública.
+## Cómo usar
+1. Edita las páginas HTML
+2. Modifica los layouts en `_layouts/`
+3. Agrega componentes en `_includes/`
+4. Personaliza los estilos en `styles.css`
 
-> Nota: no incluir `.nojekyll`.
+## Subir a GitHub Pages
+1. Crea un repositorio en GitHub
+2. Sube todos los archivos
+3. Ve a Settings → Pages
+4. Selecciona la rama `main`
+5. ¡Tu sitio estará en línea!
