@@ -1,8 +1,8 @@
 # Configuración básica para Jekyll
 title: "Proyecto Guía - Diseño Digital 5"
 description: "Template base para el primer bloque del curso"
-baseurl: ""
-url: ""
+baseurl: "/centro-template"
+url: "https://juanfuent-es.github.io"
 
 # Configuración básica de Jekyll
 markdown: kramdown
