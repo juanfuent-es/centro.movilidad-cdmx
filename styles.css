@@ -1,0 +1,10 @@
+:root {
+  --font-base: 'Inter', system-ui, sans-serif;
+  --c-text:#111; --c-bg:#fff; --c-primary:#1f6feb; --c-border:#e5e5e5;
+}
+
+html,body{font-family:var(--font-base);color:var(--c-text);background:var(--c-bg);}
+h1,h2,h3{margin-top:1.5rem;}
+.container{max-width:960px;margin:0 auto;padding:1rem;}
+nav a{margin-right:1rem;}
+footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--c-border);}
