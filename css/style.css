@@ -5,10 +5,12 @@
 }
 
 /* Estilos default */
-html, body {
+body {
     font-family: var(--font-base);
     color: var(--color-text);
     background: var(--color-bg);
+    padding: 0;
+    margin: 0;
 }
 
 a {
@@ -34,8 +36,12 @@ header#main-header nav {
 
 .hero {
     text-align: center;
-    padding: 4rem 0;
+    padding: 1em 0;
     min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .nav-link {
