@@ -3,21 +3,21 @@ layout: default
 title: Guía de Inicio
 ---
 
-<section class="row">
-    <article class="col-12 hero">
+<header class="row">
+    <div class="columns twelve hero">
         <h1>Guía de Inicio</h1>
         <p>Pasos para clonar y configurar el template</p>
         <nav>
             <a href="https://github.com/juanfuent-es/centro.html-layout" target="_blank" title="Ir a Repositorio" class="button">Ver Repositorio</a>
         </nav>
-    </article>
-</section>
+    </div>
+</header>
 
 
-<div class="row mt-4">
-    <div class="col-12">
+<section class="row mt-4">
+    <div class="columns twelve">
         <h2>Crear Proyecto</h2>
-        <div class="card">
+        <article class="card">
             <div class="card-body">
                 <ol>
                     <li><strong>Clonar desde template</strong> - Haz clic en <a href="https://github.com/new?template_name=centro.html-layout&template_owner=juanfuent-es" target="_blank" title="Usar este template"><u>Use this template</u> en GitHub</a></li>
@@ -27,68 +27,48 @@ title: Guía de Inicio
                 <pre><code>git clone https://github.com/tu-usuario/tu-nuevo-proyecto.git
 cd tu-nuevo-proyecto</code></pre>
             </div>
-        </div>
+        </article>
     </div>
-</div>
-
-<div class="row mt-4">
-    <div class="col-12">
-        <h2>⚙️ Configuración Mínima</h2>
-        <div class="row">
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>📝 Archivos a Modificar</h3>
-                    </div>
-                    <div class="card-body">
-                        <ul>
-                            <li><strong>_config.yml</strong> - Cambia título y URL</li>
-                            <li><strong>index.html</strong> - Personaliza el contenido</li>
-                            <li><strong>css/style.css</strong> - Ajusta colores y estilos</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>🔧 Configuración Básica</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>En <code>_config.yml</code>:</p>
-                        <pre><code>title: "Tu Proyecto"
-description: "Descripción de tu proyecto"
-baseurl: "/tu-repositorio"
-url: "https://tu-usuario.github.io"</code></pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-4">
-    <div class="col-12">
-        <h2>🌐 Cómo Funciona</h2>
-        <div class="card">
+</section>
+<hr>
+<section class="row mt-4">
+    <article class="columns twelve">
+        <h2>Configuración Mínima</h2>
+        <p>Archivos a Modificar</p>
+        <ul>
+            <li><strong>_config.yml</strong> - Cambia título y URL</li>
+            <li><strong>css/style.css</strong> - Ajusta colores y estilos</li>
+            <li><strong>index.html</strong> - Personaliza el contenido</li>
+        </ul>
+    </article>
+</section>
+<hr>
+<section class="row mt-4">
+    <div class="columns twelve">
+        <h2>Cómo Funciona</h2>
+        <article class="card">
             <div class="card-body">
-                <h3>Estructura del Template</h3>
-                <ul>
-                    <li><strong>_layouts/</strong> - Plantillas HTML base</li>
-                    <li><strong>_includes/</strong> - Componentes reutilizables</li>
-                    <li><strong>css/</strong> - Estilos con sistema skeleton</li>
-                    <li><strong>img/</strong> - Recursos e imágenes</li>
-                </ul>
+                <section>
+                    <h3>Estructura del Template</h3>
+                    <ul>
+                        <li><strong>_layouts/</strong> - Plantillas HTML base</li>
+                        <li><strong>_includes/</strong> - Componentes reutilizables</li>
+                        <li><strong>css/</strong> - Estilos con sistema skeleton</li>
+                        <li><strong>img/</strong> - Recursos e imágenes</li>
+                    </ul>
+                </section>
                 
-                <h3>Flujo de Trabajo</h3>
-                <ol>
-                    <li>Edita las páginas HTML en la raíz</li>
-                    <li>Personaliza los layouts en <code>_layouts/</code></li>
-                    <li>Modifica los estilos en <code>css/style.css</code></li>
-                    <li>Sube los cambios a GitHub</li>
-                    <li>GitHub Pages genera automáticamente el sitio</li>
-                </ol>
+                <section>
+                    <h3>Flujo de Trabajo</h3>
+                    <ol>
+                        <li>Edita las páginas HTML en la raíz</li>
+                        <li>Personaliza los layouts en <code>_layouts/</code></li>
+                        <li>Modifica los estilos en <code>css/style.css</code></li>
+                        <li>Sube los cambios a GitHub</li>
+                        <li>GitHub Pages genera automáticamente el sitio</li>
+                    </ol>
+                </section>
             </div>
-        </div>
+        </article>
     </div>
-</div>
+</section>
