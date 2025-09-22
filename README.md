@@ -1,30 +1,61 @@
-# Proyecto Guía · Diseño Digital 5
+# HTML Layout Template
 
-Template básico para aprender diseño web con Jekyll y GitHub Pages.
+Template base con Jekyll y GitHub Pages para proyectos de diseño web.
 
-## ¿Qué incluye?
-- **Layouts**: Plantillas reutilizables en la carpeta `_layouts`
-- **Includes**: Componentes reutilizables en la carpeta `_includes`
-- **Páginas**: Archivos HTML que usan los layouts
-- **Estilos**: CSS personalizado con Skeleton
+## 🚀 Inicio Rápido
 
-## Páginas del proyecto
-- `index.html` - Página principal
-- `manifiesto.html` - Manifiesto del curso
-- `guia-estilo.html` - Guía de estilos
-- `proyectos-g1.html` - Proyectos grupo 1
-- `proyectos-g2.html` - Proyectos grupo 2
-- `moodboard.html` - Mood board
+1. **Usa este template** - Haz clic en "Use this template" en GitHub
+2. **Crea tu repositorio** - Dale un nombre a tu proyecto
+3. **Clona** tu nuevo repositorio localmente
+4. **Personaliza** el contenido en `_config.yml`
+5. **Activa** GitHub Pages en Settings
 
-## Cómo usar
-1. Edita las páginas HTML
-2. Modifica los layouts en `_layouts/`
-3. Agrega componentes en `_includes/`
-4. Personaliza los estilos en `styles.css`
+## 📁 Estructura
 
-## Subir a GitHub Pages
-1. Crea un repositorio en GitHub
-2. Sube todos los archivos
-3. Ve a Settings → Pages
-4. Selecciona la rama `main`
-5. ¡Tu sitio estará en línea!
+```
+├── _layouts/          # Plantillas HTML base
+├── _includes/         # Componentes reutilizables  
+├── css/               # Estilos con sistema skeleton
+├── img/               # Recursos e imágenes
+├── index.html         # Página principal
+├── guia.html          # Guía de inicio
+└── _config.yml       # Configuración de Jekyll
+```
+
+## 🎨 Características
+
+- **Jekyll** - Generador de sitios estáticos
+- **GitHub Pages** - Hosting gratuito
+- **CSS Skeleton** - Framework CSS incluido
+- **Responsive** - Diseño adaptable
+- **Minimal** - Estructura simple y clara
+
+## 📖 Documentación
+
+- [Guía de Inicio](guia.html) - Pasos para configurar
+- [Manifiesto](manifiesto.html) - Filosofía del template
+
+## 🔧 Cómo Usar este Template
+
+1. **En GitHub**: Haz clic en el botón verde "Use this template"
+2. **Crea tu repositorio**: Dale un nombre descriptivo a tu proyecto
+3. **Clona localmente**: `git clone https://github.com/tu-usuario/tu-proyecto.git`
+4. **Personaliza**: Edita `_config.yml` con tu información
+5. **Sube cambios**: `git add . && git commit -m "Initial commit" && git push`
+
+## ⚙️ Configuración
+
+Edita `_config.yml`:
+
+```yaml
+title: "Tu Proyecto"
+description: "Descripción de tu proyecto"
+baseurl: "/tu-repositorio"
+url: "https://tu-usuario.github.io"
+```
+
+## 📚 Recursos
+
+- [Jekyll Docs](https://jekyllrb.com/docs/)
+- [GitHub Pages](https://pages.github.com/)
+- [CSS Skeleton](http://getskeleton.com/)

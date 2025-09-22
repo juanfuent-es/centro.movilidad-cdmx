@@ -1,7 +1,7 @@
 # Configuración básica para Jekyll
-title: "Proyecto Guía - Diseño Digital 5"
-description: "Template base para el primer bloque del curso"
-baseurl: "/centro-template"
+title: "HTML Layout Template | CENTRO DD5"
+description: "Template HTML/CSS con layouts en Jekyll, páginas de ejemplo y estilos responsive con skeleton"
+baseurl: "/centro.html-layout"
 url: "https://juanfuent-es.github.io"
 
 # Configuración básica de Jekyll

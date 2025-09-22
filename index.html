@@ -1,6 +1,14 @@
 ---
 layout: default
-title: Home — Bloque 1
+title: HTML Layout Template
 ---
-<h1>Home</h1>
-<p>Objetivo del bloque: jerarquización de información, HTML semántico y CSS responsive.</p>
+<section class="row">
+    <article class="col-12 hero">
+        <h1>HTML Layout Template</h1>
+        <p class="lead">Template base con Jekyll y GitHub Pages para proyectos de diseño web</p>
+        <nav>
+            <a href="{{ '/guia.html' | relative_url }}" title="Guía de Inicio" class="button">Guía de Inicio</a>
+            <a href="{{ '/recursos.html' | relative_url }}" title="Recursos" class="button">Recursos</a>
+        </nav>
+    </article>
+</section>
