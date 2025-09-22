@@ -7,4 +7,3 @@ url: "https://juanfuent-es.github.io"
 # Configuración básica de Jekyll
 markdown: kramdown
 highlighter: rouge
-theme: minima
