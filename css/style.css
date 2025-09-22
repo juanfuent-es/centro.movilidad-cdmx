@@ -1,0 +1,28 @@
+:root {
+    --font-base: 'Roboto', Helvetica, Arial, Lucida, sans-serif;
+    --color-text: #FFF;
+    --color-bg: #000;
+}
+
+/* Estilos default */
+html, body {
+    font-family: var(--font-base);
+    color: var(--color-text);
+    background: var(--color-bg);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Components */
+.nav-link {
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-weight: 800;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
