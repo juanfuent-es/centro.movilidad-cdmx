@@ -1,9 +1,23 @@
-<header class="container" id="main-header">
+<header id="main-header">
   <nav>
-    <a href="{{ '/guia.html' | relative_url }}" title="Guía de Inicio" class="nav-link">Guía Inicio</a>
-    <a href="{{ '/' | relative_url }}" title="Ir a Inicio" class="nav-link">
+    <a class="nav-link" id="home-link" href="{{ '/' | relative_url }}" title="Ir a Inicio">
       <img src="./img/centro-logo.svg" alt="CENTRO Logotipo" width="100" height="20">
     </a>
-    <a href="{{ '/rubrica.html' | relative_url }}" title="Rúbrica" class="nav-link">Rúbrica</a>
+    <a class="nav-link" id="mapa-ruta-link" href="{{ '/mapa-ruta.html' | relative_url }}" title="Mapa de Ruta">
+      <i class="fas fa-map-marked-alt"></i>
+      <span class="nav-text">Mapa de Ruta</span>
+    </a>
+    <a class="nav-link" id="rubrica-link" href="{{ '/rubrica.html' | relative_url }}" title="Rúbrica">
+      <i class="fas fa-clipboard-check"></i>
+      <span class="nav-text">Rúbrica</span>
+    </a>
+    <a class="nav-link" id="guia-estilo-link" href="{{ '/guia-estilo.html' | relative_url }}" title="Guía de Estilo">
+      <i class="fas fa-palette"></i>
+      <span class="nav-text">Guía de Estilo</span>
+    </a>
+    <a class="nav-link" id="proyectos-link" href="{{ '/proyectos.html' | relative_url }}" title="Proyectos">
+      <i class="fas fa-folder-open"></i>
+      <span class="nav-text">Proyectos</span>
+    </a>
   </nav>
 </header>

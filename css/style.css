@@ -10,12 +10,22 @@
     --color-blanco: #FFFFFF;          /* Texto sobre fondo oscuro */
 
     /* Roles de diseño */
-    --color-bg: var(--color-asfalto);
-    --color-text: var(--color-blanco);
-    --color-primary: var(--color-metro-naranja);
-    --color-secondary: var(--color-taxi-rosa);
-    --color-accent: var(--color-senal-verde);
-    --color-alert: var(--color-stop-rojo);
+    --color-bg: var(--color-blanco);
+    --color-text: var(--color-asfalto);
+    --color-primary: var(--color-stop-rojo);
+    --color-secondary: var(--color-metro-naranja);
+    --color-accent: var(--color-taxi-rosa);
+
+    /* Breakpoints */
+    --breakpoint-mobile: 0px;
+    --breakpoint-tablet: 768px;
+    --breakpoint-desktop: 1024px;
+
+    /* Tamaños de fuente base (mobile first) */
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-nav-link: 2rem;
 }
 
 /* Estilos default */
@@ -31,10 +41,9 @@ body {
         color-scheme: light dark;
         --color-bg: var(--color-asfalto);
         --color-text: var(--color-blanco);
-        --color-primary: var(--color-metro-naranja);
-        --color-secondary: var(--color-taxi-rosa);
-        --color-accent: var(--color-senal-verde);
-        --color-alert: var(--color-stop-rojo);
+        --color-primary: var(--color-stop-rojo);
+        --color-secondary: var(--color-metro-naranja);
+        --color-accent: var(--color-taxi-rosa);
     }
 }
 
@@ -51,31 +60,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: var(--font-size-lg);
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-lg);
 }
 
 h3 {
-    font-size: 1.5rem;
-}
-
-/* Media queries responsive para títulos */
-
-@media (min-width: 768px) {
-    h1 {
-        font-size: 3rem;
-    }
-    
-    h2 {
-        font-size: 2.25rem;
-    }
-    
-    h3 {
-        font-size: 1.75rem;
-    }
+    font-size: var(--font-size-base);
 }
 
 code {
@@ -97,18 +90,66 @@ header#main-header nav {
 
 .nav-link {
     background-color: var(--color-primary);
-    color: var(--color-text);
     font-family: var(--font-heading);
     text-decoration: none;
-    padding: 0.5em 0.5em;
+    padding: 0.5em;
     font-weight: 800;
     text-transform: uppercase;
     width: 20%;
     border: none;
-    height: 2em;
+    height: 3em;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    font-size: var(--font-size-nav-link);
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+.nav-link:hover {
+    color: var(--color-text);
+    opacity: 1;
+}
+
+/* Colores específicos por enlace */
+#home-link { background-color: var(--color-asfalto); }
+#mapa-ruta-link { background-color: var(--color-primary); }
+#rubrica-link { background-color: var(--color-secondary); }
+#guia-estilo-link { background-color: var(--color-accent); }
+#proyectos-link { background-color: var(--color-senal-verde); }
+
+/* Mobile: Solo iconos, texto oculto */
+.nav-text {
+    display: none;
+}
+.nav-link i {
+    min-width: 1.2rem;
+}
+
+/* Tablet: Mostrar texto con tamaño pequeño */
+@media (min-width: 768px) {
+    /* Escalado de tipografía para tablet */
+    :root {
+        --font-size-sm: 1rem;
+        --font-size-base: 1.125rem;
+        --font-size-lg: 1.25rem;
+    }
+    /* Mostrar texto */
+    .nav-text {
+        display: inline;
+    }
+}
+
+/* Desktop: Texto completo con tamaño grande */
+@media (min-width: 1024px) {
+    /* Escalado de tipografía para desktop */
+    :root {
+        --font-size-sm: 1.125rem;
+        --font-size-base: 1.25rem;
+        --font-size-lg: 1.5rem;
+    }
 }
 
 footer#main-footer {
@@ -132,9 +173,18 @@ footer#main-footer {
 
 
 .button {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    text-transform: uppercase;
     background-color: var(--color-primary);
     color: var(--color-text);
     border: none;
+    border-radius: 0;
+    padding: 0.25em 1em;
+    line-height: 2em;
+    font-size: var(--font-size-lg);
+    min-width: 120px;
+    transition: all 0.3s ease;
 }
 .button:hover {
     background-color: var(--color-primary);
