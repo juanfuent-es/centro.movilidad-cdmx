@@ -4,179 +4,197 @@ title: Reglamento de Evaluación
 description: Criterios de evaluación para proyectos de desarrollo web
 ---
 
-<section class="container color-orange">
-    <header class="hero">
-        <h1 class="stroke-orange"><span class="color-orange">Normas</span> Básicas</h1>
-        <p>Esta rúbrica evalúa diferentes aspectos del desarrollo web moderno. Cada criterio se evalúa en una escala de 1-4 puntos.</p>
-    </header>
-</section>
+<header class="hero container">
+    <h1 class="stroke-pink">Reglamento<span class="color-pink"> de Evaluación</span></h1>
+    <p>Esta rúbrica evalúa diferentes aspectos del desarrollo web moderno. Cada criterio se evalúa en una escala de 1-4 puntos.</p>
+    <a class="button button-pink" href="#criterios">Ver Criterios <i class="fa-solid fa-angle-right"></i></a>
+</header>
 <main class="container">
     <section class="row">
-        <div class="columns twelve">
-            <h2>Reglamento de Evaluación</h2>
-            <p>Esta rúbrica evalúa diferentes aspectos del desarrollo web moderno. Cada criterio se evalúa en una escala de 1-4 puntos.</p>
-        </div>
+        <header class="columns twelve">
+            <h2 class="color-pink">Criterios de Evaluación<br><small class="color-white">Sistema de puntuación por competencias</small></h2>ed
+            <p>Esta rúbrica evalúa diferentes aspectos del desarrollo web moderno. Cada criterio se evalúa en una escala de 1-4 puntos, donde 4 es excelente y 1 necesita mejora.</p>
+        </header>
+        <nav role="navigation" aria-label="Índice de criterios de evaluación">
+            <h3>Índice de Criterios</h3>
+            <ol>
+                <li><a title="Documentación del vehículo" href="#documentacion">Documentación del Vehículo</a></li>
+                <li><a title="Carga y mercancía" href="#contenido">Carga y Mercancía</a></li>
+                <li><a title="Señalización vial" href="#semantica">Señalización Vial</a></li>
+                <li><a title="Adaptabilidad de vía" href="#responsive">Adaptabilidad de Vía</a></li>
+                <li><a title="Pintura y señalización" href="#colores">Pintura y Señalización</a></li>
+                <li><a title="Partes y repuestos" href="#componentes">Partes y Repuestos</a></li>
+                <li><a title="Escala de multas" href="#escala">Escala de Multas</a></li>
+            </ol>
+        </nav>
     </section>
 
     <section class="row">
-        <div class="columns twelve">
-            <h3>1. Documentación del Vehículo (4 puntos)</h3>
-            <p>Evaluación de favicon, OpenGraph, título y estilos</p>
-        </div>
+        <hr>
+        <article id="documentacion" class="twelve columns" tabindex="-1">
+            <header>
+                <h3><i class="fa-solid fa-file-lines"></i> 1. Documentación del Vehículo (4 puntos)</h3>
+                <p>Evaluación de favicon, OpenGraph, título y estilos. Se valora la implementación correcta de metadatos y la organización del código.</p>
+            </header>
+            
+            <div class="row">
+                <div class="columns six card evaluation-card excelente">
+                    <h4>Excelente (4 puntos)</h4>
+                    <ul>
+                        <li>Favicon personalizado implementado correctamente</li>
+                        <li>Metadatos OpenGraph completos (title, description, image, url)</li>
+                        <li>Título de página descriptivo y único</li>
+                        <li>Metadatos SEO optimizados (keywords, author, viewport)</li>
+                        <li>Estructura de estilos bien organizada</li>
+                    </ul>
+                </div>
+                
+                <div class="columns six card evaluation-card bueno">
+                    <h4>Bueno (3 puntos)</h4>
+                    <ul>
+                        <li>Favicon implementado</li>
+                        <li>Metadatos OpenGraph básicos presentes</li>
+                        <li>Título de página apropiado</li>
+                        <li>Algunos metadatos SEO incluidos</li>
+                        <li>Estilos organizados</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="columns six card evaluation-card satisfactorio">
+                    <h4>Satisfactorio (2 puntos)</h4>
+                    <ul>
+                        <li>Favicon básico o por defecto</li>
+                        <li>Metadatos OpenGraph mínimos</li>
+                        <li>Título genérico</li>
+                        <li>Metadatos SEO limitados</li>
+                        <li>Estilos básicos</li>
+                    </ul>
+                </div>
+                
+                <div class="columns six card evaluation-card necesita-mejora">
+                    <h4>Necesita Mejora (1 punto)</h4>
+                    <ul>
+                        <li>Sin favicon</li>
+                        <li>Metadatos OpenGraph ausentes o incorrectos</li>
+                        <li>Sin título o título inapropiado</li>
+                        <li>Sin metadatos SEO</li>
+                        <li>Estilos desorganizados o ausentes</li>
+                    </ul>
+                </div>
+            </div>
+        </article>
     </section>
-
     <section class="row">
-        <div class="columns six">
-            <h4>Excelente (4 puntos)</h4>
-            <ul>
-                <li>Favicon personalizado implementado correctamente</li>
-                <li>Metadatos OpenGraph completos (title, description, image, url)</li>
-                <li>Título de página descriptivo y único</li>
-                <li>Metadatos SEO optimizados (keywords, author, viewport)</li>
-                <li>Estructura de estilos bien organizada</li>
-            </ul>
-        </div>
-        
-        <div class="columns six">
-            <h4>Bueno (3 puntos)</h4>
-            <ul>
-                <li>Favicon implementado</li>
-                <li>Metadatos OpenGraph básicos presentes</li>
-                <li>Título de página apropiado</li>
-                <li>Algunos metadatos SEO incluidos</li>
-                <li>Estilos organizados</li>
-            </ul>
-        </div>
+        <hr>
+        <article id="contenido" class="twelve columns" tabindex="-1">
+            <header>
+                <h3><i class="fa-solid fa-boxes-stacked"></i> 2. Carga y Mercancía (4 puntos)</h3>
+                <p>Evaluación de la calidad y estructura del contenido. Se valora la relevancia, organización y accesibilidad de la información presentada.</p>
+            </header>
+            
+            <div class="row">
+                <div class="columns six card evaluation-card excelente">
+                    <h4>Excelente (4 puntos)</h4>
+                    <ul>
+                        <li>Contenido relevante y bien estructurado</li>
+                        <li>Jerarquía de información clara</li>
+                        <li>Contenido accesible y comprensible</li>
+                        <li>Información actualizada y precisa</li>
+                        <li>Contenido original y de calidad</li>
+                    </ul>
+                </div>
+                
+                <div class="columns six card evaluation-card bueno">
+                    <h4>Bueno (3 puntos)</h4>
+                    <ul>
+                        <li>Contenido relevante</li>
+                        <li>Estructura de información clara</li>
+                        <li>Contenido comprensible</li>
+                        <li>Información precisa</li>
+                        <li>Contenido de buena calidad</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="columns six card evaluation-card satisfactorio">
+                    <h4>Satisfactorio (2 puntos)</h4>
+                    <ul>
+                        <li>Contenido básicamente relevante</li>
+                        <li>Estructura de información aceptable</li>
+                        <li>Contenido comprensible con esfuerzo</li>
+                        <li>Información mayormente precisa</li>
+                        <li>Contenido de calidad aceptable</li>
+                    </ul>
+                </div>
+                
+                <div class="columns six card evaluation-card necesita-mejora">
+                    <h4>Necesita Mejora (1 punto)</h4>
+                    <ul>
+                        <li>Contenido irrelevante o confuso</li>
+                        <li>Estructura de información poco clara</li>
+                        <li>Contenido difícil de comprender</li>
+                        <li>Información imprecisa o desactualizada</li>
+                        <li>Contenido de baja calidad</li>
+                    </ul>
+                </div>
+            </div>
+        </article>
     </section>
-    <hr>
     <section class="row">
-        <div class="columns six">
-            <h4>Satisfactorio (2 puntos)</h4>
-            <ul>
-                <li>Favicon básico o por defecto</li>
-                <li>Metadatos OpenGraph mínimos</li>
-                <li>Título genérico</li>
-                <li>Metadatos SEO limitados</li>
-                <li>Estilos básicos</li>
-            </ul>
-        </div>
-        
-        <div class="columns six">
-            <h4>Necesita Mejora (1 punto)</h4>
-            <ul>
-                <li>Sin favicon</li>
-                <li>Metadatos OpenGraph ausentes o incorrectos</li>
-                <li>Sin título o título inapropiado</li>
-                <li>Sin metadatos SEO</li>
-                <li>Estilos desorganizados o ausentes</li>
-            </ul>
-        </div>
-    </section>
-    <hr>
-    <section class="row">
-        <div class="columns twelve">
-            <h3>2. Carga y Mercancía (4 puntos)</h3>
-            <p>Evaluación de la calidad y estructura del contenido</p>
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="columns six">
-            <h4>Excelente (4 puntos)</h4>
-            <ul>
-                <li>Contenido relevante y bien estructurado</li>
-                <li>Jerarquía de información clara</li>
-                <li>Contenido accesible y comprensible</li>
-                <li>Información actualizada y precisa</li>
-                <li>Contenido original y de calidad</li>
-            </ul>
-        </div>
-        
-        <div class="columns six">
-            <h4>Bueno (3 puntos)</h4>
-            <ul>
-                <li>Contenido relevante</li>
-                <li>Estructura de información clara</li>
-                <li>Contenido comprensible</li>
-                <li>Información precisa</li>
-                <li>Contenido de buena calidad</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="columns six">
-            <h4>Satisfactorio (2 puntos)</h4>
-            <ul>
-                <li>Contenido básicamente relevante</li>
-                <li>Estructura de información aceptable</li>
-                <li>Contenido comprensible con esfuerzo</li>
-                <li>Información mayormente precisa</li>
-                <li>Contenido de calidad aceptable</li>
-            </ul>
-        </div>
-        
-        <div class="columns six">
-            <h4>Necesita Mejora (1 punto)</h4>
-            <ul>
-                <li>Contenido irrelevante o confuso</li>
-                <li>Estructura de información poco clara</li>
-                <li>Contenido difícil de comprender</li>
-                <li>Información imprecisa o desactualizada</li>
-                <li>Contenido de baja calidad</li>
-            </ul>
-        </div>
-    </section>
-    <hr>
-    <section class="row">
-        <div class="columns twelve">
-            <h3>3. Señalización Vial (4 puntos)</h3>
-            <p>Evaluación del uso correcto de elementos HTML5 semánticos</p>
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="columns six">
-            <h4>Excelente (4 puntos)</h4>
-            <ul>
-                <li>Uso correcto de elementos HTML5 semánticos (header, nav, main, section, article, aside, footer)</li>
-                <li>Estructura jerárquica de encabezados (h1-h6) apropiada</li>
-                <li>Elementos de lista (ul, ol, li) utilizados correctamente</li>
-                <li>Etiquetas de texto semánticas (strong, em, mark, time)</li>
-            </ul>
-        </div>
-        
-        <div class="columns six">
-            <h4>Bueno (3 puntos)</h4>
-            <ul>
-                <li>Uso mayormente correcto de elementos semánticos</li>
-                <li>Jerarquía de encabezados apropiada</li>
-                <li>Elementos de lista utilizados correctamente</li>
-                <li>Algunas etiquetas semánticas implementadas</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="columns six">
-            <h4>Satisfactorio (2 puntos)</h4>
-            <ul>
-                <li>Uso básico de elementos semánticos</li>
-                <li>Jerarquía de encabezados aceptable</li>
-                <li>Elementos de lista básicos</li>
-                <li>Pocas etiquetas semánticas</li>
-            </ul>
-        </div>
-        
-        <div class="columns six">
-            <h4>Necesita Mejora (1 punto)</h4>
-            <ul>
-                <li>Uso incorrecto o ausente de elementos semánticos</li>
-                <li>Jerarquía de encabezados incorrecta</li>
-                <li>Elementos de lista mal utilizados</li>
-                <li>Sin etiquetas semánticas</li>
-            </ul>
-        </div>
+        <hr>
+        <article id="semantica" class="twelve columns" tabindex="-1">
+            <header>
+                <h3><i class="fa-solid fa-road"></i> 3. Señalización Vial (4 puntos)</h3>
+                <p>Evaluación del uso correcto de elementos HTML5 semánticos. Se valora la estructura semántica y accesibilidad del código HTML.</p>
+            </header>
+            
+            <div class="row">
+                <div class="columns six card evaluation-card excelente">
+                    <h4>Excelente (4 puntos)</h4>
+                    <ul>
+                        <li>Uso correcto de elementos HTML5 semánticos (header, nav, main, section, article, aside, footer)</li>
+                        <li>Estructura jerárquica de encabezados (h1-h6) apropiada</li>
+                        <li>Elementos de lista (ul, ol, li) utilizados correctamente</li>
+                        <li>Etiquetas de texto semánticas (strong, em, mark, time)</li>
+                    </ul>
+                </div>
+                
+                <div class="columns six card evaluation-card bueno">
+                    <h4>Bueno (3 puntos)</h4>
+                    <ul>
+                        <li>Uso mayormente correcto de elementos semánticos</li>
+                        <li>Jerarquía de encabezados apropiada</li>
+                        <li>Elementos de lista utilizados correctamente</li>
+                        <li>Algunas etiquetas semánticas implementadas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="columns six card evaluation-card satisfactorio">
+                    <h4>Satisfactorio (2 puntos)</h4>
+                    <ul>
+                        <li>Uso básico de elementos semánticos</li>
+                        <li>Jerarquía de encabezados aceptable</li>
+                        <li>Elementos de lista básicos</li>
+                        <li>Pocas etiquetas semánticas</li>
+                    </ul>
+                </div>
+                
+                <div class="columns six card evaluation-card necesita-mejora">
+                    <h4>Necesita Mejora (1 punto)</h4>
+                    <ul>
+                        <li>Uso incorrecto o ausente de elementos semánticos</li>
+                        <li>Jerarquía de encabezados incorrecta</li>
+                        <li>Elementos de lista mal utilizados</li>
+                        <li>Sin etiquetas semánticas</li>
+                    </ul>
+                </div>
+            </div>
+        </article>
     </section>
     <hr>
     <section class="row">
@@ -187,7 +205,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
     </section>
 
     <section class="row">
-        <div class="columns six">
+        <div class="columns six card evaluation-card excelente">
             <h4>Excelente (4 puntos)</h4>
             <ul>
                 <li>Diseño completamente responsive en todos los dispositivos</li>
@@ -198,7 +216,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
             </ul>
         </div>
         
-        <div class="columns six">
+        <div class="columns six card evaluation-card bueno">
             <h4>Bueno (3 puntos)</h4>
             <ul>
                 <li>Diseño responsive en la mayoría de dispositivos</li>
@@ -211,7 +229,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
     </section>
 
     <section class="row">
-        <div class="columns six">
+        <div class="columns six card evaluation-card satisfactorio">
             <h4>Satisfactorio (2 puntos)</h4>
             <ul>
                 <li>Diseño responsive básico</li>
@@ -222,7 +240,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
             </ul>
         </div>
         
-        <div class="columns six">
+        <div class="columns six card evaluation-card necesita-mejora">
             <h4>Necesita Mejora (1 punto)</h4>
             <ul>
                 <li>Diseño no responsive o con problemas</li>
@@ -242,7 +260,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
     </section>
 
     <section class="row">
-        <div class="columns six">
+        <div class="columns six card evaluation-card excelente">
             <h4>Excelente (4 puntos)</h4>
             <ul>
                 <li>Paleta de colores coherente y profesional</li>
@@ -253,7 +271,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
             </ul>
         </div>
         
-        <div class="columns six">
+        <div class="columns six card evaluation-card bueno">
             <h4>Bueno (3 puntos)</h4>
             <ul>
                 <li>Paleta de colores coherente</li>
@@ -266,7 +284,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
     </section>
 
     <section class="row">
-        <div class="columns six">
+        <div class="columns six card evaluation-card satisfactorio">
             <h4>Satisfactorio (2 puntos)</h4>
             <ul>
                 <li>Paleta de colores básica</li>
@@ -277,7 +295,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
             </ul>
         </div>
         
-        <div class="columns six">
+        <div class="columns six card evaluation-card necesita-mejora">
             <h4>Necesita Mejora (1 punto)</h4>
             <ul>
                 <li>Paleta de colores incoherente</li>
@@ -297,7 +315,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
     </section>
 
     <section class="row">
-        <div class="columns six">
+        <div class="columns six card evaluation-card excelente">
             <h4>Excelente (4 puntos)</h4>
             <ul>
                 <li>Componentes reutilizables y modulares</li>
@@ -308,7 +326,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
             </ul>
         </div>
         
-        <div class="columns six">
+        <div class="columns six card evaluation-card bueno">
             <h4>Bueno (3 puntos)</h4>
             <ul>
                 <li>Componentes mayormente reutilizables</li>
@@ -321,7 +339,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
     </section>
 
     <section class="row">
-        <div class="columns six">
+        <div class="columns six card evaluation-card satisfactorio">
             <h4>Satisfactorio (2 puntos)</h4>
             <ul>
                 <li>Componentes básicamente reutilizables</li>
@@ -332,7 +350,7 @@ description: Criterios de evaluación para proyectos de desarrollo web
             </ul>
         </div>
         
-        <div class="columns six">
+        <div class="columns six card evaluation-card necesita-mejora">
             <h4>Necesita Mejora (1 punto)</h4>
             <ul>
                 <li>Componentes no reutilizables</li>

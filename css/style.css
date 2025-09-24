@@ -354,3 +354,55 @@ section h4 {
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
 }
+
+/* Estilos específicos para niveles de evaluación en rúbrica */
+.evaluation-card {
+    border-color: currentColor;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Excelente - Verde */
+.evaluation-card.excelente {
+    border-color: var(--color-senal-verde);
+}
+
+.evaluation-card.excelente h4 {
+    color: var(--color-senal-verde);
+    font-weight: 700;
+}
+
+/* Bueno - Naranja */
+.evaluation-card.bueno {
+    border-color: var(--color-metro-naranja);
+}
+
+.evaluation-card.bueno h4 {
+    color: var(--color-metro-naranja);
+    font-weight: 700;
+}
+
+/* Satisfactorio - Azul */
+.evaluation-card.satisfactorio {
+    border-color: var(--color-taxi-rosa);
+}
+
+.evaluation-card.satisfactorio h4 {
+    color: var(--color-taxi-rosa);
+    font-weight: 700;
+}
+
+
+
+/* Necesita Mejora - Rojo */
+.evaluation-card.necesita-mejora {
+    border-color: var(--color-stop-rojo);
+}
+
+.evaluation-card.necesita-mejora h4 {
+    color: var(--color-stop-rojo);
+    font-weight: 700;
+}
+
+
