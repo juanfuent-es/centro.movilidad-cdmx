@@ -4,80 +4,157 @@ title: Centro de Diseño Web
 description: Template base con Jekyll y GitHub Pages para proyectos de diseño web
 ---
 
-<!-- 
-PÁGINA PRINCIPAL · BLOQUE 1
-========================================
-Comunicación Visual – Diseño Digital 5
-Fundamentos web + herramientas, enfoque en movilidad CDMX.
-Secciones guía: Punto de Partida (hero), Mapa de Ruta (temario), Señalamientos (rúbrica), Kit de Supervivencia (recursos), Última Estación (entrega).
+<!--
+  COMPONENTE: header.hero (reutilizable en todas las páginas)
+  -----------------------------------------------------------
+  Descripción:
+  - Bloque de hero con título, descripción corta y CTA.
+  - Se repite igual en todas las vistas. Lo ÚNICO que cambia entre secciones
+    son las clases utilitarias de color (stroke-*, color-*, button-*) para
+    mapear la paleta por sección (Home, Mapa de Ruta, Rúbrica, Guía, Proyectos).
+
+  Guía de uso:
+  - Contenedor y layout: mantener `header.hero.container`.
+  - Título h1: cambiar utilidades de trazo y color del span.
+    Ejemplos: stroke-white | stroke-red | stroke-orange y color-pink | color-green, etc.
+  - Botón CTA: usar `button` + modificador de color si aplica (p.ej. button-pink).
 -->
+<header class="hero container">
+  <!-- Título principal del hero. Solo varían utilidades de color/contorno -->
+  <h1 class="stroke-white">Movilidad <span class="color-pink">CDMX</span></h1>
+  <!-- Texto descriptivo corto del bloque/sección -->
+  <p>Estructura informacional y jerárquica aplicada al diseño web <br>Primer Bloque | Comunicación Visual - Diseño Digital V</p>
+  <!-- CTA principal del hero. Puede usar `button-*` para acentuar color por sección -->
+  <a class="button" href="{{ '/guia.html' | relative_url }}">Comenzar <i class="fa-solid fa-angle-right"></i></a>
+</header>
 
-<!-- HERO: Punto de Partida -->
-<section class="container section--home">
-  <header class="hero">
-    <h1 class="stroke-white">#Movilidad<span class="color-pink">CDMX</span></h1>
-    <p>Proyecto del Primer Bloque | Comunicación Visual — Diseño Digital 5<br>
-      Estructura informacional y jerarquía aplicada al diseño web</p>
-      <a class="button" href="{{ '/guia.html' | relative_url }}">Comenzar <i class="fa-solid fa-angle-right"></i></a>
-  </header>
-</section>
-
-<!-- Temario del Bloque 1 -->
-<section class="row section--mapa-ruta">
-  <header class="columns twelve">
-    <h2 class="stroke-white color-asphalt">Índice</h2>
-  </header>
-  <nav class="columns twelve">
-    <h3>Sesiones del Bloque</h3>
-    <ol>
-      <li><strong>Introducción:</strong> La web como plataforma de narrativa visual interactiva</li>
-      
-    </ol>
-  </nav>
-</section>
-
-<hr>
-
-<!-- Temario del Bloque 1 -->
-<article class="row section--mapa-ruta">
+<section class="row">
   <header class="columns twelve">
     <h2><span class="stroke-white color-asphalt">Bloque 1</span> <br>Estructura Informacional y Jerárquica</h2>
+    <p><b>Objetivo:</b> <br>Explorar los fundamentos web aplicados a la comunicación visual, creando un sitio
+      estructurado y accesible que aborde la movilidad en la Ciudad de México como narrativa digital.</p>
   </header>
-  <section class="columns twelve">
-    <h3>Sesiones del Bloque</h3>
-    <ol>
-      <li><strong>Introducción:</strong> La web como plataforma de narrativa visual interactiva</li>
-      <li><strong>Terminal, Git & GitHub:</strong> repositorios, commits, ramas</li>
-      <li><strong>Markdown:</strong> README, estructura y tipografía para documentación</li>
-      <li><strong>HTML semántico:</strong> jerarquía, secciones, navegación</li>
-      <li><strong>Layout reutilizable:</strong> Variables CSS, componentes y grid (Skeleton)</li>
-      <li><strong>Diseño visual en CSS:</strong> paleta de colores, tipografías, responsive</li>
-      <li><strong>Accesibilidad y Metadatos:</strong> contraste, alt, OpenGraph, favicons</li>
-      <li><strong>Publicación:</strong> GitHub Pages</li>
-    </ol>
-  </section>
-</article>
 
-<hr>
+  <div class="row">
+    <!-- 1. INTRODUCCIÓN -->
+    <article class="six columns card">
+      <header>
+        <h3>La web como plataforma de narrativa visual</h3>
+        <p>Panorama del ecosistema web para Comunicación Visual: Cómo la web permite intercambiar información visual de
+          manera instantánea y colaborativa.</p>
+      </header>
+      <ul>
+        <li><a href="https://codepen.io/" target="_blank" rel="noopener">Codepen — Explora ejemplos de código web</a></li>
+        <li><a href="https://awwwards.com/" target="_blank" rel="noopener">Awwwards — Conoce lo mejor de la #WorldWideWeb</a></li>
+      </ul>
+    </article>
 
-<!-- ÚLTIMA ESTACIÓN: Entrega y pasos -->
-<section class="row">
-<article class="columns twelve">
-    <header>
-      <h2><span class="stroke-pink color-asphalt">Última <b class="color-pink">Estación</b></span> <br>Punto de Encuentro</h2>
-      <p>Checklist final para publicar y evaluar tu entrega.</p>
-    </header>
+    <!-- 2. TERMINAL, GIT & GITHUB -->
+    <article class="six columns card">
+      <header>
+        <h3>Terminal, Git & GitHub</h3>
+        <p>Primeros pasos en control de versiones: aprender a crear un repositorio, guardar cambios, subirlos a GitHub y colaborar en proyectos sencillos.</p>
+      </header>
+      <ul>
+        <li><a href="https://docs.github.com/es/get-started/quickstart/hello-world" target="_blank" rel="noopener">GitHub — Guía rápida: Hello World</a></li>
+        <li><a href="https://docs.github.com/es/get-started/using-git/about-git" target="_blank" rel="noopener">GitHub Docs — Introducción a Git</a></li>
+        <li><a href="https://education.github.com/git-cheat-sheet-education.pdf" target="_blank" rel="noopener">GitHub Education — Hoja de comandos básicos (PDF)</a></li>
+      </ul>
+    </article>
+    
+  </div>
 
-    <div>
-      <ol>
-        <li>Revisa la <a href="rubrica.html">Rúbrica</a> y completa el checklist</li>
-        <li>Actualiza README con brief, mapa del sitio y capturas</li>
-        <li>Verifica accesibilidad (alt, títulos, contraste)</li>
-        <li>Optimiza assets (favicons, metadatos, imágenes)</li>
-        <li>Publica en GitHub Pages y comparte URL del sitio</li>
-      </ol>
-      <a class="button button-pink" href="rubrica.html">Abrir Rúbrica</a>
-      <a class="button button-orange" href="guia.html">Ver Guía</a>
-    </div>
-  </article>
+  <div class="row">
+    <!-- 3. MARKDOWN -->
+    <article class="six columns card">
+      <header>
+        <h3>README.md: Markdown</h3>
+        <p>Uso de README.md como documento principal, aplicando Markdown para títulos, listas, enlaces, imágenes y organización clara del proyecto.</p>
+      </header>
+      <ul>
+        <li><a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener">Markdown Guide —
+            Sintaxis básica</a></li>
+        <li><a href="https://www.markdownguide.org/extended-syntax/" target="_blank" rel="noopener">Markdown Guide —
+            Sintaxis extendida</a></li>
+        <li><a href="https://docs.github.com/es/get-started/writing-on-github" target="_blank" rel="noopener">GitHub —
+            Writing on GitHub</a></li>
+      </ul>
+    </article>
+
+    <!-- 4. HTML SEMÁNTICO -->
+    <article class="six columns card">
+      <header>
+        <h3>HTML semántico</h3>
+        <p>Estructuración de contenido con elementos semánticos (<code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>footer</code>) para mejorar la accesibilidad y la SEO.
+        </p>
+      </header>
+      <ul>
+        <li><a href="https://developer.mozilla.org/es/docs/Glossary/Semantics#sem%C3%A1ntica_en_html" target="_blank"
+            rel="noopener">MDN — Semántica en HTML</a></li>
+        <li><a href="https://www.w3schools.com/html/html5_semantic_elements.asp" target="_blank"
+            rel="noopener">W3Schools — Elementos semánticos</a></li>
+        <li><a href="https://html.spec.whatwg.org/" target="_blank" rel="noopener">WHATWG — Especificación HTML</a>
+        </li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="row">
+    <!-- 5. LAYOUT REUTILIZABLE (SKELETON + VARIABLES) -->
+    <article class="six columns card">
+      <header>
+        <h3>Layout reutilizable</h3>
+        <p>Definición de variables CSS para creación de temas y consistencia visual. Aplicación de tipografías, tamaños y grid de Skeleton para consistencia visual, responsive.</p>
+      </header>
+      <ul>
+        <li><a href="http://getskeleton.com/" target="_blank" rel="noopener">Skeleton CSS — Sitio oficial</a></li>
+        <li><a href="https://developer.mozilla.org/es/docs/Web/CSS/Using_CSS_custom_properties" target="_blank"
+            rel="noopener">MDN — Variables (custom properties)</a></li>
+        <li><a href="https://fonts.google.com/" target="_blank" rel="noopener">Google Fonts — Catálogo</a></li>
+      </ul>
+    </article>
+
+    <!-- 6. DISEÑO VISUAL EN CSS -->
+    <article class="six columns card">
+      <header>
+        <h3>Componentes</h3>
+        <p>Uso de componentes básicos en CSS para dar estilo consistente al proyecto: enlaces, botones, tipografía, colores y adaptabilidad a distintos dispositivos.</p>
+      </header>
+      <ul>
+        <li><a href="https://developer.mozilla.org/es/docs/Learn/CSS/Styling_text/Styling_links" target="_blank" rel="noopener">MDN — Cómo dar estilo a enlaces</a></li>
+        <li><a href="https://developer.mozilla.org/es/docs/Learn/CSS/Styling_boxes/Styling_buttons" target="_blank" rel="noopener">MDN — Estilos para botones en CSS</a></li>
+        <li><a href="https://developer.mozilla.org/es/docs/Learn/CSS/Styling_text/Fundamentals" target="_blank" rel="noopener">MDN — Fundamentos de tipografía en CSS</a></li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="row">
+    <!-- 7. ACCESIBILIDAD Y METADATOS -->
+    <article class="six columns card">
+      <header>
+        <h3>Accesibilidad y Metadatos</h3>
+        <p>Prácticas para mejorar la lectura en pantalla y el SEO social: texto alternativo, contraste AA/AAA, metadatos, favicons</p>
+          y favicons.</p>
+      </header>
+      <ul>
+        <li><a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank" rel="noopener">W3C WAI —
+            WCAG</a></li>
+        <li><a href="https://ogp.me/" target="_blank" rel="noopener">Open Graph — Protocolo</a></li>
+        <li><a href="https://realfavicongenerator.net/" target="_blank" rel="noopener">RealFaviconGenerator —
+            Favicons</a></li>
+      </ul>
+    </article>
+
+    <!-- 8. PUBLICACIÓN -->
+    <article class="six columns card">
+      <header>
+        <h3>Publicación</h3>
+        <p>Despliegue estático del sitio: configuración del repositorio, rama de publicación y verificación de la build en github pages.</p>
+      </header>
+      <ul>
+        <li><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages — Sitio</a></li>
+        <li><a href="https://docs.github.com/es/pages" target="_blank" rel="noopener">Docs de GitHub Pages</a></li>
+      </ul>
+    </article>
+  </div>
 </section>
