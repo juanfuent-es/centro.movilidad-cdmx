@@ -1,11 +1,218 @@
 ---
 layout: default
-title: Mapa de Ruta
-description: Navegación y estructura del proyecto de desarrollo web
+title: Guía Técnica
+description: 
 ---
 <header class="hero container">
     <!-- Título principal del hero. Solo varían utilidades de color/contorno -->
-    <h1 class="stroke-white">Documentación<span class="color-orange"> de Estilo</span></h1>
+    <h1 class="stroke-orange">Guía<span class="color-orange"> Técnica</span></h1>
     <!-- Texto descriptivo corto del bloque/sección -->
-    <p></p>
+    <p class="color-orange">Documentación de los conceptos y tecnologías usadas en este proyecto estático con Skeleton y utilidades CSS personalizadas.</p>
 </header>
+<main class="container">
+    <section class="row">
+        <header class="columns twelve">
+            <h2><span class="stroke-white color-asphalt">Documentación</span> <br>Recursos, convenciones y ejemplos</h2>
+            <p>Esta guía documenta los conceptos y tecnologías usadas en este proyecto estático con Jekyll, Skeleton y utilidades CSS personalizadas. Referencia archivos locales como <code>_includes/head.html</code>, <code>css/style.css</code> y <code>css/scroll-bar.css</code>.</p>
+        </header>
+        <nav role="navigation" aria-label="Índice de la guía">
+            <ul>
+                <li><a href="#tipografias">Tipografías</a></li>
+                <li><a href="#metadatos">Metadatos</a></li>
+                <li><a href="#colores-temas">Colores y temas</a></li>
+                <li><a href="#skeleton">Skeleton (Grid y baseline)</a></li>
+                <li><a href="#scroll-accesibilidad">Scroll y accesibilidad</a></li>
+                <li><a href="#estructura-tecnologias">Estructura y tecnologías</a></li>
+                <li><a href="#font-awesome">Font Awesome</a></li>
+                <li><a href="#buenas-practicas">Buenas prácticas</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <section class="row">
+        <hr>
+        <article id="tipografias" class="twelve columns" tabindex="-1">
+            <header>
+                <h3><i class="fa-solid fa-font"></i> Tipografías</h3>
+                <p>El proyecto usa variables tipográficas y carga de Google Fonts. Puedes sustituir o extender con Adobe Fonts o Font Squirrel.</p>
+            </header>
+            <ul>
+                <li><a href="https://fonts.google.com/" target="_blank" rel="noopener">Google Fonts</a></li>
+                <li><a href="https://fonts.adobe.com/" target="_blank" rel="noopener">Adobe Fonts (Typekit)</a></li>
+                <li><a href="https://www.fontsquirrel.com/" target="_blank" rel="noopener">Font Squirrel</a></li>
+            </ul>
+            <p><b>Variables locales</b> en <code>css/style.css</code>:</p>
+            <pre><code>:root {
+    --font-base: 'Roboto', Helvetica, Arial, Lucida, sans-serif;
+    --font-heading: 'Barlow', Helvetica, Arial, Lucida, sans-serif;
+}
+
+body { font-family: var(--font-base); }
+h1, h2, h3 { font-family: var(--font-heading); }</code></pre>
+            <p><b>Carga por CDN</b> en <code>_includes/head.html</code>:</p>
+            <pre><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Barlow:...&amp;family=Roboto:...&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+            <p><b>Ejemplo de uso</b> en HTML:</p>
+            <pre><code>&lt;h1 class="stroke-white"&gt;Título con &lt;span class="color-orange"&gt;Barlow&lt;/span&gt;&lt;/h1&gt;</code></pre>
+        </article>
+
+        <hr>
+        <article id="metadatos" class="twelve columns" tabindex="-1">
+            <header>
+                <h3><i class="fa-solid fa-tag"></i> Metadatos</h3>
+                <p>Incluye metadatos básicos y Open Graph para vistas previas sociales.</p>
+            </header>
+            <p><b>Definidos</b> en <code>_includes/head.html</code>:</p>
+            <pre><code>&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;title&gt;{{ page.title }}&lt;/title&gt;
+&lt;meta property="og:title" content="{{ page.title }}"&gt;
+&lt;meta property="og:description" content="{{ page.description }}"&gt;
+&lt;meta property="og:url" content="{{ page.url }}"&gt;
+&lt;meta property="og:type" content="website"&gt;</code></pre>
+            <p><b>Cómo editar</b> por página (YAML front matter):</p>
+            <pre><code>---
+layout: default
+title: Mi Página
+description: Descripción para SEO y redes
+---</code></pre>
+            <p><b>Favicons</b> y redes:</p>
+            <ul>
+                <li><a href="https://ogp.me/" target="_blank" rel="noopener">Open Graph — Protocolo</a></li>
+                <li><a href="https://realfavicongenerator.net/" target="_blank" rel="noopener">RealFaviconGenerator</a></li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="row">
+        <hr>
+        <article id="colores-temas" class="twelve columns" tabindex="-1">
+            <header>
+                <h3><i class="fa-solid fa-palette"></i> Colores y temas</h3>
+                <p>Se usan variables CSS y utilidades para color y contorno; hay soporte a modo oscuro automático.</p>
+            </header>
+            <p><b>Variables</b> en <code>css/style.css</code>:</p>
+            <pre><code>:root {
+    --color-asfalto: #212121;
+    --color-white: #FFFFFF;
+    --color-stop-rojo: #D32F2F;
+    --color-metro-naranja: #F47C20;
+    --color-taxi-rosa: #EC407A;
+    --color-senal-verde: #2E7D32;
+    --color-bg: var(--color-white);
+    --color-text: var(--color-asfalto);
+    --color-primary: var(--color-stop-rojo);
+}
+@media (prefers-color-scheme: dark) {
+    :root { --color-bg: var(--color-asfalto); --color-text: var(--color-white); }
+}</code></pre>
+            <p><b>Utilidades</b> disponibles:</p>
+            <pre><code>.color-orange { color: var(--color-metro-naranja); }
+.stroke-white { -webkit-text-stroke: 1px var(--color-white); }
+.button.button-pink:hover { background-color: var(--color-taxi-rosa); }</code></pre>
+            <p><b>Ejemplo</b> de uso en HTML:</p>
+            <pre><code>&lt;a class="button button-orange" href="#"&gt;CTA Naranja&lt;/a&gt;</code></pre>
+        </article>
+
+        <hr>
+        <article id="skeleton" class="twelve columns" tabindex="-1">
+            <header>
+                <h3><i class="fa-brands fa-simplybuilt"></i> Skeleton (Grid y baseline)</h3>
+                <p>Se importa Skeleton para grid y tipografía base. Las utilidades propias viven en <code>css/style.css</code>.</p>
+            </header>
+            <p><b>Importación</b> en <code>_includes/head.html</code>:</p>
+            <pre><code>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"&gt;</code></pre>
+            <p><b>Layout responsivo</b> con grid:</p>
+            <pre><code>&lt;section class="row"&gt;
+  &lt;article class="six columns card"&gt;Columna 1&lt;/article&gt;
+  &lt;article class="six columns card"&gt;Columna 2&lt;/article&gt;
+&lt;/section&gt;</code></pre>
+            <p><b>Componentes locales</b> (ejemplos):</p>
+            <pre><code>.hero { min-height: 70vh; display: flex; align-items: center; }
+.card { border: 1px solid var(--color-text); padding: 1em; }
+.button { font-weight: 800; text-transform: uppercase; }</code></pre>
+            <ul>
+                <li><a href="http://getskeleton.com/" target="_blank" rel="noopener">Skeleton — Documentación</a></li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="row">
+        <hr>
+        <article id="scroll-accesibilidad" class="twelve columns" tabindex="-1">
+            <header>
+                <h3><i class="fa-solid fa-arrows-up-down"></i> Scroll y accesibilidad</h3>
+                <p>Scroll personalizado con variables y smooth scrolling respetando preferencias de movimiento.</p>
+            </header>
+            <p><b>Definición</b> en <code>css/scroll-bar.css</code>:</p>
+            <pre><code>:root { --scroll-size: 10px; --scroll-background: var(--color-bg); }
+::-webkit-scrollbar { width: var(--scroll-size); height: var(--scroll-size); }
+::-webkit-scrollbar-thumb { background-color: var(--scroll-foreground); }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}</code></pre>
+            <p><b>Consejo</b>: Evita forzar parallax/animaciones si el usuario prefiere reducir movimiento.</p>
+        </article>
+
+        <hr>
+        <article id="estructura-tecnologias" class="twelve columns" tabindex="-1">
+            <header>
+                <h3><i class="fa-solid fa-diagram-project"></i> Estructura y tecnologías</h3>
+                <p>Arquitectura estática con includes y utilidades CSS.</p>
+            </header>
+            <ul>
+                <li><b>Skeleton</b>: grid responsivo con <code>row</code> y <code>columns</code>.</li>
+                <li><b>Utilidades CSS</b>: variables, colores y helpers <code>color-*</code>, <code>stroke-*</code>, <code>button-*</code>.</li>
+                <li><b>Font Awesome</b>: iconografía por CDN.</li>
+            </ul>
+            <p><b>Ejemplo</b> de bloque hero reutilizable:</p>
+            <pre><code>&lt;header class="hero container"&gt;
+  &lt;h1 class="stroke-white"&gt;Movilidad &lt;span class="color-pink"&gt;CDMX&lt;/span&gt;&lt;/h1&gt;
+  &lt;p&gt;Texto descriptivo&lt;/p&gt;
+  &lt;a class="button" href="{{ '/guia.html' | relative_url }}"&gt;Comenzar&lt;/a&gt;
+&lt;/header&gt;</code></pre>
+            <p><b>Navegación</b> (ver <code>_includes/header.html</code>):</p>
+            <pre><code>&lt;a class="nav-link" id="mapa-ruta-link" href="{{ '/guia.html' | relative_url }}"&gt;
+  &lt;i class="fa-solid fa-map-location-dot"&gt;&lt;/i&gt;
+  &lt;span class="nav-text"&gt;Mapa de Ruta&lt;/span&gt;
+&lt;/a&gt;</code></pre>
+        </article>
+    </section>
+
+    <section class="row">
+        <hr>
+        <article id="font-awesome" class="twelve columns" tabindex="-1">
+            <header>
+                <h3><i class="fa-solid fa-icons"></i> Font Awesome</h3>
+                <p>Iconografía vía CDN ya incluida en <code>_includes/head.html</code>. Usa las clases de la librería para incrustar íconos.</p>
+            </header>
+            <p><b>Importación</b> (ya presente):</p>
+            <pre><code>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;</code></pre>
+            <p><b>Ejemplos</b> de uso en HTML:</p>
+            <pre><code>&lt;i class="fa-solid fa-font" aria-hidden="true"&gt;&lt;/i&gt;
+&lt;i class="fa-solid fa-tag" aria-hidden="true"&gt;&lt;/i&gt;
+&lt;button class="button"&gt;&lt;i class="fa-solid fa-location-dot" aria-hidden="true"&gt;&lt;/i&gt; CTA&lt;/button&gt;</code></pre>
+            <p><b>Accesibilidad</b>: cuando el ícono es decorativo, añade <code>aria-hidden="true"</code>. Si transmite información, acompáñalo con texto visible.</p>
+            <ul>
+                <li><a href="https://fontawesome.com/search?o=r&m=free" target="_blank" rel="noopener">Catálogo de íconos (free)</a></li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="row">
+        <hr>
+        <article id="buenas-practicas" class="twelve columns" tabindex="-1">
+            <header>
+                <h3>Buenas prácticas rápidas</h3>
+            </header>
+            <ul>
+                <li>Define colores y tipografías solo en variables; usa utilidades para consumo.</li>
+                <li>Usa el grid de Skeleton para layout; componentes propios para estética.</li>
+                <li>Mantén metadatos por página en el front matter; evita duplicar en HTML.</li>
+                <li>Respeta <code>prefers-color-scheme</code> y <code>prefers-reduced-motion</code>.</li>
+                <li>Optimiza accesibilidad: contraste, tamaños legibles y texto alternativo.</li>
+            </ul>
+        </article>
+    </section>
+</main>

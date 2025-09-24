@@ -70,16 +70,16 @@ h1 {
 }
 
 h2 {
-    font-size: 2em;
+    font-size: 1.75em;
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom: 1em;
 }
 
 h2::first-line {
-    font-size: 1.75em;
+    font-size: 1.5em;
+    stroke-width: .5px;
 }
-
 h3 {
     font-size: 1.5em;
     font-weight: 600;
