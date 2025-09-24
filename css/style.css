@@ -70,11 +70,19 @@ h1 {
 }
 
 h2 {
-    font-size: 3em;
+    font-size: 2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 1em;
+}
+
+h2::first-line {
+    font-size: 1.75em;
 }
 
 h3 {
-    font-size: 2em;
+    font-size: 1.5em;
+    font-weight: 600;
 }
 
 code {
@@ -101,7 +109,7 @@ header#main-header nav {
 .color-orange { color: var(--color-metro-naranja); }
 .color-red { color: var(--color-stop-rojo); }
 .color-white { color: var(--color-white); }
-.color-asfalto { color: var(--color-asfalto); }
+.color-asphalt { color: var(--color-asfalto); }
 
 .stroke-pink { -webkit-text-stroke: 1px var(--color-taxi-rosa); }
 .stroke-green { -webkit-text-stroke: 1px var(--color-senal-verde); }
@@ -252,7 +260,7 @@ footer#main-footer {
     outline: 1px solid currentColor;
 }
 .button:hover {
-    background-color: var(--color-primary);
+    background-color: var(--color-taxi-rosa);
     color: var(--color-asfalto);
     border-color: var(--color-asfalto);
 }

@@ -13,202 +13,165 @@ Secciones guía: Punto de Partida (hero), Mapa de Ruta (temario), Señalamientos
 -->
 
 <!-- HERO: Punto de Partida -->
-<section class="container color-pink" aria-labelledby="hero-title">
-    <header class="hero">
-      <h1 id="hero-title" class="stroke-white">#Movilidad<span class="color-pink">CDMX</span></h1>
-      <p>Proyecto del Primer Bloque | Comunicación Visual — Diseño Digital 5<br>
-        Estructura informacional y jerarquía aplicada al diseño web</p>
-        <a class="button button-pink" href="{{ '/guia.html' | relative_url }}">Comenzar <i class="fa-solid fa-angle-right"></i></a>
+<section class="container">
+  <header class="hero">
+    <h1 id="hero-title" class="stroke-white">#Movilidad<span class="color-pink">CDMX</span></h1>
+    <p>Proyecto del Primer Bloque | Comunicación Visual — Diseño Digital 5<br>
+      Estructura informacional y jerarquía aplicada al diseño web</p>
+      <a class="button" href="{{ '/guia.html' | relative_url }}">Comenzar <i class="fa-solid fa-angle-right"></i></a>
+  </header>
+</section>
+
+<!-- Temario del Bloque 1 -->
+<article class="row">
+  <header class="columns twelve">
+    <h2><span class="stroke-white color-asphalt">Bloque 1</span> <br>Estructura Informacional y Jerárquica</h2>
+  </header>
+  <section class="columns twelve">
+    <ul>
+      <li>Sitio base en GitHub Pages con layout reutilizable</li>
+      <li>README con brief y estructura del proyecto</li>
+      <li>Secciones mínimas: Home, Guía, Recursos/Referencias</li>
+      <li>Guía de estilo con componentes y paleta</li>
+      <li>Accesibilidad mínima: alt, títulos, contraste AA</li>
+      <li>Despliegue configurado y funcional</li>
+    </ul>
+  </section>
+</article>
+
+<hr>
+
+<!-- SEÑALAMIENTOS: Rúbrica de evaluación -->
+<section class="row" aria-labelledby="signs-title">
+  <article class="columns twelve">
+    <header>
+      <h2><span class="stroke-pink color-asphalt">Rúbrica</span> <br>Criterios de Evaluación</h2>
+      <p>Evaluación del primer bloque basada en calidad técnica, claridad visual y despliegue.</p>
     </header>
-  </section>
-  
-  <!-- MAPA DE RUTA: Temario del Bloque 1 -->
-  <section class="row" aria-labelledby="mapa-title">
-    <article class="columns twelve">
-      <header>
-        <h2 id="mapa-title"><i class="fas fa-route"></i> Mapa de Ruta · Bloque 1</h2>
-        <p>Primer bloque del curso: Fundamentos Web y Herramientas para Comunicación Visual (7º semestre). Dos sesiones por semana, enfoque práctico y publicable.</p>
-      </header>
-  
-      <div class="route-grid">
-        <div class="columns six">
-          <h3>Sesiones del Bloque</h3>
-          <ol>
-            <li><strong>Introducción:</strong> La web como plataforma de narrativa visual interactiva</li>
-            <li><strong>Terminal, Git & GitHub:</strong> repositorios, commits, ramas, Pages</li>
-            <li><strong>Markdown:</strong> README, estructura y tipografía para documentación</li>
-            <li><strong>HTML semántico:</strong> jerarquía, secciones, navegación</li>
-            <li><strong>Layout reutilizable:</strong> _layouts, _includes, componentes y grid (Skeleton)</li>
-            <li><strong>Diseño visual en CSS:</strong> paleta de tránsito CDMX, tipografías, responsive</li>
-            <li><strong>Accesibilidad y performance:</strong> contraste, alt, metadatos, favicons</li>
-            <li><strong>Publicación:</strong> GitHub Pages, pruebas y revisión final</li>
-          </ol>
-        </div>
-  
-        <div class="columns six">
-          <h3>Entregables del Bloque</h3>
-          <ul>
-            <li>Sitio base en GitHub Pages con layout reutilizable</li>
-            <li>README con brief y estructura del proyecto</li>
-            <li>Secciones mínimas: Home, Guía, Recursos/Referencias</li>
-            <li>Guía de estilo con componentes y paleta</li>
-            <li>Accesibilidad mínima: alt, títulos, contraste AA</li>
-            <li>Despliegue configurado y funcional</li>
-          </ul>
-        </div>
+
+    <div class="row">
+      <div class="six columns">
+        <h3>Rúbrica (resumen)</h3>
+        <ul>
+          <li><strong>Estructura semántica (20%)</strong> – uso correcto de header/nav/main/section/footer</li>
+          <li><strong>Layout reutilizable (20%)</strong> – _layouts, _includes y componentes consistentes</li>
+          <li><strong>Diseño y sistema (20%)</strong> – paleta tránsito, tipografías, escala, espaciados</li>
+          <li><strong>Accesibilidad y contenidos (15%)</strong> – contraste, alt, jerarquía textual</li>
+          <li><strong>Repositorio y README (15%)</strong> – commits claros, documentación, licencias</li>
+          <li><strong>Despliegue (10%)</strong> – sitio público en Pages con metadatos y favicon</li>
+        </ul>
       </div>
-    </article>
-  </section>
-  
-  <hr>
-  
-  <!-- SEÑALAMIENTOS: Rúbrica de evaluación -->
-  <section class="row" aria-labelledby="signs-title">
-    <article class="columns twelve">
-      <header>
-        <h2 id="signs-title"><i class="fas fa-traffic-light"></i> Señalamientos · Criterios de Evaluación</h2>
-        <p>Evaluación del primer bloque basada en calidad técnica, claridad visual y despliegue.</p>
-      </header>
-  
-      <div class="rubric-grid">
-        <div class="columns six">
-          <h3>Rúbrica (resumen)</h3>
-          <ul>
-            <li><strong>Estructura semántica (20%)</strong> – uso correcto de header/nav/main/section/footer</li>
-            <li><strong>Layout reutilizable (20%)</strong> – _layouts, _includes y componentes consistentes</li>
-            <li><strong>Diseño y sistema (20%)</strong> – paleta tránsito, tipografías, escala, espaciados</li>
-            <li><strong>Accesibilidad y contenidos (15%)</strong> – contraste, alt, jerarquía textual</li>
-            <li><strong>Repositorio y README (15%)</strong> – commits claros, documentación, licencias</li>
-            <li><strong>Despliegue (10%)</strong> – sitio público en Pages con metadatos y favicon</li>
-          </ul>
-        </div>
-  
-        <div class="columns six">
-          <h3>Checklist rápido</h3>
-          <ul>
-            <li>Commit inicial + README con brief</li>
-            <li>Home con hero y navegación clara</li>
-            <li>Guía de estilo con botones, títulos, grid</li>
-            <li>Paleta aplicada (naranja metro, rosa, verde, rojo)</li>
-            <li>Contrast checker y alt en imágenes</li>
-            <li>GitHub Pages activo con dominio del repo</li>
-          </ul>
-          <p><a class="button" href="rubrica.html">Ver Rúbrica completa</a></p>
-        </div>
+
+      <div class="six columns">
+        <h3>Checklist rápido</h3>
+        <ul>
+          <li>Commit inicial + README con brief</li>
+          <li>Home con hero y navegación clara</li>
+          <li>Guía de estilo con botones, títulos, grid</li>
+          <li>Paleta aplicada (naranja metro, rosa, verde, rojo)</li>
+          <li>Contrast checker y alt en imágenes</li>
+          <li>GitHub Pages activo con dominio del repo</li>
+        </ul>
+        <p><a class="button" href="rubrica.html">Ver Rúbrica completa</a></p>
       </div>
-    </article>
-  </section>
-  
-  <hr>
-  
-  <!-- KIT DE SUPERVIVENCIA: Recursos -->
-  <section class="row" aria-labelledby="kit-title">
-    <article class="columns twelve">
-      <header>
-        <h2 id="kit-title"><i class="fas fa-toolbox"></i> Kit de Supervivencia</h2>
-        <p>Herramientas esenciales para diseñar, documentar y publicar.</p>
-      </header>
-  
-      <div class="resources-grid">
-        <div class="columns six">
-          <h3>Diseño y contenido</h3>
-          <ul>
-            <li><a href="https://fonts.google.com/" target="_blank" rel="noopener">Google Fonts</a> · tipografías</li>
-            <li><a href="https://realfavicongenerator.net/" target="_blank" rel="noopener">RealFaviconGenerator</a> · favicons</li>
-            <li><a href="https://contrast-ratio.com/" target="_blank" rel="noopener">Contrast Ratio</a> · contraste</li>
-            <li><a href="https://developer.mozilla.org/" target="_blank" rel="noopener">MDN</a> · documentación web</li>
-          </ul>
-        </div>
-        <div class="columns six">
-          <h3>Frameworks y despliegue</h3>
-          <ul>
-            <li><a href="https://getskeleton.com/" target="_blank" rel="noopener">Skeleton CSS</a> · grid ligero</li>
-            <li><a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a> · sitio estático</li>
-            <li><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> · hosting</li>
-            <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> · control de versiones</li>
-          </ul>
-        </div>
+    </div>
+  </article>
+</section>
+
+<hr>
+
+<!-- KIT DE SUPERVIVENCIA: Recursos -->
+<section class="row" aria-labelledby="kit-title">
+  <article class="columns twelve">
+    <header>
+      <h2 id="kit-title"><i class="fas fa-toolbox"></i> Kit de Supervivencia</h2>
+      <p>Herramientas esenciales para diseñar, documentar y publicar.</p>
+    </header>
+
+    <div class="row">
+      <div class="six columns">
+        <h3>Diseño y contenido</h3>
+        <ul>
+          <li><a href="https://fonts.google.com/" target="_blank" rel="noopener">Google Fonts</a> · tipografías</li>
+          <li><a href="https://realfavicongenerator.net/" target="_blank" rel="noopener">RealFaviconGenerator</a> · favicons</li>
+          <li><a href="https://contrast-ratio.com/" target="_blank" rel="noopener">Contrast Ratio</a> · contraste</li>
+          <li><a href="https://developer.mozilla.org/" target="_blank" rel="noopener">MDN</a> · documentación web</li>
+        </ul>
       </div>
-    </article>
-  </section>
-  
-  <hr>
-  
-  <!-- REFERENCIAS & ESTRUCTURA -->
-  <section class="row" aria-labelledby="refs-title">
-    <article class="columns twelve">
-      <header>
-        <h2 id="refs-title"><i class="fas fa-book"></i> Referencias y Estructura</h2>
-        <p>Guías locales del proyecto y estructura mínima de carpetas.</p>
-      </header>
-  
-      <div class="references-grid">
-        <div class="columns four">
-          <h3>Guías del Sistema</h3>
-          <ul>
-            <li><a href="guia-estilo.html">Guía de Estilo</a> · componentes y tokens</li>
-            <li><a href="rubrica.html">Rúbrica</a> · criterios y niveles</li>
-            <li><a href="proyectos.html">Proyectos</a> · ejemplos</li>
-          </ul>
-        </div>
-        <div class="columns four">
-          <h3>Estructura del Proyecto</h3>
-          <ul>
-            <li><code>css/style.css</code> · estilos principales</li>
-            <li><code>_includes/</code> · componentes</li>
-            <li><code>_layouts/</code> · plantillas</li>
-            <li><code>index.html</code> · home</li>
-          </ul>
-        </div>
-        <div class="columns four">
-          <h3>Tokens de Color (CDMX tránsito)</h3>
-          <ul>
-            <li><code>--metro-naranja</code> · #F58025</li>
-            <li><code>--taxi-rosa</code> · #E91E63</li>
-            <li><code>--señal-verde</code> · #2E7D32</li>
-            <li><code>--alto-rojo</code> · #C62828</li>
-          </ul>
-        </div>
+      <div class="six columns">
+        <h3>Frameworks y despliegue</h3>
+        <ul>
+          <li><a href="https://getskeleton.com/" target="_blank" rel="noopener">Skeleton CSS</a> · grid ligero</li>
+          <li><a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a> · sitio estático</li>
+          <li><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> · hosting</li>
+          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> · control de versiones</li>
+        </ul>
       </div>
-    </article>
-  </section>
-  
-  <hr>
-  
-  <!-- ÚLTIMA ESTACIÓN: Entrega y pasos -->
-  <section class="row" aria-labelledby="ultima-title">
-    <article class="columns twelve">
-      <header>
-        <h2 id="ultima-title"><i class="fas fa-flag-checkered"></i> Última Estación · Entrega del Bloque</h2>
-        <p>Checklist final para publicar y evaluar tu entrega.</p>
-      </header>
-  
-      <div class="final-cta">
-        <ol>
-          <li>Revisa la <a href="rubrica.html">Rúbrica</a> y completa el checklist</li>
-          <li>Actualiza README con brief, mapa del sitio y capturas</li>
-          <li>Verifica accesibilidad (alt, títulos, contraste)</li>
-          <li>Optimiza assets (favicons, metadatos, imágenes)</li>
-          <li>Publica en GitHub Pages y comparte URL del sitio</li>
-        </ol>
-        <a class="button" href="rubrica.html">Abrir Rúbrica</a>
-        <a class="button " href="guia-estilo.html">Ver Guía</a>
+    </div>
+  </article>
+</section>
+
+<hr>
+
+<!-- REFERENCIAS & ESTRUCTURA -->
+<section class="row" aria-labelledby="refs-title">
+  <article class="columns twelve">
+    <header>
+      <h2 id="refs-title"><i class="fas fa-book"></i> Referencias y Estructura</h2>
+      <p>Guías locales del proyecto y estructura mínima de carpetas.</p>
+    </header>
+
+    <div class="row">
+      <div class="four columns">
+        <h3>Guías del Sistema</h3>
+        <ul>
+          <li><a href="guia-estilo.html">Guía de Estilo</a> · componentes y tokens</li>
+          <li><a href="rubrica.html">Rúbrica</a> · criterios y niveles</li>
+          <li><a href="proyectos.html">Proyectos</a> · ejemplos</li>
+        </ul>
       </div>
-    </article>
-  </section>
-  
-  <!-- NOTA: Variables sugeridas (puedes mover a css/style.css) -->
-  <style>
-  :root{
-    --metro-naranja:#F58025;
-    --taxi-rosa:#E91E63;
-    --señal-verde:#2E7D32;
-    --alto-rojo:#C62828;
-  }
-  .color-pink{ color:var(--taxi-rosa); }
-  .stroke-pink{ -webkit-text-stroke:1px var(--taxi-rosa); }
-  .button{ margin-right:.5rem; }
-  .route-grid,.rubric-grid,.resources-grid,.references-grid{ margin-top:1rem; }
-  .final-cta ol{ margin-bottom:1rem; }
-  </style>
-  
+      <div class="four columns">
+        <h3>Estructura del Proyecto</h3>
+        <ul>
+          <li><code>css/style.css</code> · estilos principales</li>
+          <li><code>_includes/</code> · componentes</li>
+          <li><code>_layouts/</code> · plantillas</li>
+          <li><code>index.html</code> · home</li>
+        </ul>
+      </div>
+      <div class="four columns">
+        <h3>Tokens de Color (CDMX tránsito)</h3>
+        <ul>
+          <li><code>--metro-naranja</code> · #F58025</li>
+          <li><code>--taxi-rosa</code> · #E91E63</li>
+          <li><code>--señal-verde</code> · #2E7D32</li>
+          <li><code>--alto-rojo</code> · #C62828</li>
+        </ul>
+      </div>
+    </div>
+  </article>
+</section>
+
+<hr>
+
+<!-- ÚLTIMA ESTACIÓN: Entrega y pasos -->
+<section class="row" aria-labelledby="ultima-title">
+<article class="columns twelve">
+    <header>
+      <h2 id="ultima-title"><i class="fas fa-flag-checkered"></i> Última Estación · Entrega del Bloque</h2>
+      <p>Checklist final para publicar y evaluar tu entrega.</p>
+    </header>
+
+    <div>
+      <ol>
+        <li>Revisa la <a href="rubrica.html">Rúbrica</a> y completa el checklist</li>
+        <li>Actualiza README con brief, mapa del sitio y capturas</li>
+        <li>Verifica accesibilidad (alt, títulos, contraste)</li>
+        <li>Optimiza assets (favicons, metadatos, imágenes)</li>
+        <li>Publica en GitHub Pages y comparte URL del sitio</li>
+      </ol>
+      <a class="button" href="rubrica.html">Abrir Rúbrica</a>
+      <a class="button" href="guia-estilo.html">Ver Guía</a>
+    </div>
+  </article>
+</section>
