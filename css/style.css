@@ -7,10 +7,10 @@
     --color-senal-verde: #2E7D32;     /* Verde de señalamientos */
     --color-stop-rojo: #D32F2F;       /* Rojo de alto */
     --color-asfalto: #212121;         /* Asfalto urbano */
-    --color-blanco: #FFFFFF;          /* Texto sobre fondo oscuro */
+    --color-white: #FFFFFF;          /* Texto sobre fondo oscuro */
 
     /* Roles de diseño */
-    --color-bg: var(--color-blanco);
+    --color-bg: var(--color-white);
     --color-text: var(--color-asfalto);
     --color-primary: var(--color-stop-rojo);
     --color-secondary: var(--color-metro-naranja);
@@ -44,7 +44,7 @@ body {
     :root {
         color-scheme: light dark;
         --color-bg: var(--color-asfalto);
-        --color-text: var(--color-blanco);
+        --color-text: var(--color-white);
         --color-primary: var(--color-stop-rojo);
         --color-secondary: var(--color-metro-naranja);
         --color-accent: var(--color-taxi-rosa);
@@ -96,18 +96,18 @@ header#main-header nav {
 
 /* utilidades */
 [class*="color-"] { -webkit-text-stroke: 0px; }
-.color-rosa { color: var(--color-taxi-rosa); }
-.color-verde { color: var(--color-senal-verde); }
-.color-naranja { color: var(--color-metro-naranja); }
-.color-rojo { color: var(--color-stop-rojo); }
-.color-blanco { color: var(--color-blanco); }
+.color-pink { color: var(--color-taxi-rosa); }
+.color-green { color: var(--color-senal-verde); }
+.color-orange { color: var(--color-metro-naranja); }
+.color-red { color: var(--color-stop-rojo); }
+.color-white { color: var(--color-white); }
 .color-asfalto { color: var(--color-asfalto); }
 
 .stroke-rosa { -webkit-text-stroke: 1px var(--color-taxi-rosa); }
 .stroke-verde { -webkit-text-stroke: 1px var(--color-senal-verde); }
 .stroke-naranja { -webkit-text-stroke: 1px var(--color-metro-naranja); }
 .stroke-rojo { -webkit-text-stroke: 1px var(--color-stop-rojo); }
-.stroke-blanco { -webkit-text-stroke: 1px var(--color-blanco); }
+.stroke-blanco { -webkit-text-stroke: 1px var(--color-white); }
 .stroke-asfalto { -webkit-text-stroke: 1px var(--color-asfalto); }
 
 /* componentes */
@@ -162,7 +162,7 @@ a#proyectos-link { background-color: var(--color-senal-verde); }
 
 .nav-link.active,
 .nav-link:hover {
-    color: var(--color-blanco);
+    color: var(--color-white);
     opacity: 1;
 }
 
@@ -222,7 +222,7 @@ footer#main-footer {
 .hero {
     text-align: center;
     padding: 1em 0;
-    min-height: 50vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -239,17 +239,29 @@ footer#main-footer {
     text-transform: uppercase;
     background-color: var(--color-primary);
     color: var(--color-text);
-    border: none;
+    border: 1px solid currentColor;
     border-radius: 0;
     padding: 0.25em 1em;
-    line-height: 2em;
+    line-height: 1.42em;
     font-size: var(--font-size-lg);
     min-width: 120px;
     transition: all 0.3s ease;
+    height: auto;
+    margin: 0;
+    background-color: var(--color-asfalto);
+    outline: 1px solid currentColor;
 }
 .button:hover {
     background-color: var(--color-primary);
-    color: var(--color-bg);
+    color: var(--color-asfalto);
+    border-color: var(--color-asfalto);
+}
+.button-pink {
+    color: var(--color-taxi-rosa);
+}
+.button-pink:hover {
+    background-color: var(--color-taxi-rosa);
+    color: var(--color-asfalto);
 }
 
 .text-center {

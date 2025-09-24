@@ -25,8 +25,8 @@ ARCHIVOS PRINCIPALES:
 
 <!-- HERO SECTION: Sección principal de la página -->
 <section class="row">
-    <header class="hero color-rosa columns twelve">
-        <h1 class="stroke-rosa"><span class="color-rosa">Guía de</span> Estilo</h1>
+    <header class="hero color-pink columns twelve">
+        <h1 class="stroke-rosa"><span class="color-pink">Guía de</span> Estilo</h1>
         <p>Demo de componentes y estilos del sistema de diseño</p>
     </header>
 </section>
@@ -51,7 +51,7 @@ ARCHIVOS PRINCIPALES:
         <aside class="code-example">
             <h4>📁 Ubicación de estilos: css/style.css (líneas 60-78)</h4>
             <pre><code>&lt;!-- Títulos con clases de color y contorno --&gt;
-&lt;h1 class="stroke-rosa"&gt;&lt;span class="color-rosa"&gt;Título&lt;/span&gt; Principal&lt;/h1&gt;
+&lt;h1 class="stroke-rosa"&gt;&lt;span class="color-pink"&gt;Título&lt;/span&gt; Principal&lt;/h1&gt;
 &lt;h2&gt;Título Secundario&lt;/h2&gt;
 &lt;h3&gt;Título Terciario&lt;/h3&gt;
 &lt;h4&gt;Título Cuaternario&lt;/h4&gt;</code></pre>
@@ -91,24 +91,24 @@ h3 { font-size: 2em; }</code></pre>
         </header>
         
         <section class="color-examples">
-            <p class="color-rosa">Texto en color rosa (taxi)</p>
-            <p class="color-verde">Texto en color verde (señal)</p>
-            <p class="color-naranja">Texto en color naranja (metro)</p>
-            <p class="color-rojo">Texto en color rojo (alto)</p>
+            <p class="color-pink">Texto en color rosa (taxi)</p>
+            <p class="color-green">Texto en color verde (señal)</p>
+            <p class="color-orange">Texto en color naranja (metro)</p>
+            <p class="color-red">Texto en color rojo (alto)</p>
             <p class="color-asfalto">Texto en color asfalto</p>
-            <p class="color-blanco" style="background: var(--color-asfalto); padding: 0.5em;">Texto en color blanco</p>
+            <p class="color-white" style="background: var(--color-asfalto); padding: 0.5em;">Texto en color blanco</p>
         </section>
         
         <!-- CÓDIGO DE EJEMPLO -->
         <aside class="code-example">
             <h4>📁 Ubicación: css/style.css (líneas 98-111)</h4>
             <pre><code>&lt;!-- Clases de color para texto --&gt;
-&lt;p class="color-rosa"&gt;Texto rosa&lt;/p&gt;
-&lt;p class="color-verde"&gt;Texto verde&lt;/p&gt;
-&lt;p class="color-naranja"&gt;Texto naranja&lt;/p&gt;
-&lt;p class="color-rojo"&gt;Texto rojo&lt;/p&gt;
+&lt;p class="color-pink"&gt;Texto rosa&lt;/p&gt;
+&lt;p class="color-green"&gt;Texto verde&lt;/p&gt;
+&lt;p class="color-orange"&gt;Texto naranja&lt;/p&gt;
+&lt;p class="color-red"&gt;Texto rojo&lt;/p&gt;
 &lt;p class="color-asfalto"&gt;Texto asfalto&lt;/p&gt;
-&lt;p class="color-blanco"&gt;Texto blanco&lt;/p&gt;</code></pre>
+&lt;p class="color-white"&gt;Texto blanco&lt;/p&gt;</code></pre>
             
             <h4>🎨 Variables CSS:</h4>
             <pre><code>/* Variables de color - css/style.css líneas 4-10 */
@@ -118,7 +118,7 @@ h3 { font-size: 2em; }</code></pre>
     --color-senal-verde: #2E7D32;     /* Verde de señalamientos */
     --color-stop-rojo: #D32F2F;       /* Rojo de alto */
     --color-asfalto: #212121;         /* Asfalto urbano */
-    --color-blanco: #FFFFFF;          /* Texto sobre fondo oscuro */
+    --color-white: #FFFFFF;          /* Texto sobre fondo oscuro */
 }</code></pre>
         </aside>
     </article>
@@ -156,7 +156,7 @@ h3 { font-size: 2em; }</code></pre>
 .stroke-verde { -webkit-text-stroke: 1px var(--color-senal-verde); }
 .stroke-naranja { -webkit-text-stroke: 1px var(--color-metro-naranja); }
 .stroke-rojo { -webkit-text-stroke: 1px var(--color-stop-rojo); }
-.stroke-blanco { -webkit-text-stroke: 1px var(--color-blanco); }
+.stroke-blanco { -webkit-text-stroke: 1px var(--color-white); }
 .stroke-asfalto { -webkit-text-stroke: 1px var(--color-asfalto); }</code></pre>
         </aside>
     </article>
@@ -183,9 +183,9 @@ h3 { font-size: 2em; }</code></pre>
         </header>
         
         <section class="hero-demo">
-            <div class="container color-rosa" style="padding: 2em; margin: 1em 0;">
+            <div class="container color-pink" style="padding: 2em; margin: 1em 0;">
                 <header class="hero">
-                    <h1 class="stroke-rosa"><span class="color-rosa">Título</span> Principal</h1>
+                    <h1 class="stroke-rosa"><span class="color-pink">Título</span> Principal</h1>
                     <p>Descripción del contenido</p>
                 </header>
             </div>
@@ -195,9 +195,9 @@ h3 { font-size: 2em; }</code></pre>
         <aside class="code-example">
             <h4>📁 Ubicación: css/style.css (líneas 222-234)</h4>
             <pre><code>&lt;!-- Estructura del componente hero --&gt;
-&lt;section class="container color-rosa"&gt;
+&lt;section class="container color-pink"&gt;
     &lt;header class="hero"&gt;
-        &lt;h1 class="stroke-rosa"&gt;&lt;span class="color-rosa"&gt;Título&lt;/span&gt; Principal&lt;/h1&gt;
+        &lt;h1 class="stroke-rosa"&gt;&lt;span class="color-pink"&gt;Título&lt;/span&gt; Principal&lt;/h1&gt;
         &lt;p&gt;Descripción del contenido&lt;/p&gt;
     &lt;/header&gt;
 &lt;/section&gt;</code></pre>
@@ -228,9 +228,9 @@ h3 { font-size: 2em; }</code></pre>
         </header>
         
         <section class="hero-demo">
-            <div class="container color-verde" style="padding: 2em; margin: 1em 0;">
+            <div class="container color-green" style="padding: 2em; margin: 1em 0;">
                 <header class="hero">
-                    <h1 class="stroke-verde"><span class="color-verde">Título</span> Secundario</h1>
+                    <h1 class="stroke-verde"><span class="color-green">Título</span> Secundario</h1>
                     <p>Otra descripción de contenido</p>
                 </header>
             </div>
@@ -240,9 +240,9 @@ h3 { font-size: 2em; }</code></pre>
         <aside class="code-example">
             <h4>📁 Ubicación: css/style.css (líneas 222-234)</h4>
             <pre><code>&lt;!-- Hero con fondo verde --&gt;
-&lt;section class="container color-verde"&gt;
+&lt;section class="container color-green"&gt;
     &lt;header class="hero"&gt;
-        &lt;h1 class="stroke-verde"&gt;&lt;span class="color-verde"&gt;Título&lt;/span&gt; Secundario&lt;/h1&gt;
+        &lt;h1 class="stroke-verde"&gt;&lt;span class="color-green"&gt;Título&lt;/span&gt; Secundario&lt;/h1&gt;
         &lt;p&gt;Otra descripción de contenido&lt;/p&gt;
     &lt;/header&gt;
 &lt;/section&gt;</code></pre>
@@ -758,9 +758,9 @@ hr {
         <aside class="code-example">
             <h4>📁 Estructura completa de página:</h4>
             <pre><code>&lt;!-- Hero section con fondo de color --&gt;
-&lt;section class="container color-rosa"&gt;
+&lt;section class="container color-pink"&gt;
     &lt;header class="hero"&gt;
-        &lt;h1 class="stroke-rosa"&gt;&lt;span class="color-rosa"&gt;Título&lt;/span&gt; Principal&lt;/h1&gt;
+        &lt;h1 class="stroke-rosa"&gt;&lt;span class="color-pink"&gt;Título&lt;/span&gt; Principal&lt;/h1&gt;
         &lt;p&gt;Descripción del contenido&lt;/p&gt;
     &lt;/header&gt;
 &lt;/section&gt;
