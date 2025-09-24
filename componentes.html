@@ -24,16 +24,38 @@ ARCHIVOS PRINCIPALES:
 -->
 
 <!-- HERO SECTION: Sección principal de la página -->
-<section class="row">
-    <header class="hero color-pink columns twelve">
-        <h1 class="stroke-pink"><span class="color-pink">Guía de</span> Estilo</h1>
-        <p>Demo de componentes y estilos del sistema de diseño</p>
-    </header>
-</section>
+<header class="hero container">
+    <h1 class="stroke-white">Guía de <span class="color-pink">Componentes</span></h1>
+    <p>Demo de componentes y estilos del sistema de diseño usados en el sitio.</p>
+    <a class="button button-pink" target="_blank" href="https://github.com/juanfuent-es/centro.html-layout/blob/master/componentes.html" title="Ver este archivo en GitHub"><i class="fa-brands fa-github"></i> Ver Código Fuente</a>
+</header>
 
-<!-- SECCIÓN PRINCIPAL: Contenido principal de la guía -->
-<main class="row">
-    <article class="columns twelve">
+<main class="container">
+    <section class="row">
+        <header class="columns twelve">
+            <h2 class="color-pink">Documentación de Componentes<br><small class="color-white">Índice y referencias rápidas</small></h2>
+            <p>Esta página lista los componentes reales del proyecto (tipografía, colores, hero, navegación, botones, grid, utilidades) con ejemplos y código. Referencias a <code>_includes/header.html</code>, <code>_includes/head.html</code> y <code>css/style.css</code>.</p>
+        </header>
+        <nav role="navigation" aria-label="Índice de componentes">
+            <h3>Índice</h3>
+            <ol>
+                <li><a href="#titulos-jerarquia" title="Jerarquía tipográfica">Títulos y Jerarquía Tipográfica</a></li>
+                <li><a href="#colores" title="Paleta y utilidades de color">Sistema de Colores</a></li>
+                <li><a href="#contornos" title="Contornos tipográficos">Efectos de Contorno</a></li>
+                <li><a href="#componente-hero" title="Hero">Componente Hero</a></li>
+                <li><a href="#nav-link" title="Navegación principal">Enlaces de Navegación</a></li>
+                <li><a href="#botones" title="Botones">Botones</a></li>
+                <li><a href="#grid" title="Sistema de grid">Sistema de Grid</a></li>
+                <li><a href="#tipografia-espaciado" title="Tipografía y espaciado">Tipografía y Espaciado</a></li>
+                <li><a href="#utilidades" title="Clases utilitarias">Utilidades</a></li>
+                <li><a href="#ejemplo-pagina" title="Estructura completa">Ejemplo de Página</a></li>
+            </ol>
+        </nav>
+    </section>
+
+    <!-- SECCIÓN PRINCIPAL: Contenido principal de la guía -->
+    <section class="row">
+        <article id="titulos-jerarquia" class="columns twelve" tabindex="-1">
         <header>
             <h2>1. Títulos y Jerarquía Tipográfica</h2>
             <p>El sistema utiliza una jerarquía tipográfica clara con fuentes específicas y tamaños responsive.</p>
@@ -49,14 +71,14 @@ ARCHIVOS PRINCIPALES:
         
         <!-- CÓDIGO DE EJEMPLO: Mostrar cómo implementar los títulos -->
         <aside class="code-example">
-            <h4>📁 Ubicación de estilos: css/style.css (líneas 60-78)</h4>
+            <h4>Ubicación de estilos: css/style.css (líneas 60-78)</h4>
             <pre><code>&lt;!-- Títulos con clases de color y contorno --&gt;
 &lt;h1 class="stroke-pink"&gt;&lt;span class="color-pink"&gt;Título&lt;/span&gt; Principal&lt;/h1&gt;
 &lt;h2&gt;Título Secundario&lt;/h2&gt;
 &lt;h3&gt;Título Terciario&lt;/h3&gt;
 &lt;h4&gt;Título Cuaternario&lt;/h4&gt;</code></pre>
             
-            <h4>🎨 CSS correspondiente:</h4>
+            <h4>CSS correspondiente:</h4>
             <pre><code>/* Fuente para títulos - css/style.css líneas 60-78 */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading); /* Barlow */
@@ -67,14 +89,14 @@ h1 { font-size: 4em; }
 h2 { font-size: 3em; }
 h3 { font-size: 2em; }</code></pre>
         </aside>
-    </article>
-</main>
+        </article>
+    </section>
 
 <hr>
 
 <!-- SECCIÓN DE COLORES: Sistema de colores del proyecto -->
 <section class="row">
-    <article class="columns twelve">
+    <article id="colores" class="columns twelve" tabindex="-1">
         <header>
             <h2>2. Sistema de Colores</h2>
             <p>El sistema utiliza una paleta inspirada en el tránsito urbano de la Ciudad de México.</p>
@@ -84,7 +106,7 @@ h3 { font-size: 2em; }</code></pre>
 
 <section class="row">
     <!-- COLUMNA 1: Colores de texto -->
-    <article class="columns six">
+    <article id="contornos" class="columns twelve" tabindex="-1">
         <header>
             <h3>Colores de Texto</h3>
             <p>Clases para aplicar colores específicos al texto.</p>
@@ -101,7 +123,7 @@ h3 { font-size: 2em; }</code></pre>
         
         <!-- CÓDIGO DE EJEMPLO -->
         <aside class="code-example">
-            <h4>📁 Ubicación: css/style.css (líneas 98-111)</h4>
+            <h4>Ubicación: css/style.css (líneas 98-111)</h4>
             <pre><code>&lt;!-- Clases de color para texto --&gt;
 &lt;p class="color-pink"&gt;Texto rosa&lt;/p&gt;
 &lt;p class="color-green"&gt;Texto verde&lt;/p&gt;
@@ -110,7 +132,7 @@ h3 { font-size: 2em; }</code></pre>
 &lt;p class="color-asfalto"&gt;Texto asfalto&lt;/p&gt;
 &lt;p class="color-white"&gt;Texto blanco&lt;/p&gt;</code></pre>
             
-            <h4>🎨 Variables CSS:</h4>
+            <h4>Variables CSS:</h4>
             <pre><code>/* Variables de color - css/style.css líneas 4-10 */
 :root {
     --color-metro-naranja: #F47C20;   /* Naranja del Metro CDMX */
@@ -124,7 +146,7 @@ h3 { font-size: 2em; }</code></pre>
     </article>
     
     <!-- COLUMNA 2: Efectos de contorno -->
-    <article class="columns six">
+    <article class="columns twelve">
         <header>
             <h3>Efectos de Contorno</h3>
             <p>Clases para aplicar contornos de color a los títulos.</p>
@@ -141,7 +163,7 @@ h3 { font-size: 2em; }</code></pre>
         
         <!-- CÓDIGO DE EJEMPLO -->
         <aside class="code-example">
-            <h4>📁 Ubicación: css/style.css (líneas 106-111)</h4>
+            <h4>Ubicación: css/style.css (líneas 106-111)</h4>
             <pre><code>&lt;!-- Clases de contorno para títulos --&gt;
 &lt;h4 class="stroke-pink"&gt;Contorno rosa&lt;/h4&gt;
 &lt;h4 class="stroke-green"&gt;Contorno verde&lt;/h4&gt;
@@ -150,7 +172,7 @@ h3 { font-size: 2em; }</code></pre>
 &lt;h4 class="stroke-white"&gt;Contorno blanco&lt;/h4&gt;
 &lt;h4 class="stroke-asphalt"&gt;Contorno asfalto&lt;/h4&gt;</code></pre>
             
-            <h4>🎨 CSS correspondiente:</h4>
+            <h4>CSS correspondiente:</h4>
             <pre><code>/* Clases de contorno - css/style.css líneas 106-111 */
 .stroke-pink { -webkit-text-stroke: 1px var(--color-taxi-rosa); }
 .stroke-green { -webkit-text-stroke: 1px var(--color-senal-verde); }
@@ -166,7 +188,7 @@ h3 { font-size: 2em; }</code></pre>
 
 <!-- SECCIÓN HERO: Componente principal de títulos -->
 <section class="row">
-    <article class="columns twelve">
+    <article id="componente-hero" class="columns twelve" tabindex="-1">
         <header>
             <h2>3. Componente Hero</h2>
             <p>El componente hero se utiliza para títulos principales con fondo de color. Es el elemento más prominente de cada página.</p>
@@ -174,26 +196,27 @@ h3 { font-size: 2em; }</code></pre>
     </article>
 </section>
 
+<div class="row">
+    <section class="columns six hero-demo color-pink">
+        <header class="hero">
+            <h1 class="stroke-pink"><span class="color-pink">Título</span> Principal</h1>
+            <p>Ejemplo de hero con fondo rosa (color taxi)</p>
+        </header>
+    </section>
+    <section class="columns six hero-demo color-green">
+        <header class="hero">
+            <h1 class="stroke-green"><span class="color-green">Título</span> Secundario</h1>
+            <p>Ejemplo de hero con fondo verde (color señal).</p>
+        </header>
+    </section>
+</div>
 <section class="row">
     <!-- EJEMPLO 1: Hero con fondo rosa -->
-    <article class="columns six">
-        <header>
-            <h3>Hero con Fondo Rosa</h3>
-            <p>Ejemplo de hero con fondo rosa (color taxi).</p>
-        </header>
-        
-        <section class="hero-demo">
-            <div class="container color-pink" style="padding: 2em; margin: 1em 0;">
-                <header class="hero">
-                    <h1 class="stroke-pink"><span class="color-pink">Título</span> Principal</h1>
-                    <p>Descripción del contenido</p>
-                </header>
-            </div>
-        </section>
+    <article class="columns twelve">
         
         <!-- CÓDIGO DE EJEMPLO -->
         <aside class="code-example">
-            <h4>📁 Ubicación: css/style.css (líneas 222-234)</h4>
+            <h4>Ubicación: css/style.css (líneas 222-234)</h4>
             <pre><code>&lt;!-- Estructura del componente hero --&gt;
 &lt;section class="container color-pink"&gt;
     &lt;header class="hero"&gt;
@@ -202,7 +225,7 @@ h3 { font-size: 2em; }</code></pre>
     &lt;/header&gt;
 &lt;/section&gt;</code></pre>
             
-            <h4>🎨 CSS del componente hero:</h4>
+            <h4>CSS del componente hero:</h4>
             <pre><code>/* Componente hero - css/style.css líneas 222-234 */
 .hero {
     text-align: center;
@@ -218,36 +241,8 @@ h3 { font-size: 2em; }</code></pre>
     font-size: var(--font-size-lg);
 }</code></pre>
         </aside>
-    </article>
-    
-    <!-- EJEMPLO 2: Hero con fondo verde -->
-    <article class="columns six">
-        <header>
-            <h3>Hero con Fondo Verde</h3>
-            <p>Ejemplo de hero con fondo verde (color señal).</p>
-        </header>
-        
-        <section class="hero-demo">
-            <div class="container color-green" style="padding: 2em; margin: 1em 0;">
-                <header class="hero">
-                    <h1 class="stroke-green"><span class="color-green">Título</span> Secundario</h1>
-                    <p>Otra descripción de contenido</p>
-                </header>
-            </div>
-        </section>
-        
-        <!-- CÓDIGO DE EJEMPLO -->
         <aside class="code-example">
-            <h4>📁 Ubicación: css/style.css (líneas 222-234)</h4>
-            <pre><code>&lt;!-- Hero con fondo verde --&gt;
-&lt;section class="container color-green"&gt;
-    &lt;header class="hero"&gt;
-        &lt;h1 class="stroke-green"&gt;&lt;span class="color-green"&gt;Título&lt;/span&gt; Secundario&lt;/h1&gt;
-        &lt;p&gt;Otra descripción de contenido&lt;/p&gt;
-    &lt;/header&gt;
-&lt;/section&gt;</code></pre>
-            
-            <h4>💡 Características del hero:</h4>
+            <h4>Características del hero:</h4>
             <ul>
                 <li><strong>Altura mínima:</strong> 50vh (50% del viewport)</li>
                 <li><strong>Centrado:</strong> Flexbox para centrado vertical y horizontal</li>
@@ -256,13 +251,14 @@ h3 { font-size: 2em; }</code></pre>
             </ul>
         </aside>
     </article>
+
 </section>
 
 <hr>
 
 <!-- SECCIÓN NAVEGACIÓN: Enlaces de navegación del sitio -->
 <section class="row">
-    <article class="columns twelve">
+    <article id="nav-link" class="columns twelve" tabindex="-1">
         <header>
             <h2>4. Enlaces de Navegación (.nav-link)</h2>
             <p>Los enlaces de navegación son componentes interactivos con colores específicos y comportamiento responsive. Se adaptan automáticamente según el tamaño de pantalla.</p>
@@ -278,34 +274,14 @@ h3 { font-size: 2em; }</code></pre>
         </header>
         
         <!-- DEMO DE NAVEGACIÓN -->
-        <section class="nav-demo">
-            <nav style="display: flex; gap: 1em; margin: 1em 0; flex-wrap: wrap;">
-                <a href="#" class="nav-link" id="home-link">
-                    <i class="fas fa-home"></i>
-                    <span class="nav-text">Inicio</span>
-                </a>
-                <a href="#" class="nav-link" id="mapa-ruta-link">
-                    <i class="fas fa-map"></i>
-                    <span class="nav-text">Mapa</span>
-                </a>
-                <a href="#" class="nav-link" id="rubrica-link">
-                    <i class="fas fa-list"></i>
-                    <span class="nav-text">Rúbrica</span>
-                </a>
-                <a href="#" class="nav-link" id="guia-estilo-link">
-                    <i class="fas fa-palette"></i>
-                    <span class="nav-text">Estilo</span>
-                </a>
-                <a href="#" class="nav-link" id="proyectos-link">
-                    <i class="fas fa-project-diagram"></i>
-                    <span class="nav-text">Proyectos</span>
-                </a>
-            </nav>
-        </section>
+        <a href="#" class="nav-link color-pink">
+            <i class="fas fa-home"></i>
+            <span class="nav-text">.nav-link</span>
+        </a>
         
         <!-- CÓDIGO DE EJEMPLO -->
         <aside class="code-example">
-            <h4>📁 Ubicación: css/style.css (líneas 114-211)</h4>
+            <h4>Ubicación: css/style.css (líneas 114-211)</h4>
             <pre><code>&lt;!-- Estructura de enlaces de navegación --&gt;
 &lt;nav&gt;
     &lt;a href="#" class="nav-link" id="home-link"&gt;
@@ -330,7 +306,7 @@ h3 { font-size: 2em; }</code></pre>
     &lt;/a&gt;
 &lt;/nav&gt;</code></pre>
             
-            <h4>🎨 CSS del componente nav-link:</h4>
+            <h4>CSS del componente nav-link:</h4>
             <pre><code>/* Componente nav-link - css/style.css líneas 114-138 */
 .nav-link {
     font-size: var(--font-size-mobile-icon);
@@ -402,7 +378,7 @@ h3 { font-size: 2em; }</code></pre>
 
 <section class="row">
     <!-- EJEMPLO DE BOTONES -->
-    <article class="columns six">
+    <article class="columns twelve">
         <header>
             <h3>Botones Estándar</h3>
             <p>Ejemplos de botones con diferentes propósitos.</p>
@@ -445,14 +421,14 @@ h3 { font-size: 2em; }</code></pre>
     </article>
     
     <!-- CARACTERÍSTICAS DEL BOTÓN -->
-    <article class="columns six">
+    <article class="columns twelve">
         <header>
             <h3>Características del Botón</h3>
             <p>Propiedades y comportamiento del componente button.</p>
         </header>
         
         <section class="button-features">
-            <h4>🎨 Estilos Visuales:</h4>
+            <h4>Estilos Visuales:</h4>
             <ul>
                 <li><strong>Fondo:</strong> Color primario (rojo)</li>
                 <li><strong>Texto:</strong> Color del tema</li>
@@ -462,7 +438,7 @@ h3 { font-size: 2em; }</code></pre>
                 <li><strong>Transición:</strong> 0.3s ease</li>
             </ul>
             
-            <h4>📏 Dimensiones:</h4>
+            <h4>Dimensiones:</h4>
             <ul>
                 <li><strong>Ancho mínimo:</strong> 120px</li>
                 <li><strong>Padding:</strong> 0.25em 1em</li>
@@ -470,7 +446,7 @@ h3 { font-size: 2em; }</code></pre>
                 <li><strong>Border-radius:</strong> 0 (esquinas rectas)</li>
             </ul>
             
-            <h4>🖱️ Estados Interactivos:</h4>
+            <h4>Estados Interactivos:</h4>
             <ul>
                 <li><strong>Hover:</strong> Cambio de color de texto</li>
                 <li><strong>Active:</strong> Efecto de presión</li>
@@ -501,7 +477,7 @@ h3 { font-size: 2em; }</code></pre>
         
         <!-- DEMO DE GRID -->
         <section class="grid-demo">
-            <h4>📐 Grid de 2 columnas (6 + 6):</h4>
+            <h4>Grid de 2 columnas (6 + 6):</h4>
             <div class="row" style="background: rgba(0,0,0,0.1); padding: 1em; margin: 1em 0;">
                 <div class="columns six" style="background: rgba(255,0,0,0.2); padding: 1em; text-align: center;">
                     <strong>6 columnas</strong>
@@ -511,7 +487,7 @@ h3 { font-size: 2em; }</code></pre>
                 </div>
             </div>
             
-            <h4>📐 Grid de 3 columnas (4 + 4 + 4):</h4>
+            <h4>Grid de 3 columnas (4 + 4 + 4):</h4>
             <div class="row" style="background: rgba(0,0,0,0.1); padding: 1em; margin: 1em 0;">
                 <div class="columns four" style="background: rgba(255,0,0,0.2); padding: 1em; text-align: center;">
                     <strong>4 columnas</strong>
@@ -527,7 +503,7 @@ h3 { font-size: 2em; }</code></pre>
         
         <!-- CÓDIGO DE EJEMPLO -->
         <aside class="code-example">
-            <h4>📁 Ubicación: css/style.css (sistema de grid personalizado)</h4>
+            <h4>Ubicación: css/style.css (sistema de grid personalizado)</h4>
             <pre><code>&lt;!-- Grid de 2 columnas --&gt;
 &lt;div class="row"&gt;
     &lt;div class="columns six"&gt;Contenido 1&lt;/div&gt;
@@ -554,7 +530,7 @@ h3 { font-size: 2em; }</code></pre>
         
         <!-- INFORMACIÓN ADICIONAL -->
         <section class="grid-info">
-            <h4>💡 Características del Grid:</h4>
+            <h4>Características del Grid:</h4>
             <ul>
                 <li><strong>Sistema de 12 columnas:</strong> División flexible del ancho</li>
                 <li><strong>Responsive:</strong> Se adapta automáticamente a diferentes pantallas</li>
@@ -562,7 +538,7 @@ h3 { font-size: 2em; }</code></pre>
                 <li><strong>Gap automático:</strong> Espaciado entre columnas</li>
             </ul>
             
-            <h4>📱 Comportamiento Responsive:</h4>
+            <h4>Comportamiento Responsive:</h4>
             <ul>
                 <li><strong>Mobile:</strong> Columnas se apilan verticalmente</li>
                 <li><strong>Tablet:</strong> Columnas se distribuyen horizontalmente</li>
@@ -586,7 +562,7 @@ h3 { font-size: 2em; }</code></pre>
 
 <section class="row">
     <!-- TAMAÑOS DE FUENTE -->
-    <article class="columns six">
+    <article class="columns twelve">
         <header>
             <h3>Tamaños de Fuente</h3>
             <p>Variables CSS para tamaños de fuente responsive.</p>
@@ -599,7 +575,7 @@ h3 { font-size: 2em; }</code></pre>
         </section>
         
         <section class="font-families">
-            <h4>📝 Fuentes del Sistema</h4>
+            <h4>Fuentes del Sistema</h4>
             <ul>
                 <li><strong>Base:</strong> Roboto, Helvetica, Arial, Lucida, sans-serif</li>
                 <li><strong>Heading:</strong> Barlow, Helvetica, Arial, Lucida, sans-serif</li>
@@ -608,7 +584,7 @@ h3 { font-size: 2em; }</code></pre>
         
         <!-- CÓDIGO DE EJEMPLO -->
         <aside class="code-example">
-            <h4>📁 Ubicación: css/style.css (líneas 1-32)</h4>
+            <h4>Ubicación: css/style.css (líneas 1-32)</h4>
             <pre><code>/* Variables de tipografía - css/style.css líneas 1-32 */
 :root {
     --font-base: 'Roboto', Helvetica, Arial, Lucida, sans-serif;
@@ -623,31 +599,35 @@ h3 { font-size: 2em; }</code></pre>
     </article>
     
     <!-- RESPONSIVE DESIGN -->
-    <article class="columns six">
+    <article class="columns twelve">
         <header>
             <h3>Responsive Design</h3>
             <p>Los tamaños de fuente se ajustan automáticamente según el breakpoint.</p>
         </header>
         
-        <section class="responsive-info">
-            <h4>📱 Tamaños por Breakpoint:</h4>
-            <ul>
-                <li><strong>Mobile:</strong> 1rem, 1.35rem, 1.5rem</li>
-                <li><strong>Tablet:</strong> 1rem, 1.125rem, 1.25rem</li>
-                <li><strong>Desktop:</strong> 1.125rem, 1.5rem, 1.75rem</li>
-            </ul>
+        <section class="responsive-info row">
+            <div class="columns six">
+                <h4>📱 Tamaños por Breakpoint:</h4>
+                <ul>
+                    <li><strong>Mobile:</strong> 1rem, 1.35rem, 1.5rem</li>
+                    <li><strong>Tablet:</strong> 1rem, 1.125rem, 1.25rem</li>
+                    <li><strong>Desktop:</strong> 1.125rem, 1.5rem, 1.75rem</li>
+                </ul>
+            </div>    
             
-            <h4>📏 Breakpoints del Sistema:</h4>
-            <ul>
-                <li><strong>Mobile:</strong> 0px - 767px</li>
-                <li><strong>Tablet:</strong> 768px - 1023px</li>
-                <li><strong>Desktop:</strong> 1024px+</li>
-            </ul>
+            <div class="columns six">
+                <h4>📏 Breakpoints del Sistema:</h4>
+                <ul>
+                    <li><strong>Mobile:</strong> 0px - 767px</li>
+                    <li><strong>Tablet:</strong> 768px - 1023px</li>
+                    <li><strong>Desktop:</strong> 1024px+</li>
+                </ul>
+            </div>
         </section>
         
         <!-- CÓDIGO DE EJEMPLO -->
         <aside class="code-example">
-            <h4>🎨 CSS Responsive:</h4>
+            <h4>CSS Responsive:</h4>
             <pre><code>/* Media queries para tipografía - css/style.css líneas 170-211 */
 @media (min-width: 768px) {
     :root {
@@ -682,7 +662,7 @@ h3 { font-size: 2em; }</code></pre>
 
 <section class="row">
     <!-- CLASES DE ALINEACIÓN -->
-    <article class="columns six">
+    <article class="columns twelve">
         <header>
             <h3>Clases de Alineación</h3>
             <p>Utilidades para controlar la alineación del texto.</p>
@@ -711,7 +691,7 @@ h3 { font-size: 2em; }</code></pre>
     </article>
     
     <!-- SEPARADORES -->
-    <article class="columns six">
+    <article class="columns twelve">
         <header>
             <h3>Separadores</h3>
             <p>Elementos para dividir secciones de contenido.</p>
@@ -799,7 +779,7 @@ hr {
         
         <!-- INFORMACIÓN ADICIONAL -->
         <section class="page-structure-info">
-            <h4>🏗️ Estructura de la Página:</h4>
+            <h4>Estructura de la Página:</h4>
             <ol>
                 <li><strong>Hero Section:</strong> Título principal con fondo de color</li>
                 <li><strong>Contenido Principal:</strong> Sección de ancho completo</li>
@@ -808,7 +788,7 @@ hr {
                 <li><strong>Acciones:</strong> Botones y elementos interactivos</li>
             </ol>
             
-            <h4>💡 Mejores Prácticas:</h4>
+            <h4>Mejores Prácticas:</h4>
             <ul>
                 <li><strong>Semántica:</strong> Usar elementos HTML5 apropiados</li>
                 <li><strong>Accesibilidad:</strong> Estructura clara y navegable</li>
@@ -816,7 +796,7 @@ hr {
                 <li><strong>Consistencia:</strong> Seguir el sistema de diseño</li>
             </ul>
             
-            <h4>📱 Consideraciones Responsive:</h4>
+            <h4>Consideraciones Responsive:</h4>
             <ul>
                 <li><strong>Mobile:</strong> Columnas se apilan verticalmente</li>
                 <li><strong>Tablet:</strong> Layout intermedio con columnas</li>
