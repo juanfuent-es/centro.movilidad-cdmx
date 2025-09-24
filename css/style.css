@@ -103,12 +103,12 @@ header#main-header nav {
 .color-white { color: var(--color-white); }
 .color-asfalto { color: var(--color-asfalto); }
 
-.stroke-rosa { -webkit-text-stroke: 1px var(--color-taxi-rosa); }
-.stroke-verde { -webkit-text-stroke: 1px var(--color-senal-verde); }
-.stroke-naranja { -webkit-text-stroke: 1px var(--color-metro-naranja); }
-.stroke-rojo { -webkit-text-stroke: 1px var(--color-stop-rojo); }
-.stroke-blanco { -webkit-text-stroke: 1px var(--color-white); }
-.stroke-asfalto { -webkit-text-stroke: 1px var(--color-asfalto); }
+.stroke-pink { -webkit-text-stroke: 1px var(--color-taxi-rosa); }
+.stroke-green { -webkit-text-stroke: 1px var(--color-senal-verde); }
+.stroke-orange { -webkit-text-stroke: 1px var(--color-metro-naranja); }
+.stroke-red { -webkit-text-stroke: 1px var(--color-stop-rojo); }
+.stroke-white { -webkit-text-stroke: 1px var(--color-white); }
+.stroke-asphalt { -webkit-text-stroke: 1px var(--color-asfalto); }
 
 /* componentes */
 .nav-link {
@@ -256,13 +256,18 @@ footer#main-footer {
     color: var(--color-asfalto);
     border-color: var(--color-asfalto);
 }
-.button-pink {
-    color: var(--color-taxi-rosa);
-}
-.button-pink:hover {
-    background-color: var(--color-taxi-rosa);
-    color: var(--color-asfalto);
-}
+.button-pink { color: var(--color-taxi-rosa); }
+.button-pink:hover { background-color: var(--color-taxi-rosa); }
+.button-orange { color: var(--color-metro-naranja); }
+.button-orange:hover { background-color: var(--color-metro-naranja); }
+.button-green { color: var(--color-senal-verde); }
+.button-green:hover { background-color: var(--color-senal-verde); }
+.button-red { color: var(--color-stop-rojo); }
+.button-red:hover { background-color: var(--color-stop-rojo); }
+.button-white { color: var(--color-white); }
+.button-white:hover { background-color: var(--color-white); }
+.button-asfalto { color: var(--color-asfalto); }
+.button-asfalto:hover { background-color: var(--color-asfalto); }
 
 .text-center {
     text-align: center;

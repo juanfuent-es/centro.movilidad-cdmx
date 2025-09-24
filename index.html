@@ -15,13 +15,10 @@ Secciones guía: Punto de Partida (hero), Mapa de Ruta (temario), Señalamientos
 <!-- HERO: Punto de Partida -->
 <section class="container color-pink" aria-labelledby="hero-title">
     <header class="hero">
-      <h1 id="hero-title" class="stroke-rosa"><span class="color-pink">Movilidad</span> CDMX</h1>
+      <h1 id="hero-title" class="stroke-white">#Movilidad<span class="color-pink">CDMX</span></h1>
       <p>Proyecto del Primer Bloque | Comunicación Visual — Diseño Digital 5<br>
         Estructura informacional y jerarquía aplicada al diseño web</p>
-      <nav class="hero-cta" aria-label="Acciones principales">
-        <a class="button button-pink" href="acerca.html">Comenzar</a>
-        <a class="button button-pink" href="rubrica.html">Ver Rúbrica</a>
-      </nav>
+        <a class="button button-pink" href="{{ '/guia.html' | relative_url }}">Comenzar <i class="fa-solid fa-angle-right"></i></a>
     </header>
   </section>
   
@@ -209,7 +206,7 @@ Secciones guía: Punto de Partida (hero), Mapa de Ruta (temario), Señalamientos
     --alto-rojo:#C62828;
   }
   .color-pink{ color:var(--taxi-rosa); }
-  .stroke-rosa{ -webkit-text-stroke:1px var(--taxi-rosa); }
+  .stroke-pink{ -webkit-text-stroke:1px var(--taxi-rosa); }
   .button{ margin-right:.5rem; }
   .route-grid,.rubric-grid,.resources-grid,.references-grid{ margin-top:1rem; }
   .final-cta ol{ margin-bottom:1rem; }
