@@ -2,7 +2,7 @@
 
 Template base con Jekyll y GitHub Pages para proyectos de diseño web.
 
-## 🚀 Inicio Rápido
+## 🚗 Inicio Rápido
 
 1. **Usa este template** - Haz clic en "Use this template" en GitHub
 2. **Crea tu repositorio** - Dale un nombre a tu proyecto
@@ -10,7 +10,7 @@ Template base con Jekyll y GitHub Pages para proyectos de diseño web.
 4. **Personaliza** el contenido en `_config.yml`
 5. **Activa** GitHub Pages en Settings
 
-## 📁 Estructura
+## 🗺️ Estructura
 
 ```
 ├── _layouts/          # Plantillas HTML base
@@ -22,7 +22,7 @@ Template base con Jekyll y GitHub Pages para proyectos de diseño web.
 └── _config.yml       # Configuración de Jekyll
 ```
 
-## 🎨 Características
+## 🚦 Características
 
 - **Jekyll** - Generador de sitios estáticos
 - **GitHub Pages** - Hosting gratuito
@@ -30,12 +30,12 @@ Template base con Jekyll y GitHub Pages para proyectos de diseño web.
 - **Responsive** - Diseño adaptable
 - **Minimal** - Estructura simple y clara
 
-## 📖 Documentación
+## 📋 Documentación
 
 - [Guía de Inicio](guia.html) - Pasos para configurar
 - [Manifiesto](manifiesto.html) - Filosofía del template
 
-## 🔧 Cómo Usar este Template
+## 🛠️ Cómo Usar este Template
 
 1. **En GitHub**: Haz clic en el botón verde "Use this template"
 2. **Crea tu repositorio**: Dale un nombre descriptivo a tu proyecto
@@ -43,7 +43,7 @@ Template base con Jekyll y GitHub Pages para proyectos de diseño web.
 4. **Personaliza**: Edita `_config.yml` con tu información
 5. **Sube cambios**: `git add . && git commit -m "Initial commit" && git push`
 
-## ⚙️ Configuración
+## 🔧 Configuración
 
 Edita `_config.yml`:
 
@@ -54,7 +54,7 @@ baseurl: "/tu-repositorio"
 url: "https://tu-usuario.github.io"
 ```
 
-## 📚 Recursos
+## 🚧 Recursos
 
 - [Jekyll Docs](https://jekyllrb.com/docs/)
 - [GitHub Pages](https://pages.github.com/)
