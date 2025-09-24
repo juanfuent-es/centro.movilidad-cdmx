@@ -60,11 +60,13 @@ a {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 800;
-    text-transform: uppercase;
 }
 
 h1 {
+    color: var(--color-asfalto);
     font-size: 4em;
+    margin: .2em 0;
+    line-height: 1em;
 }
 
 h2 {
@@ -92,6 +94,23 @@ header#main-header nav {
     align-items: center;
 }
 
+/* utilidades */
+[class*="color-"] { -webkit-text-stroke: 0px; }
+.color-rosa { color: var(--color-taxi-rosa); }
+.color-verde { color: var(--color-senal-verde); }
+.color-naranja { color: var(--color-metro-naranja); }
+.color-rojo { color: var(--color-stop-rojo); }
+.color-blanco { color: var(--color-blanco); }
+.color-asfalto { color: var(--color-asfalto); }
+
+.stroke-rosa { -webkit-text-stroke: 1px var(--color-taxi-rosa); }
+.stroke-verde { -webkit-text-stroke: 1px var(--color-senal-verde); }
+.stroke-naranja { -webkit-text-stroke: 1px var(--color-metro-naranja); }
+.stroke-rojo { -webkit-text-stroke: 1px var(--color-stop-rojo); }
+.stroke-blanco { -webkit-text-stroke: 1px var(--color-blanco); }
+.stroke-asfalto { -webkit-text-stroke: 1px var(--color-asfalto); }
+
+/* componentes */
 .nav-link {
     font-size: var(--font-size-mobile-icon);
     background-color: var(--color-primary);
@@ -126,9 +145,9 @@ header#main-header nav {
 }
 /* Colores específicos por enlace */
 a#home-link { background-color: var(--color-asfalto); }
-a#mapa-ruta-link { background-color: var(--color-primary); }
-a#rubrica-link { background-color: var(--color-secondary); }
-a#guia-estilo-link { background-color: var(--color-accent); }
+a#mapa-ruta-link { background-color: var(--color-metro-naranja); }
+a#rubrica-link { background-color: var(--color-stop-rojo); }
+a#guia-estilo-link { background-color: var(--color-taxi-rosa); }
 a#proyectos-link { background-color: var(--color-senal-verde); }
 
 /* Mobile: Solo iconos, texto oculto */
@@ -186,6 +205,9 @@ a#proyectos-link { background-color: var(--color-senal-verde); }
     .nav-link i {
         font-size: inherit;
     }
+    h1 {
+        font-size: 5em;
+    }
 }
 
 footer#main-footer {
@@ -207,6 +229,9 @@ footer#main-footer {
     flex-direction: column;
 }
 
+.hero p {
+    font-size: var(--font-size-lg);
+}
 
 .button {
     font-family: var(--font-heading);
