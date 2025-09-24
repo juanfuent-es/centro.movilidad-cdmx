@@ -17,7 +17,7 @@ description:
         </header>
         <nav role="navigation" aria-label="Índice de la guía">
             <h3>Índice</h3>
-            <ul>
+            <ol>
                 <li><a title="Importa tipografías" href="#tipografias">Tipografías</a></li>
                 <li><a title="Define metadatos" href="#metadatos">Metadatos</a></li>
                 <li><a title="Define colores y temas" href="#colores-temas">Colores y temas</a></li>
@@ -26,7 +26,7 @@ description:
                 <li><a title="Arquitectura estática con includes y utilidades CSS" href="#estructura-tecnologias">Estructura y tecnologías</a></li>
                 <li><a title="Iconografía vía CDN" href="#font-awesome">Font Awesome</a></li>
                 <li><a title="Buenas prácticas rápidas" href="#buenas-practicas">Buenas prácticas</a></li>
-            </ul>
+            </ol>
         </nav>
     </section>
 
@@ -217,3 +217,24 @@ description: Descripción para SEO y redes
         </article>
     </section>
 </main>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Resalta todos los bloques <pre><code> usando CodeMirror RunMode
+    if (window.CodeMirror && CodeMirror.runMode) {
+        var codeBlocks = document.querySelectorAll('pre > code');
+        codeBlocks.forEach(function (codeEl) {
+            var pre = codeEl.parentElement;
+            var text = codeEl.textContent;
+            // Detecta modo por heurística simple según contenido
+            var mode = 'htmlmixed';
+            if (/^\s*\./m.test(text) || /:root\s*\{/.test(text)) mode = 'css';
+            if (/function\s|const\s|let\s|=>/.test(text)) mode = 'javascript';
+            // Aplica tema visual similar a darcula sobre nuestro fondo azul
+            pre.classList.add('cm-s-monokai');
+            // Limpia el <code> y crea un contenedor para tokens
+            codeEl.innerHTML = '';
+            CodeMirror.runMode(text, mode, codeEl);
+        });
+    }
+});
+</script>

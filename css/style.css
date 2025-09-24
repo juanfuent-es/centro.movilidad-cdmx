@@ -99,48 +99,15 @@ p {
     max-width: 60ch;
 }
 
-/* Tipografía monoespaciada y estilos para código */
-code, kbd, samp, pre {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-        "Liberation Mono", "Courier New", monospace;
-}
-
-/* Bloques de código */
-pre {
-    background: var(--code-bg);
-    color: var(--code-text);
-    border: 1px solid var(--code-border);
-    padding: 1rem;
-    margin: 1rem 0;
-    overflow-x: auto;
-    line-height: 1.6;
-}
-
-/* Código inline */
-code {
-    background: color-mix(in srgb, var(--code-bg) 85%, transparent);
-    color: var(--code-text);
-    border: 1px solid var(--code-border);
-    padding: 0.1em 0.35em;
-    border-radius: 4px;
-}
-
-/* Evitar doble fondo cuando code está dentro de pre */
-pre code {
-    background: transparent;
-    border: 0;
-    padding: 0;
-}
-
-/* Resaltar etiquetas HTML simplificado dentro de code (sin highlighter) */
-code b, code strong { color: var(--color-taxi-rosa); }
-code i, code em { color: var(--color-metro-naranja); }
-code .attr { color: var(--color-senal-verde); }
-code .value { color: var(--color-stop-rojo); }
-
 img {
     max-width: 100%;
     height: auto;
+}
+
+pre, code {
+    background-color: transparent;
+    overflow-x: auto;
+    --scroll-size: 5px;
 }
 /* layout */
 
