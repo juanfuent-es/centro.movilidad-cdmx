@@ -8,6 +8,7 @@
     --color-stop-rojo: #D32F2F;       /* Rojo de alto */
     --color-asfalto: #212121;         /* Asfalto urbano */
     --color-white: #FFFFFF;          /* Texto sobre fondo oscuro */
+    --color-senal-azul: #0D47A1;     /* Azul de señalamientos */
 
     /* Roles de diseño */
     --color-bg: var(--color-white);
@@ -29,6 +30,11 @@
     --font-size-sm: 1rem;
     --font-size-base: 1.35rem;
     --font-size-lg: 1.5rem;
+
+    /* Colores para bloques de código */
+    --code-bg: var(--color-senal-azul);
+    --code-text: var(--color-white);
+    --code-border: rgba(255,255,255,0.12);
 }
 
 /* Estilos default */
@@ -48,6 +54,10 @@ body {
         --color-primary: var(--color-stop-rojo);
         --color-secondary: var(--color-metro-naranja);
         --color-accent: var(--color-taxi-rosa);
+        /* Ajustes de código en oscuro (mantener contraste alto) */
+        --code-bg: var(--color-senal-azul);
+        --code-text: var(--color-white);
+        --code-border: rgba(255,255,255,0.16);
     }
 }
 
@@ -89,9 +99,44 @@ p {
     max-width: 60ch;
 }
 
-code {
-    background: var(--color-bg);
+/* Tipografía monoespaciada y estilos para código */
+code, kbd, samp, pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
 }
+
+/* Bloques de código */
+pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    border: 1px solid var(--code-border);
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    line-height: 1.6;
+}
+
+/* Código inline */
+code {
+    background: color-mix(in srgb, var(--code-bg) 85%, transparent);
+    color: var(--code-text);
+    border: 1px solid var(--code-border);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+}
+
+/* Evitar doble fondo cuando code está dentro de pre */
+pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
+
+/* Resaltar etiquetas HTML simplificado dentro de code (sin highlighter) */
+code b, code strong { color: var(--color-taxi-rosa); }
+code i, code em { color: var(--color-metro-naranja); }
+code .attr { color: var(--color-senal-verde); }
+code .value { color: var(--color-stop-rojo); }
 
 img {
     max-width: 100%;
