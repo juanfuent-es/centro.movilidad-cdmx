@@ -86,10 +86,10 @@ h2 {
     margin-bottom: 1em;
 }
 
-h2::first-line {
+/* h2::first-line {
     font-size: 1.5em;
     stroke-width: .5px;
-}
+} */
 h3 {
     font-size: 1.5em;
     font-weight: 600;
@@ -97,6 +97,7 @@ h3 {
 
 p {
     max-width: 60ch;
+    text-wrap-style: balance;
 }
 
 img {
@@ -257,13 +258,18 @@ a#proyectos-link { background-color: var(--color-senal-verde); }
 .hero {
     text-align: center;
     padding: 1em 0;
-    min-height: 70vh;
+    min-height: 400px;
+    height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
-
+@media (min-width: 1024px) {
+    .hero {
+        height: 80vh;
+    }
+}
 .hero p {
     font-size: var(--font-size-lg);
 }
