@@ -15,16 +15,9 @@
     --nav-link-active-color: var(--color-white);
     
     /* Tamaños y espaciado */
-    --nav-link-padding: 0;
     --nav-link-gap: 0.25em;
     --nav-link-width: 20%;
     --nav-link-aspect-ratio: 1 / 1;
-    
-    /* Tipografía */
-    --nav-link-font-family: var(--font-heading);
-    --nav-link-font-size: var(--font-size-2xl);
-    --nav-link-font-weight: var(--font-weight-extrabold);
-    --nav-link-text-transform: uppercase;
     
     /* Iconos */
     --nav-link-icon-size: 2.5rem;
@@ -60,14 +53,12 @@
     color: var(--nav-link-color);
     border: var(--nav-link-border);
     border-radius: var(--nav-link-border-radius);
-    padding: var(--nav-link-padding);
     opacity: var(--nav-link-opacity);
     
     /* Tipografía */
-    font-family: var(--nav-link-font-family);
-    font-size: var(--nav-link-font-size);
-    font-weight: var(--nav-link-font-weight);
-    text-transform: var(--nav-link-text-transform);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
     text-decoration: none;
     text-align: center;
     line-height: 1.1em;
@@ -144,7 +135,6 @@
 /* Mobile: Solo iconos, texto oculto */
 @media (max-width: 767px) {
     .nav-link {
-        --nav-link-font-size: var(--font-size-2xl);
         --nav-link-aspect-ratio: 1 / 1;
         --nav-link-gap: 0.25em;
         --nav-link-icon-size: 2.5rem;
@@ -158,7 +148,6 @@
 /* Tablet: Mostrar texto con tamaño pequeño */
 @media (min-width: 768px) and (max-width: 1023px) {
     .nav-link {
-        --nav-link-font-size: var(--font-size-lg);
         --nav-link-aspect-ratio: 1 / 0.6;
         --nav-link-gap: 0.35em;
         --nav-link-icon-size: 2.5rem;
@@ -172,7 +161,6 @@
 /* Desktop: Texto completo con tamaño grande */
 @media (min-width: 1024px) {
     .nav-link {
-        --nav-link-font-size: var(--font-size-xl);
         --nav-link-aspect-ratio: 1 / 0.3;
         --nav-link-gap: 0.35em;
         --nav-link-icon-size: inherit;
@@ -182,48 +170,4 @@
     .nav-text {
         display: inline;
     }
-}
-
-/* ============================================
-   UTILIDADES DEL NAV-LINK
-   ============================================ */
-.nav-link.compact {
-    --nav-link-width: 15%;
-    --nav-link-font-size: var(--font-size-sm);
-    --nav-link-icon-size: 1.5rem;
-}
-
-.nav-link.large {
-    --nav-link-width: 25%;
-    --nav-link-font-size: var(--font-size-2xl);
-    --nav-link-icon-size: 3rem;
-}
-
-.nav-link.rounded {
-    --nav-link-border-radius: var(--border-radius-md);
-}
-
-.nav-link.outlined {
-    --nav-link-border: 2px solid currentColor;
-    --nav-link-bg: transparent;
-}
-
-.nav-link.outlined:hover {
-    --nav-link-bg: currentColor;
-    --nav-link-color: var(--color-white);
-}
-
-/* ============================================
-   ANIMACIONES DEL NAV-LINK
-   ============================================ */
-.nav-link.animate-scale:hover {
-    transform: scale(1.05);
-}
-
-.nav-link.animate-slide:hover {
-    transform: translateY(-2px);
-}
-
-.nav-link.animate-glow:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }

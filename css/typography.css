@@ -13,18 +13,9 @@
     --font-size-lg: 1.125rem;   /* 18px - mobile default */
     
     /* Pesos de fuente */
-    --font-weight-light: 300;
+    --font-weight-light: 200;
     --font-weight-normal: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    --font-weight-extrabold: 800;
-    --font-weight-black: 900;
-    
-    /* Alturas de línea */
-    --line-height-tight: 1.1;
-    --line-height-normal: 1.5;
-    --line-height-relaxed: 1.75;
+    --font-weight-bold: 800;
 }
 
 /* ============================================
@@ -38,7 +29,6 @@ body {
     font-family: var(--font-base);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-normal);
-    line-height: var(--line-height-normal);
     color: var(--color-text);
     background: var(--color-bg);
     padding: 0;
@@ -62,22 +52,19 @@ a:hover {
 /* ============================================
    TÍTULOS Y ENCABEZADOS
    ============================================ */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4 {
     font-family: var(--font-heading);
-    font-weight: var(--font-weight-extrabold);
-    line-height: var(--line-height-tight);
-    margin: 0;
-    color: var(--color-text);
 }
 
 h1 {
-    font-size: var(--font-size-4xl);
+    font-size: 5rem;
+    font-weight: 800;
     margin-bottom: 1.5rem;
     line-height: 1em;
 }
 
 h2 {
-    font-size: var(--font-size-2xl);
+    font-size: 4rem;
     text-transform: uppercase;
     font-weight: var(--font-weight-bold);
     margin-bottom: 1rem;
@@ -85,28 +72,12 @@ h2 {
 }
 
 h3 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
+    font-size: 3rem;
     margin-bottom: 1rem;
 }
 
 h4 {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
-    margin-bottom: 0.5rem;
-}
-
-h5 {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-medium);
-    margin-bottom: 0.5rem;
-}
-
-h6 {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-size: 2rem;
     margin-bottom: 0.5rem;
 }
 
@@ -117,7 +88,6 @@ p {
     max-width: 60ch;
     text-wrap-style: balance;
     margin-bottom: 1rem;
-    line-height: var(--line-height-relaxed);
 }
 
 /* ============================================
@@ -130,7 +100,6 @@ ul, ol {
 
 li {
     margin-bottom: 0.5rem;
-    line-height: var(--line-height-normal);
 }
 
 /* ============================================
@@ -181,9 +150,6 @@ img {
 .font-regular { font-weight: var(--font-weight-regular); }
 .font-bold { font-weight: var(--font-weight-bold); }
 
-.leading-normal { line-height: var(--line-height-normal); }
-.leading-relaxed { line-height: var(--line-height-relaxed); }
-
 .text-left { text-align: left; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
@@ -197,3 +163,43 @@ img {
    RESPONSIVE TIPOGRAFÍA SIMPLIFICADA
    ============================================ */
 /* Los breakpoints y tamaños responsive se manejan en responsive.css */
+
+/* Tablet: Mostrar texto con tamaño pequeño */
+@media (min-width: var(--breakpoint-tablet)) {
+    /* Escalado de tipografía para tablet */
+    html {
+        font-size: 18px;
+    }
+    h1 {
+        font-size: 5rem;
+    }
+    h2 {
+        font-size: 4rem;
+    }
+    h3 {
+        font-size: 3rem;
+    }
+    h4 {
+        font-size: 2rem;
+    }
+}
+
+/* Desktop: Texto completo con tamaño grande */
+@media (min-width: var(--breakpoint-desktop)) {
+    /* Escalado de tipografía para desktop */
+    html {
+        font-size: 20px;
+    }
+    h1 {
+        font-size: 6rem;
+    }
+    h2 {
+        font-size: 5rem;
+    }
+    h3 {
+        font-size: 4rem;
+    }
+    h4 {
+        font-size: 3rem;
+    }
+}

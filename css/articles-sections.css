@@ -152,7 +152,6 @@ footer#main-footer {
 
 .evaluation-card.excelente h4 {
     color: var(--color-senal-verde);
-    font-weight: var(--font-weight-bold);
 }
 
 /* Bueno - Naranja */
@@ -162,7 +161,6 @@ footer#main-footer {
 
 .evaluation-card.bueno h4 {
     color: var(--color-metro-naranja);
-    font-weight: var(--font-weight-bold);
 }
 
 /* Satisfactorio - Rosa */
@@ -172,7 +170,6 @@ footer#main-footer {
 
 .evaluation-card.satisfactorio h4 {
     color: var(--color-taxi-rosa);
-    font-weight: var(--font-weight-bold);
 }
 
 /* Necesita Mejora - Rojo */
@@ -182,7 +179,6 @@ footer#main-footer {
 
 .evaluation-card.necesita-mejora h4 {
     color: var(--color-stop-rojo);
-    font-weight: var(--font-weight-bold);
 }
 
 /* ============================================

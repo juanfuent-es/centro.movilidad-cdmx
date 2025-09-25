@@ -2,36 +2,19 @@
    VARIABLES DE COLORES
    ============================================ */
 :root {
-    /* Colores base inspirados en tránsito urbano */
-    --color-metro-naranja: #F47C20;   /* Naranja del Metro CDMX */
-    --color-taxi-rosa: #EC407A;       /* Rosa de taxis */
-    --color-senal-verde: #2E7D32;     /* Verde de señalamientos */
-    --color-stop-rojo: #D32F2F;       /* Rojo de alto */
-    --color-asfalto: #212121;         /* Asfalto urbano */
-    --color-white: #f0f0f0;           /* Blanco puro */
-    --color-senal-azul: #0D47A1;      /* Azul de señalamientos */
-    
     /* Colores semánticos */
     --color-primary: var(--color-stop-rojo);
     --color-secondary: var(--color-metro-naranja);
     --color-accent: var(--color-taxi-rosa);
-    --color-success: var(--color-senal-verde);
-    --color-warning: var(--color-metro-naranja);
-    --color-danger: var(--color-stop-rojo);
-    --color-info: var(--color-senal-azul);
     
     /* Colores de fondo y texto */
     --color-bg: var(--color-asfalto);
-    --color-bg-secondary: #F5F5F5;
-    --color-bg-tertiary: #EEEEEE;
     --color-text: var(--color-white);
-    --color-text-secondary: #666666;
     --color-text-muted: #999999;
     
     /* Colores de borde */
     --color-border: #E0E0E0;
     --color-border-light: #F0F0F0;
-    --color-border-dark: #CCCCCC;
 }
 
 

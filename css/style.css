@@ -1,17 +1,35 @@
 /* ============================================
-   IMPORTAR SISTEMA DE COMPONENTES
+   VARIABLES DE BREAKPOINTS
    ============================================ */
-@import url('./components.css');
+:root {
+   /* Breakpoints */
+   --breakpoint-tablet: 768px;
+   --breakpoint-desktop: 1024px;
+   /* Colores base inspirados en tránsito urbano */
+   --color-metro-naranja: #F47C20;   /* Naranja del Metro CDMX */
+   --color-taxi-rosa: #EC407A;       /* Rosa de taxis */
+   --color-senal-verde: #2E7D32;     /* Verde de señalamientos */
+   --color-stop-rojo: #D32F2F;       /* Rojo de alto */
+   --color-asfalto: #212121;         /* Asfalto urbano */
+   --color-white: #f0f0f0;           /* Blanco puro */
+   --color-senal-azul: #0D47A1;      /* Azul de señalamientos */
+}
+
+/* ============================================
+SISTEMA DE COMPONENTES CSS
+============================================ */
+@import url('./typography.css');
+@import url('./nav-link.css');
+@import url('./button.css');
+@import url('./colors-backgrounds.css');
+@import url('./articles-sections.css');
+@import url('./responsive.css');
 
 /* ============================================
    ESTILOS ESPECÍFICOS DEL PROYECTO
    ============================================ */
 
 /* Estilos adicionales específicos que no están en los componentes */
-
-/* ============================================
-   COMPATIBILIDAD CON CÓDIGO EXISTENTE
-   ============================================ */
 
 /* Mantener clases existentes para compatibilidad */
 [class*="color-"] { -webkit-text-stroke: 0px; }
