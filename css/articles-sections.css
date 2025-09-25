@@ -172,17 +172,6 @@ hr {
     opacity: 0.3;
 }
 
-.separator {
-    height: var(--border-width-thick);
-    background: linear-gradient(90deg, 
-        transparent, 
-        var(--color-primary), 
-        transparent
-    );
-    margin: 3rem 0;
-    border: none;
-}
-
 /* ============================================
    CONTENEDORES
    ============================================ */
