@@ -2,10 +2,6 @@
    VARIABLES DE BREAKPOINTS Y COLORES BASE
    ============================================ */
    :root {
-    /* Breakpoints */
-    --breakpoint-tablet: 768px;
-    --breakpoint-desktop: 1024px;
-    
     /* Colores base inspirados en tránsito urbano */
     --color-metro-naranja: #F47C20;   /* Naranja del Metro CDMX */
     --color-taxi-rosa: #EC407A;       /* Rosa de taxis */

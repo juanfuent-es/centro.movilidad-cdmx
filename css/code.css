@@ -14,15 +14,16 @@
 pre {
     font-family: var(--font-mono);
     background-color: var(--color-bg-secondary);
-    padding: 1rem;
-    border-radius: var(--border-radius-md);
     overflow-x: auto;
     margin: 1rem 0;
-    border: var(--border-width-thin) solid var(--color-border);
+    padding: 1em;
+    border: none;
+    outline: none;
 }
 
 pre code {
     background: none;
     padding: 0;
     border-radius: 0;
+    border: none;
 }

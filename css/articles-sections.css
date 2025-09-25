@@ -8,18 +8,8 @@
 article, section {
     /* Variables personalizables */
     --article-color: var(--color-text);
-    --article-padding: 1.5rem;
-    --article-margin: 2rem 0;
-    --article-border: none;
-    --article-border-radius: 0;
-    --article-shadow: none;
-    
-    /* Tipografía */
-    --article-font-size: var(--font-size-base);
-    --article-line-height: var(--line-height-normal);
-    
-    /* Transiciones */
-    --article-transition: all var(--transition-normal);
+    --article-padding: .5rem;
+    --article-margin: .25rem 0;
 }
 
 /* ============================================
@@ -28,30 +18,31 @@ article, section {
 article {
     color: var(--article-color);
     padding: var(--article-padding);
-    margin: var(--article-margin);
-    border: var(--article-border);
-    border-radius: var(--article-border-radius);
-    box-shadow: var(--article-shadow);
-    transition: var(--article-transition);
-    font-size: var(--article-font-size);
-    line-height: var(--article-line-height);
 }
 
+article header p {
+    text-wrap-style: pretty;
+    margin-top: .25rem;
+    margin-bottom: 2em;
+}
 /* ============================================
    ESTILOS BASE DE SECTIONS
    ============================================ */
 section {
     color: var(--article-color);
-    padding: var(--article-padding);
     margin: var(--article-margin);
     border: var(--article-border);
-    border-radius: var(--article-border-radius);
     box-shadow: var(--article-shadow);
-    transition: var(--article-transition);
-    font-size: var(--article-font-size);
     line-height: var(--article-line-height);
 }
 
+.cards-container {
+    padding: 0;
+    margin: 0;
+}
+.cards-container .row {
+    display: flex;
+}
 /* ============================================
    HEADERS Y FOOTERS
    ============================================ */
@@ -77,9 +68,6 @@ footer#main-footer {
    CARDS
    ============================================ */
 .card {
-    --article-border: var(--border-width-thin) solid var(--color-border);
-    --article-border-radius: var(--border-radius-md);
-    --article-shadow: none;
     --article-padding: 1.5rem;
     --article-margin: 1rem 0;
     border: 1px solid currentColor;
@@ -99,18 +87,12 @@ footer#main-footer {
     color: var(--color-text-secondary);
 }
 
-.card:hover {
-    --article-shadow: none;
-    transform: translateY(-2px);
-}
-
 /* ============================================
    HERO SECTION
    ============================================ */
 .hero {
     --article-padding: 4rem 1.5rem;
     --article-margin: 0;
-    --article-border-radius: 0;
     
     text-align: center;
     min-height: 400px;
@@ -133,9 +115,6 @@ footer#main-footer {
    EVALUATION CARDS
    ============================================ */
 .evaluation-card {
-    --article-border: var(--border-width-medium) solid var(--color-border);
-    --article-border-radius: var(--border-radius-md);
-    --article-shadow: none;
     --article-padding: 2rem;
     --article-margin: 1rem 0;
     
@@ -144,7 +123,6 @@ footer#main-footer {
 }
 
 .evaluation-card:hover {
-    --article-shadow: none;
     transform: translateY(-4px);
 }
 
@@ -190,7 +168,7 @@ footer#main-footer {
 hr {
     border: none;
     border-top: var(--border-width-thin) solid var(--color-border);
-    margin: 3rem 0;
+    margin: .25rem 0;
     opacity: 0.3;
 }
 
