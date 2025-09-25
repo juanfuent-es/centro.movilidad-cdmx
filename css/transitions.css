@@ -1,0 +1,7 @@
+/* ============================================
+   VARIABLES DE TRANSICIONES BÁSICAS
+   ============================================ */
+:root {
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+}

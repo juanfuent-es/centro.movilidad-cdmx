@@ -1,0 +1,317 @@
+/* ============================================
+   ARTICLES Y SECTIONS
+   ============================================ */
+
+/* ============================================
+   VARIABLES DE ARTICLES Y SECTIONS
+   ============================================ */
+article, section {
+    /* Variables personalizables */
+    --article-color: var(--color-text);
+    --article-padding: 1.5rem;
+    --article-margin: 2rem 0;
+    --article-border: none;
+    --article-border-radius: 0;
+    --article-shadow: none;
+    
+    /* Tipografía */
+    --article-font-size: var(--font-size-base);
+    --article-line-height: var(--line-height-normal);
+    
+    /* Transiciones */
+    --article-transition: all var(--transition-normal);
+}
+
+/* ============================================
+   ESTILOS BASE DE ARTICLES
+   ============================================ */
+article {
+    color: var(--article-color);
+    padding: var(--article-padding);
+    margin: var(--article-margin);
+    border: var(--article-border);
+    border-radius: var(--article-border-radius);
+    box-shadow: var(--article-shadow);
+    transition: var(--article-transition);
+    font-size: var(--article-font-size);
+    line-height: var(--article-line-height);
+}
+
+/* ============================================
+   ESTILOS BASE DE SECTIONS
+   ============================================ */
+section {
+    color: var(--article-color);
+    padding: var(--article-padding);
+    margin: var(--article-margin);
+    border: var(--article-border);
+    border-radius: var(--article-border-radius);
+    box-shadow: var(--article-shadow);
+    transition: var(--article-transition);
+    font-size: var(--article-font-size);
+    line-height: var(--article-line-height);
+}
+
+/* ============================================
+   HEADERS Y FOOTERS
+   ============================================ */
+header#main-header {
+    background-color: var(--color-bg);
+}
+
+header#main-header nav {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer#main-footer {
+    margin-top: 3rem;
+    text-align: center;
+    padding: 2rem 0 1rem 0;
+    background-color: var(--color-bg-secondary);
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.card {
+    --article-border: var(--border-width-thin) solid var(--color-border);
+    --article-border-radius: var(--border-radius-md);
+    --article-shadow: none;
+    --article-padding: 1.5rem;
+    --article-margin: 1rem 0;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: var(--color-text);
+    border-bottom: var(--border-width-thin) solid var(--color-border);
+    padding-bottom: 0.5rem;
+}
+
+.card p {
+    margin-bottom: 0;
+    color: var(--color-text-secondary);
+}
+
+.card:hover {
+    --article-shadow: none;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    --article-padding: 4rem 1.5rem;
+    --article-margin: 0;
+    --article-border-radius: 0;
+    
+    text-align: center;
+    min-height: 400px;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero p {
+    font-size: var(--font-size-lg);
+    max-width: 60ch;
+    margin: 1rem auto;
+}
+
+/* ============================================
+   EVALUATION CARDS
+   ============================================ */
+.evaluation-card {
+    --article-border: var(--border-width-medium) solid var(--color-border);
+    --article-border-radius: var(--border-radius-md);
+    --article-shadow: none;
+    --article-padding: 2rem;
+    --article-margin: 1rem 0;
+    
+    transition: all var(--transition-normal);
+    cursor: pointer;
+}
+
+.evaluation-card:hover {
+    --article-shadow: none;
+    transform: translateY(-4px);
+}
+
+/* Excelente - Verde */
+.evaluation-card.excelente {
+    --article-border-color: var(--color-senal-verde);
+}
+
+.evaluation-card.excelente h4 {
+    color: var(--color-senal-verde);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Bueno - Naranja */
+.evaluation-card.bueno {
+    --article-border-color: var(--color-metro-naranja);
+}
+
+.evaluation-card.bueno h4 {
+    color: var(--color-metro-naranja);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Satisfactorio - Rosa */
+.evaluation-card.satisfactorio {
+    --article-border-color: var(--color-taxi-rosa);
+}
+
+.evaluation-card.satisfactorio h4 {
+    color: var(--color-taxi-rosa);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Necesita Mejora - Rojo */
+.evaluation-card.necesita-mejora {
+    --article-border-color: var(--color-stop-rojo);
+}
+
+.evaluation-card.necesita-mejora h4 {
+    color: var(--color-stop-rojo);
+    font-weight: var(--font-weight-bold);
+}
+
+/* ============================================
+   SEPARADORES
+   ============================================ */
+hr {
+    border: none;
+    border-top: var(--border-width-thin) solid var(--color-border);
+    margin: 3rem 0;
+    opacity: 0.3;
+}
+
+.separator {
+    height: var(--border-width-thick);
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--color-primary), 
+        transparent
+    );
+    margin: 3rem 0;
+    border: none;
+}
+
+/* ============================================
+   CONTENEDORES
+   ============================================ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.container-sm {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.container-lg {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.container-fluid {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+/* ============================================
+   GRID SYSTEM
+   ============================================ */
+.grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+
+/* ============================================
+   RESPONSIVE ARTICLES Y SECTIONS
+   ============================================ */
+@media (max-width: 767px) {
+    article, section {
+        --article-padding: 1rem;
+        --article-margin: 1.5rem 0;
+    }
+    
+    .hero {
+        --article-padding: 2rem 1rem;
+        min-height: 300px;
+        height: 40vh;
+    }
+    
+    .grid-cols-2,
+    .grid-cols-3,
+    .grid-cols-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero {
+        height: 60vh;
+    }
+    
+    .grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero {
+        height: 80vh;
+    }
+    
+    .grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .grid-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ============================================
+   UTILIDADES ADICIONALES
+   ============================================ */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+
+.hidden { display: none; }
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }

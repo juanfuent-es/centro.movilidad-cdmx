@@ -1,0 +1,12 @@
+/* ============================================
+   VARIABLES DE BORDES BÁSICAS
+   ============================================ */
+:root {
+    /* Radios de borde básicos */
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    
+    /* Anchos de borde básicos */
+    --border-width-thin: 1px;
+    --border-width-medium: 2px;
+}

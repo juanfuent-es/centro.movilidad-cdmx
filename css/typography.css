@@ -1,0 +1,199 @@
+/* ============================================
+   VARIABLES DE TIPOGRAFÍA
+   ============================================ */
+:root {
+    /* Fuentes */
+    --font-base: 'Roboto', Helvetica, Arial, Lucida, sans-serif;
+    --font-heading: 'Barlow', Helvetica, Arial, Lucida, sans-serif;
+    --font-mono: 'Fira Code', 'Monaco', 'Consolas', monospace;
+    
+    /* Tamaños de fuente base (mobile first) - solo sm, base, lg */
+    --font-size-sm: 0.875rem;   /* 14px - mobile default */
+    --font-size-base: 1rem;     /* 16px - mobile default */
+    --font-size-lg: 1.125rem;   /* 18px - mobile default */
+    
+    /* Pesos de fuente */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+    
+    /* Alturas de línea */
+    --line-height-tight: 1.1;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+}
+
+/* ============================================
+   TIPOGRAFÍA - SISTEMA DE TEXTO
+   ============================================ */
+
+/* ============================================
+   CONFIGURACIÓN BASE
+   ============================================ */
+body {
+    font-family: var(--font-base);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    color: var(--color-text);
+    background: var(--color-bg);
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* ============================================
+   ENLACES
+   ============================================ */
+a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-primary);
+}
+
+/* ============================================
+   TÍTULOS Y ENCABEZADOS
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-extrabold);
+    line-height: var(--line-height-tight);
+    margin: 0;
+    color: var(--color-text);
+}
+
+h1 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: 1.5rem;
+    line-height: 1em;
+}
+
+h2 {
+    font-size: var(--font-size-2xl);
+    text-transform: uppercase;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 1rem;
+}
+
+h4 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 0.5rem;
+}
+
+h5 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 0.5rem;
+}
+
+h6 {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   PÁRRAFOS Y TEXTO
+   ============================================ */
+p {
+    max-width: 60ch;
+    text-wrap-style: balance;
+    margin-bottom: 1rem;
+    line-height: var(--line-height-relaxed);
+}
+
+/* ============================================
+   LISTAS
+   ============================================ */
+ul, ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+    line-height: var(--line-height-normal);
+}
+
+/* ============================================
+   CÓDIGO Y PRE
+   ============================================ */
+code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background-color: var(--color-bg-secondary);
+    padding: 0.2em 0.4em;
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text);
+}
+
+pre {
+    font-family: var(--font-mono);
+    background-color: var(--color-bg-secondary);
+    padding: 1rem;
+    border-radius: var(--border-radius-md);
+    overflow-x: auto;
+    margin: 1rem 0;
+    border: var(--border-width-thin) solid var(--color-border);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* ============================================
+   IMÁGENES
+   ============================================ */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-md);
+}
+
+/* ============================================
+   UTILIDADES DE TIPOGRAFÍA SIMPLIFICADAS
+   ============================================ */
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg { font-size: var(--font-size-lg); }
+
+.font-light { font-weight: var(--font-weight-light); }
+.font-regular { font-weight: var(--font-weight-regular); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.leading-normal { line-height: var(--line-height-normal); }
+.leading-relaxed { line-height: var(--line-height-relaxed); }
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+
+/* ============================================
+   RESPONSIVE TIPOGRAFÍA SIMPLIFICADA
+   ============================================ */
+/* Los breakpoints y tamaños responsive se manejan en responsive.css */

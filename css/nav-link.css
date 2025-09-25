@@ -1,0 +1,229 @@
+/* ============================================
+   COMPONENTE NAV-LINK
+   ============================================ */
+
+/* ============================================
+   VARIABLES DEL COMPONENTE NAV-LINK
+   ============================================ */
+.nav-link {
+    /* Variables personalizables del componente */
+    --nav-link-bg: var(--color-primary);
+    --nav-link-color: var(--color-text);
+    --nav-link-hover-bg: var(--color-secondary);
+    --nav-link-hover-color: var(--color-white);
+    --nav-link-active-bg: var(--color-accent);
+    --nav-link-active-color: var(--color-white);
+    
+    /* Tamaños y espaciado */
+    --nav-link-padding: 0;
+    --nav-link-gap: 0.25em;
+    --nav-link-width: 20%;
+    --nav-link-aspect-ratio: 1 / 1;
+    
+    /* Tipografía */
+    --nav-link-font-family: var(--font-heading);
+    --nav-link-font-size: var(--font-size-2xl);
+    --nav-link-font-weight: var(--font-weight-extrabold);
+    --nav-link-text-transform: uppercase;
+    
+    /* Iconos */
+    --nav-link-icon-size: 2.5rem;
+    --nav-link-icon-min-width: 1.2rem;
+    --nav-link-icon-max-width: 100px;
+    --nav-link-icon-width: 60%;
+    
+    /* Transiciones */
+    --nav-link-transition: all var(--transition-normal);
+    --nav-link-opacity: 0.8;
+    --nav-link-hover-opacity: 1;
+    
+    /* Bordes */
+    --nav-link-border: none;
+    --nav-link-border-radius: 0;
+}
+
+/* ============================================
+   ESTILOS BASE DEL NAV-LINK
+   ============================================ */
+.nav-link {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: var(--nav-link-width);
+    aspect-ratio: var(--nav-link-aspect-ratio);
+    gap: var(--nav-link-gap);
+    
+    /* Apariencia */
+    background-color: var(--nav-link-bg);
+    color: var(--nav-link-color);
+    border: var(--nav-link-border);
+    border-radius: var(--nav-link-border-radius);
+    padding: var(--nav-link-padding);
+    opacity: var(--nav-link-opacity);
+    
+    /* Tipografía */
+    font-family: var(--nav-link-font-family);
+    font-size: var(--nav-link-font-size);
+    font-weight: var(--nav-link-font-weight);
+    text-transform: var(--nav-link-text-transform);
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1em;
+    
+    /* Comportamiento */
+    transition: var(--nav-link-transition);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* ============================================
+   ELEMENTOS INTERNOS DEL NAV-LINK
+   ============================================ */
+.nav-link img {
+    width: var(--nav-link-icon-width);
+    height: auto;
+    object-fit: contain;
+    min-width: 60px;
+    max-width: var(--nav-link-icon-max-width);
+}
+
+.nav-link i {
+    font-size: var(--nav-link-icon-size);
+    min-width: var(--nav-link-icon-min-width);
+}
+
+.nav-text {
+    display: none;
+    font-size: inherit;
+}
+
+/* ============================================
+   ESTADOS DEL NAV-LINK
+   ============================================ */
+.nav-link.active,
+.nav-link:active,
+.nav-link:hover {
+    color: var(--nav-link-hover-color);
+    opacity: var(--nav-link-hover-opacity);
+}
+
+.nav-link:focus {
+    outline: 2px solid var(--color-white);
+    outline-offset: 0px;
+}
+
+/* ============================================
+   VARIANTES DE COLOR POR ENLACE
+   ============================================ */
+.asfalto {
+    --nav-link-bg: var(--color-asfalto);
+}
+
+.metro {
+    --nav-link-bg: var(--color-metro-naranja);
+}
+
+.stop {
+    --nav-link-bg: var(--color-stop-rojo);
+}
+
+.taxi {
+    --nav-link-bg: var(--color-taxi-rosa);
+}
+
+.senal {
+    --nav-link-bg: var(--color-senal-verde);
+}
+
+/* ============================================
+   RESPONSIVE NAV-LINK
+   ============================================ */
+
+/* Mobile: Solo iconos, texto oculto */
+@media (max-width: 767px) {
+    .nav-link {
+        --nav-link-font-size: var(--font-size-2xl);
+        --nav-link-aspect-ratio: 1 / 1;
+        --nav-link-gap: 0.25em;
+        --nav-link-icon-size: 2.5rem;
+    }
+    
+    .nav-text {
+        display: none;
+    }
+}
+
+/* Tablet: Mostrar texto con tamaño pequeño */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .nav-link {
+        --nav-link-font-size: var(--font-size-lg);
+        --nav-link-aspect-ratio: 1 / 0.6;
+        --nav-link-gap: 0.35em;
+        --nav-link-icon-size: 2.5rem;
+    }
+    
+    .nav-text {
+        display: inline;
+    }
+}
+
+/* Desktop: Texto completo con tamaño grande */
+@media (min-width: 1024px) {
+    .nav-link {
+        --nav-link-font-size: var(--font-size-xl);
+        --nav-link-aspect-ratio: 1 / 0.3;
+        --nav-link-gap: 0.35em;
+        --nav-link-icon-size: inherit;
+        flex-direction: row;
+    }
+    
+    .nav-text {
+        display: inline;
+    }
+}
+
+/* ============================================
+   UTILIDADES DEL NAV-LINK
+   ============================================ */
+.nav-link.compact {
+    --nav-link-width: 15%;
+    --nav-link-font-size: var(--font-size-sm);
+    --nav-link-icon-size: 1.5rem;
+}
+
+.nav-link.large {
+    --nav-link-width: 25%;
+    --nav-link-font-size: var(--font-size-2xl);
+    --nav-link-icon-size: 3rem;
+}
+
+.nav-link.rounded {
+    --nav-link-border-radius: var(--border-radius-md);
+}
+
+.nav-link.outlined {
+    --nav-link-border: 2px solid currentColor;
+    --nav-link-bg: transparent;
+}
+
+.nav-link.outlined:hover {
+    --nav-link-bg: currentColor;
+    --nav-link-color: var(--color-white);
+}
+
+/* ============================================
+   ANIMACIONES DEL NAV-LINK
+   ============================================ */
+.nav-link.animate-scale:hover {
+    transform: scale(1.05);
+}
+
+.nav-link.animate-slide:hover {
+    transform: translateY(-2px);
+}
+
+.nav-link.animate-glow:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
