@@ -7,10 +7,10 @@
    ============================================ */
 .button {
     /* Variables personalizables del componente */
-    --button-bg: var(--color-black);
-    --button-color: var(--color-text);
-    --button-hover-bg: var(--color-secondary);
-    --button-hover-color: var(--color-white);
+    --button-bg: var(--color-white);
+    --button-color: var(--color-asfalto);
+    --button-hover-bg: var(--color-taxi-rosa);
+    --button-hover-color: var(--color-asfalto);
     --button-active-bg: var(--color-primary);
     --button-active-color: var(--color-white);
     
@@ -105,6 +105,52 @@
     --button-bg: var(--color-primary);
     --button-color: var(--color-white);
     --button-hover-bg: var(--color-secondary);
+    --button-hover-color: var(--color-white);
+}
+
+.button-pink {
+    --button-bg: var(--color-taxi-rosa);
+    --button-color: var(--color-asfalto);
+    --button-hover-bg: var(--color-stop-rojo);
+    --button-hover-color: var(--color-white);
+}
+.button-pink:hover {
+    --button-bg: var(--color-taxi-rosa);
+    --button-color: var(--color-asfalto);
+    --button-hover-bg: var(--color-stop-rojo);
+    --button-hover-color: var(--color-white);
+}
+
+.button-green {
+    --button-bg: var(--color-senal-verde);
+    --button-color: var(--color-asfalto);
+    --button-hover-bg: var(--color-stop-rojo);
+    --button-hover-color: var(--color-white);
+}
+.button-green:hover {
+    --button-bg: var(--color-senal-verde);
+    --button-color: var(--color-asfalto);
+    --button-hover-bg: var(--color-stop-rojo);
+    --button-hover-color: var(--color-white);
+}
+.button-orange {
+    --button-bg: var(--color-metro-naranja);
+    --button-color: var(--color-asfalto);
+    --button-hover-bg: var(--color-stop-rojo);
+    --button-hover-color: var(--color-white);
+}
+
+.button-orange:hover {
+    --button-bg: var(--color-metro-naranja);
+    --button-color: var(--color-asfalto);
+    --button-hover-bg: var(--color-stop-rojo);
+    --button-hover-color: var(--color-white);
+}
+
+.button-red {
+    --button-bg: var(--color-stop-rojo);
+    --button-color: var(--color-asfalto);
+    --button-hover-bg: var(--color-stop-rojo);
     --button-hover-color: var(--color-white);
 }
 
