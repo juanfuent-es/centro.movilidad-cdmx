@@ -111,7 +111,7 @@ footer#main-footer {
     
     text-align: center;
     min-height: 400px;
-    height: 50vh;
+    min-height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -236,56 +236,34 @@ hr {
     gap: 1rem;
 }
 
-.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
-.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
-
-
 /* ============================================
    RESPONSIVE ARTICLES Y SECTIONS
    ============================================ */
-@media (max-width: 767px) {
-    article, section {
-        --article-padding: 1rem;
-        --article-margin: 1.5rem 0;
-    }
-    
-    .hero {
-        --article-padding: 2rem 1rem;
-        min-height: 300px;
-        height: 40vh;
-    }
-    
-    .grid-cols-2,
-    .grid-cols-3,
-    .grid-cols-4 {
-        grid-template-columns: 1fr;
-    }
+article, section {
+    --article-padding: 1rem;
+    --article-margin: 1.5rem 0;
+}
+
+.hero {
+    --article-padding: 2rem 1rem;
+    min-height: 300px;
+    min-height: 40vh;
+    padding: 1em 0;
 }
 
 @media (min-width: 768px) {
     .hero {
-        height: 60vh;
+        min-height: 60vh;
     }
     
-    .grid-cols-2 {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 @media (min-width: 1024px) {
     .hero {
-        height: 80vh;
+        min-height: 80vh;
     }
     
-    .grid-cols-3 {
-        grid-template-columns: repeat(3, 1fr);
-    }
     
-    .grid-cols-4 {
-        grid-template-columns: repeat(4, 1fr);
-    }
 }
 
 /* ============================================

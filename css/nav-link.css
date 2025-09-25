@@ -58,6 +58,7 @@
     /* Tipografía */
     font-family: var(--font-heading);
     font-weight: 700;
+    font-size: 1rem;
     text-transform: uppercase;
     text-decoration: none;
     text-align: center;
@@ -107,42 +108,26 @@
 
 /* ============================================
    VARIANTES DE COLOR POR ENLACE
-   ============================================ */
-.asfalto {
-    --nav-link-bg: var(--color-asfalto);
-}
-
-.metro {
-    --nav-link-bg: var(--color-metro-naranja);
-}
-
-.stop {
-    --nav-link-bg: var(--color-stop-rojo);
-}
-
-.taxi {
-    --nav-link-bg: var(--color-taxi-rosa);
-}
-
-.senal {
-    --nav-link-bg: var(--color-senal-verde);
-}
+   =========================================== */
+a.asfalto { --nav-link-bg: var(--color-asfalto); }
+a.metro { --nav-link-bg: var(--color-metro-naranja); }
+a.stop { --nav-link-bg: var(--color-stop-rojo); }
+a.taxi { --nav-link-bg: var(--color-taxi-rosa); }
+a.senal { --nav-link-bg: var(--color-senal-verde); }
 
 /* ============================================
    RESPONSIVE NAV-LINK
    ============================================ */
 
 /* Mobile: Solo iconos, texto oculto */
-@media (max-width: 767px) {
-    .nav-link {
-        --nav-link-aspect-ratio: 1 / 1;
-        --nav-link-gap: 0.25em;
-        --nav-link-icon-size: 2.5rem;
-    }
-    
-    .nav-text {
-        display: none;
-    }
+.nav-link {
+    --nav-link-aspect-ratio: 1 / 1;
+    --nav-link-gap: 0.25em;
+    --nav-link-icon-size: 2.5rem;
+}
+
+.nav-text {
+    display: none;
 }
 
 /* Tablet: Mostrar texto con tamaño pequeño */

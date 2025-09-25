@@ -8,9 +8,9 @@
     --font-mono: 'Fira Code', 'Monaco', 'Consolas', monospace;
     
     /* Tamaños de fuente base (mobile first) - solo sm, base, lg */
-    --font-size-sm: 0.875rem;   /* 14px - mobile default */
-    --font-size-base: 1rem;     /* 16px - mobile default */
-    --font-size-lg: 1.125rem;   /* 18px - mobile default */
+    --font-size-sm: 14px;   /* 14px - mobile default */
+    --font-size-base: 16px;     /* 16px - mobile default */
+    --font-size-lg: 18px;   /* 18px - mobile default */
     
     /* Pesos de fuente */
     --font-weight-light: 200;
@@ -21,14 +21,15 @@
 /* ============================================
    TIPOGRAFÍA - SISTEMA DE TEXTO
    ============================================ */
-
+html {
+    font-size: var(--font-size-base);
+    font-family: var(--font-base);
+    font-weight: var(--font-weight-normal);
+}
 /* ============================================
    CONFIGURACIÓN BASE
    ============================================ */
 body {
-    font-family: var(--font-base);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
     color: var(--color-text);
     background: var(--color-bg);
     padding: 0;
@@ -54,31 +55,29 @@ a:hover {
    ============================================ */
 h1, h2, h3, h4 {
     font-family: var(--font-heading);
+    margin: 0;
 }
 
 h1 {
     font-size: 5rem;
     font-weight: 800;
-    margin-bottom: 1.5rem;
     line-height: 1em;
+    color: var(--color-bg);
 }
 
 h2 {
-    font-size: 4rem;
+    font-size: 3rem;
     text-transform: uppercase;
     font-weight: var(--font-weight-bold);
-    margin-bottom: 1rem;
     letter-spacing: 0.05em;
 }
 
 h3 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 2.25rem;
 }
 
 h4 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.75rem;
 }
 
 /* ============================================
@@ -100,34 +99,6 @@ ul, ol {
 
 li {
     margin-bottom: 0.5rem;
-}
-
-/* ============================================
-   CÓDIGO Y PRE
-   ============================================ */
-code {
-    font-family: var(--font-mono);
-    font-size: 0.9em;
-    background-color: var(--color-bg-secondary);
-    padding: 0.2em 0.4em;
-    border-radius: var(--border-radius-sm);
-    color: var(--color-text);
-}
-
-pre {
-    font-family: var(--font-mono);
-    background-color: var(--color-bg-secondary);
-    padding: 1rem;
-    border-radius: var(--border-radius-md);
-    overflow-x: auto;
-    margin: 1rem 0;
-    border: var(--border-width-thin) solid var(--color-border);
-}
-
-pre code {
-    background: none;
-    padding: 0;
-    border-radius: 0;
 }
 
 /* ============================================
@@ -168,7 +139,7 @@ img {
 @media (min-width: var(--breakpoint-tablet)) {
     /* Escalado de tipografía para tablet */
     html {
-        font-size: 18px;
+        font-size: var(--font-size-base);
     }
     h1 {
         font-size: 5rem;
@@ -188,7 +159,7 @@ img {
 @media (min-width: var(--breakpoint-desktop)) {
     /* Escalado de tipografía para desktop */
     html {
-        font-size: 20px;
+        font-size: var(--font-size-lg);
     }
     h1 {
         font-size: 6rem;
