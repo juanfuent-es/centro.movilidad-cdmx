@@ -25,11 +25,6 @@
     --nav-link-icon-max-width: 100px;
     --nav-link-icon-width: 60%;
     
-    /* Transiciones */
-    --nav-link-transition: all var(--transition-normal);
-    --nav-link-opacity: 0.8;
-    --nav-link-hover-opacity: 1;
-    
     /* Bordes */
     --nav-link-border: none;
     --nav-link-border-radius: 0;
@@ -53,7 +48,7 @@
     color: var(--nav-link-color);
     border: var(--nav-link-border);
     border-radius: var(--nav-link-border-radius);
-    opacity: var(--nav-link-opacity);
+    opacity: .8;
     
     /* Tipografía */
     font-family: var(--font-heading);
@@ -65,7 +60,7 @@
     line-height: 1.1em;
     
     /* Comportamiento */
-    transition: var(--nav-link-transition);
+    transition: all 350ms ease;
     overflow: hidden;
     cursor: pointer;
 }
@@ -98,7 +93,7 @@
 .nav-link:active,
 .nav-link:hover {
     color: var(--nav-link-hover-color);
-    opacity: var(--nav-link-hover-opacity);
+    opacity: 1;
 }
 
 .nav-link:focus {
