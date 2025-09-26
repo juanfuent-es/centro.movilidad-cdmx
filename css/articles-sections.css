@@ -82,8 +82,8 @@ footer#main-footer {
     padding-bottom: 0.5rem;
 }
 
-.card p {
-    margin-bottom: 0;
+.evaluation-card p {
+    margin: 1em 0;
     color: var(--color-text-secondary);
 }
 
