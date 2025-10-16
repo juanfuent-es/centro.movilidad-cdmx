@@ -1,61 +1,22 @@
-# HTML Layout Template
+# Movilidad CDMX | Comunicación Visual
 
-Template base con Jekyll y GitHub Pages para proyectos de diseño web.
+Este repositorio es un **compilatorio de los trabajos** realizados por lxs **estudiantxs de Séptimo Semestre de la licenciatura en Comunicación Visual de CENTRO - Cine, Diseño, Televisión**.
 
-## 🚗 Inicio Rápido
+El proyecto documenta la exploración y el desarrollo de propuestas enfocadas en la información, la estructura y el diseño de contenidos relacionados con la movilidad en la Ciudad de México (CDMX).
 
-1. **Usa este template** - Haz clic en "Use this template" en GitHub
-2. **Crea tu repositorio** - Dale un nombre a tu proyecto
-3. **Clona** tu nuevo repositorio localmente
-4. **Personaliza** el contenido en `_config.yml`
-5. **Activa** GitHub Pages en Settings
+---
 
-## 🗺️ Estructura
+## Primer Bloque | Progreso
 
-```
-├── _layouts/          # Plantillas HTML base
-├── _includes/         # Componentes reutilizables  
-├── css/               # Estilos con sistema skeleton
-├── img/               # Recursos e imágenes
-├── index.html         # Página principal
-├── guia.html          # Guía de inicio
-└── _config.yml       # Configuración de Jekyll
-```
+Los trabajos iniciales se han centrado en la **fase de investigación y organización** de la información:
 
-## 🚦 Características
+1.  **Exploración de Información:** Recolección y análisis de datos.
+2.  **Jerarquización de Información:** Definición de la importancia y el orden de los contenidos.
+3.  **Estructura de Contenidos:** Diseño de la arquitectura de la información para el proyecto.
 
-- **Jekyll** - Generador de sitios estáticos
-- **GitHub Pages** - Hosting gratuito
-- **CSS Skeleton** - Framework CSS incluido
-- **Responsive** - Diseño adaptable
-- **Minimal** - Estructura simple y clara
+---
 
-## 📋 Documentación
+## Acerca de
 
-- [Guía de Inicio](guia.html) - Pasos para configurar
-- [Manifiesto](manifiesto.html) - Filosofía del template
-
-## 🛠️ Cómo Usar este Template
-
-1. **En GitHub**: Haz clic en el botón verde "Use this template"
-2. **Crea tu repositorio**: Dale un nombre descriptivo a tu proyecto
-3. **Clona localmente**: `git clone https://github.com/tu-usuario/tu-proyecto.git`
-4. **Personaliza**: Edita `_config.yml` con tu información
-5. **Sube cambios**: `git add . && git commit -m "Initial commit" && git push`
-
-## 🔧 Configuración
-
-Edita `_config.yml`:
-
-```yaml
-title: "Tu Proyecto"
-description: "Descripción de tu proyecto"
-baseurl: "/tu-repositorio"
-url: "https://tu-usuario.github.io"
-```
-
-## 🚧 Recursos
-
-- [Jekyll Docs](https://jekyllrb.com/docs/)
-- [GitHub Pages](https://pages.github.com/)
-- [CSS Skeleton](http://getskeleton.com/)
+* **Institución:** CENTRO - Cine, Diseño, Televisión
+* **Semestre:** Séptimo (2025)
