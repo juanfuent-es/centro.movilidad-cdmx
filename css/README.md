@@ -211,20 +211,6 @@ El sistema incluye breakpoints automáticos:
 }
 ```
 
-## Modo Oscuro
-
-El sistema incluye soporte automático para modo oscuro:
-
-```css
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-bg: var(--color-asfalto);
-        --color-text: var(--color-white);
-        /* ... más variables */
-    }
-}
-```
-
 ## Accesibilidad
 
 - Soporte para `prefers-reduced-motion`
