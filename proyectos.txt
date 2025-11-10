@@ -1,4 +1,3 @@
-
 Título: Andanza
 Descripción: Visibilizar y concientizar cómo se vive la vejez a través de la movilidad interpretando el mismo cuerpo como método de transporte en un contexto urbano.
 link: https://mariasv1.github.io/andanza/

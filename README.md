@@ -1,5 +1,7 @@
 # Movilidad CDMX | Comunicación Visual
 
+Diseño en movimiento: Exploraciones digitales como relato visual del transporte urbano.
+
 Este repositorio es un **compilatorio de los trabajos** realizados por lxs **estudiantxs de Séptimo Semestre de la licenciatura en Comunicación Visual de CENTRO - Cine, Diseño, Televisión**.
 
 El proyecto documenta la exploración y el desarrollo de propuestas enfocadas en la información, la estructura y el diseño de contenidos relacionados con la movilidad en la Ciudad de México (CDMX).
