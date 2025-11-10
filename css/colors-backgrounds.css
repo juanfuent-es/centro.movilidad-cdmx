@@ -3,12 +3,12 @@
    ============================================ */
 :root {
     /* Colores semánticos */
-    --color-primary: var(--color-stop-rojo);
-    --color-secondary: var(--color-metro-naranja);
-    --color-accent: var(--color-taxi-rosa);
+    --color-primary: var(--color-red);
+    --color-secondary: var(--color-orange);
+    --color-accent: var(--color-pink);
     
     /* Colores de fondo y texto */
-    --color-bg: var(--color-asfalto);
+    --color-bg: var(--color-black);
     --color-text: var(--color-white);
     --color-text-muted: #999999;
     
@@ -31,26 +31,26 @@
 .text-secondary { color: var(--color-secondary); }
 .text-accent { color: var(--color-accent); }
 .text-white { color: var(--color-white); }
-.text-black { color: var(--color-asfalto); }
+.text-black { color: var(--color-black); }
 .text-muted { color: var(--color-text-muted); }
 
 /* Colores específicos del sistema de tránsito */
-.text-metro-naranja { color: var(--color-metro-naranja); }
-.text-taxi-rosa { color: var(--color-taxi-rosa); }
-.text-senal-verde { color: var(--color-senal-verde); }
-.text-stop-rojo { color: var(--color-stop-rojo); }
-.text-asfalto { color: var(--color-asfalto); }
-.text-senal-azul { color: var(--color-senal-azul); }
+.text-metro-naranja { color: var(--color-orange); }
+.text-taxi-rosa { color: var(--color-pink); }
+.text-senal-verde { color: var(--color-green); }
+.text-stop-rojo { color: var(--color-red); }
+.text-asfalto { color: var(--color-black); }
+.text-senal-azul { color: var(--color-blue); }
 
 /* ============================================
    UTILIDADES DE COLORES
    ============================================ */
-.color-pink { color: var(--color-taxi-rosa); }
-.color-green { color: var(--color-senal-verde); }
-.color-orange { color: var(--color-metro-naranja); }
-.color-red { color: var(--color-stop-rojo); }
-.color-blue { color: var(--color-senal-azul); }
-.color-purple { color: var(--color-asfalto); }
+.color-pink { color: var(--color-pink); }
+.color-green { color: var(--color-green); }
+.color-orange { color: var(--color-orange); }
+.color-red { color: var(--color-red); }
+.color-blue { color: var(--color-blue); }
+.color-purple { color: var(--color-black); }
 
 /* ============================================
    UTILIDADES DE BACKGROUND
@@ -59,16 +59,16 @@
 .bg-secondary { background-color: var(--color-secondary); }
 .bg-accent { background-color: var(--color-accent); }
 .bg-white { background-color: var(--color-white); }
-.bg-black { background-color: var(--color-asfalto); }
+.bg-black { background-color: var(--color-black); }
 .bg-transparent { background-color: transparent; }
 
 /* Backgrounds específicos del sistema de tránsito */
-.bg-metro-naranja { background-color: var(--color-metro-naranja); }
-.bg-taxi-rosa { background-color: var(--color-taxi-rosa); }
-.bg-senal-verde { background-color: var(--color-senal-verde); }
-.bg-stop-rojo { background-color: var(--color-stop-rojo); }
-.bg-asfalto { background-color: var(--color-asfalto); }
-.bg-senal-azul { background-color: var(--color-senal-azul); }
+.bg-metro-naranja { background-color: var(--color-orange); }
+.bg-taxi-rosa { background-color: var(--color-pink); }
+.bg-senal-verde { background-color: var(--color-green); }
+.bg-stop-rojo { background-color: var(--color-red); }
+.bg-asfalto { background-color: var(--color-black); }
+.bg-senal-azul { background-color: var(--color-blue); }
 
 /* Backgrounds semánticos */
 .bg-light { background-color: var(--color-bg-secondary); }
@@ -81,15 +81,15 @@
 .border-secondary { border-color: var(--color-secondary); }
 .border-accent { border-color: var(--color-accent); }
 .border-white { border-color: var(--color-white); }
-.border-black { border-color: var(--color-asfalto); }
+.border-black { border-color: var(--color-black); }
 
 /* Bordes específicos del sistema de tránsito */
-.border-metro-naranja { border-color: var(--color-metro-naranja); }
-.border-taxi-rosa { border-color: var(--color-taxi-rosa); }
-.border-senal-verde { border-color: var(--color-senal-verde); }
-.border-stop-rojo { border-color: var(--color-stop-rojo); }
-.border-asfalto { border-color: var(--color-asfalto); }
-.border-senal-azul { border-color: var(--color-senal-azul); }
+.border-metro-naranja { border-color: var(--color-orange); }
+.border-taxi-rosa { border-color: var(--color-pink); }
+.border-senal-verde { border-color: var(--color-green); }
+.border-stop-rojo { border-color: var(--color-red); }
+.border-asfalto { border-color: var(--color-black); }
+.border-senal-azul { border-color: var(--color-blue); }
 
 /* ============================================
    STROKE (TEXTO CON CONTORNO)
@@ -98,17 +98,17 @@
 .stroke-secondary { -webkit-text-stroke: 1px var(--color-secondary); }
 .stroke-accent { -webkit-text-stroke: 1px var(--color-accent); }
 .stroke-white { -webkit-text-stroke: 1px var(--color-white); }
-.stroke-black { -webkit-text-stroke: 1px var(--color-asfalto); }
-.stroke-pink { -webkit-text-stroke: 1px var(--color-taxi-rosa); }
-.stroke-green { -webkit-text-stroke: 1px var(--color-senal-verde); }
-.stroke-orange { -webkit-text-stroke: 1px var(--color-metro-naranja); }
-.stroke-red { -webkit-text-stroke: 1px var(--color-stop-rojo); }
-.stroke-blue { -webkit-text-stroke: 1px var(--color-senal-azul); }
-.stroke-purple { -webkit-text-stroke: 1px var(--color-asfalto); }
+.stroke-black { -webkit-text-stroke: 1px var(--color-black); }
+.stroke-pink { -webkit-text-stroke: 1px var(--color-pink); }
+.stroke-green { -webkit-text-stroke: 1px var(--color-green); }
+.stroke-orange { -webkit-text-stroke: 1px var(--color-orange); }
+.stroke-red { -webkit-text-stroke: 1px var(--color-red); }
+.stroke-blue { -webkit-text-stroke: 1px var(--color-blue); }
+.stroke-purple { -webkit-text-stroke: 1px var(--color-black); }
 /* Strokes específicos del sistema de tránsito */
-.stroke-metro-naranja { -webkit-text-stroke: 1px var(--color-metro-naranja); }
-.stroke-taxi-rosa { -webkit-text-stroke: 1px var(--color-taxi-rosa); }
-.stroke-senal-verde { -webkit-text-stroke: 1px var(--color-senal-verde); }
-.stroke-stop-rojo { -webkit-text-stroke: 1px var(--color-stop-rojo); }
-.stroke-asfalto { -webkit-text-stroke: 1px var(--color-asfalto); }
-.stroke-senal-azul { -webkit-text-stroke: 1px var(--color-senal-azul); }
+.stroke-metro-naranja { -webkit-text-stroke: 1px var(--color-orange); }
+.stroke-taxi-rosa { -webkit-text-stroke: 1px var(--color-pink); }
+.stroke-senal-verde { -webkit-text-stroke: 1px var(--color-green); }
+.stroke-stop-rojo { -webkit-text-stroke: 1px var(--color-red); }
+.stroke-asfalto { -webkit-text-stroke: 1px var(--color-black); }
+.stroke-senal-azul { -webkit-text-stroke: 1px var(--color-blue); }

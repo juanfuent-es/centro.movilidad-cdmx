@@ -1,7 +1,7 @@
 :root {
     --scroll-background: var(--color-bg);
     --scroll-foreground: var(--color-text);
-    --scroll-background-over: var(--color-taxi-rosa);
+    --scroll-background-over: var(--color-pink);
     --scroll-size: 10px;
 }
 

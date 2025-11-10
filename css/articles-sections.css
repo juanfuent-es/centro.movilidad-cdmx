@@ -118,38 +118,38 @@ footer#main-footer {
 
 /* Excelente - Verde */
 .evaluation-card.excelente {
-    --article-border-color: var(--color-senal-verde);
+    --article-border-color: var(--color-green);
 }
 
 .evaluation-card.excelente h4 {
-    color: var(--color-senal-verde);
+    color: var(--color-green);
 }
 
 /* Bueno - Naranja */
 .evaluation-card.bueno {
-    --article-border-color: var(--color-metro-naranja);
+    --article-border-color: var(--color-orange);
 }
 
 .evaluation-card.bueno h4 {
-    color: var(--color-metro-naranja);
+    color: var(--color-orange);
 }
 
 /* Satisfactorio - Rosa */
 .evaluation-card.satisfactorio {
-    --article-border-color: var(--color-taxi-rosa);
+    --article-border-color: var(--color-pink);
 }
 
 .evaluation-card.satisfactorio h4 {
-    color: var(--color-taxi-rosa);
+    color: var(--color-pink);
 }
 
 /* Necesita Mejora - Rojo */
 .evaluation-card.necesita-mejora {
-    --article-border-color: var(--color-stop-rojo);
+    --article-border-color: var(--color-red);
 }
 
 .evaluation-card.necesita-mejora h4 {
-    color: var(--color-stop-rojo);
+    color: var(--color-red);
 }
 
 /* ============================================

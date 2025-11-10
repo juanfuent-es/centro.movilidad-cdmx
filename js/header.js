@@ -91,6 +91,8 @@ Header.prototype = {
     
     /**
      * Lógica al hacer scroll hacia abajo
+     * UPDATE: Actualizar a que se oculte al momento de pasar el 100% del scroll de la página,
+     * o mejor dicho tenga posición relativa, fixed sólo cuando suba el scroll
      */
     scrollDown: function() {
         if (window.scrollY > this.height) {

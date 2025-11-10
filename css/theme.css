@@ -3,11 +3,11 @@
 ============================================ */
 :root {
    /* Colores base inspirados en tránsito urbano */
-   --color-metro-naranja: #F47C20;   /* Naranja del Metro CDMX */
-   --color-taxi-rosa: #EC407A;       /* Rosa de taxis */
-   --color-senal-verde: #2E7D32;     /* Verde de señalamientos */
-   --color-stop-rojo: #D32F2F;       /* Rojo de alto */
-   --color-asfalto: #212121;         /* Asfalto urbano */
+   --color-black: #212121;         /* Asfalto urbano */
    --color-white: #f0f0f0;           /* Blanco puro */
-   --color-senal-azul: #0D47A1;      /* Azul de señalamientos */
+   --color-orange: #F47C20;   /* Naranja del Metro CDMX */
+   --color-pink: #EC407A;       /* Rosa de taxis */
+   --color-green: #2E7D32;     /* Verde de señalamientos */
+   --color-red: #D32F2F;       /* Rojo de alto */
+   --color-blue: #0D47A1;      /* Azul de señalamientos */
 }
