@@ -4,9 +4,13 @@ SISTEMA DE COMPONENTES CSS
 /* Importar archivos base primero */
 
 @import url('./theme.css');
+@import url('./scroll-bar.css');
+
+@import url('./header.css');
+@import url('./footer.css');
 @import url('./typography.css');
-@import url('./code.css');
+@import url('./img.css');
+
 @import url('./colors-backgrounds.css');
 @import url('./button.css');
 @import url('./nav-link.css');
-@import url('./articles-sections.css');

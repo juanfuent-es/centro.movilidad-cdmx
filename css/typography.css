@@ -4,8 +4,6 @@
    :root {
     /* Fuentes */
     --font-base: 'Open Sans', Helvetica, Arial, Lucida, sans-serif;
-    --font-heading: 'Barlow', Helvetica, Arial, Lucida, sans-serif;
-    --font-mono: 'Fira Code', 'Monaco', 'Consolas', monospace;
     
     /* Tamaños de fuente base (mobile first) - solo sm, base, lg */
     --font-size-sm: 14px;   /* 14px - mobile default */
@@ -54,7 +52,7 @@ a:hover {
    TÍTULOS Y ENCABEZADOS
    ============================================ */
 h1, h2, h3, h4 {
-    font-family: var(--font-heading);
+    font-family: var(--font-base);
     margin: 0;
 }
 
@@ -104,14 +102,6 @@ ul, ol {
 
 li {
     margin-bottom: 0.5rem;
-}
-
-/* ============================================
-   IMÁGENES
-   ============================================ */
-img {
-    max-width: 100%;
-    height: auto;
 }
 
 /* ============================================

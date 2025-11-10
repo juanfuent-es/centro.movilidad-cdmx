@@ -112,27 +112,3 @@
 .stroke-stop-rojo { -webkit-text-stroke: 1px var(--color-stop-rojo); }
 .stroke-asfalto { -webkit-text-stroke: 1px var(--color-asfalto); }
 .stroke-senal-azul { -webkit-text-stroke: 1px var(--color-senal-azul); }
-
-/* ============================================
-   GRADIENTES
-   ============================================ */
-.gradient-primary {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-}
-
-.gradient-secondary {
-    background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
-}
-
-.gradient-accent {
-    background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
-}
-
-/* ============================================
-   PATRONES DE BACKGROUND
-   ============================================ */
-.bg-pattern-dots {
-    background-image: radial-gradient(circle, #2e2e2e 1px, transparent 2px);
-    background-size: 5rem 5rem;
-    background-attachment: fixed;
-}

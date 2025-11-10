@@ -2,152 +2,20 @@
    COMPONENTE NAV-LINK
    ============================================ */
 
-/* ============================================
-   VARIABLES DEL COMPONENTE NAV-LINK
-   ============================================ */
 .nav-link {
-    /* Variables personalizables del componente */
-    --nav-link-bg: var(--color-primary);
-    --nav-link-color: var(--color-text);
-    --nav-link-hover-bg: var(--color-secondary);
-    --nav-link-hover-color: var(--color-white);
-    --nav-link-active-bg: var(--color-accent);
-    --nav-link-active-color: var(--color-white);
     
-    /* Tamaños y espaciado */
-    --nav-link-gap: 0.25em;
-    --nav-link-width: 20%;
-    --nav-link-aspect-ratio: 1 / 1;
-    
-    /* Iconos */
-    --nav-link-icon-size: 2.5rem;
-    --nav-link-icon-min-width: 1.2rem;
-    --nav-link-icon-max-width: 100px;
-    --nav-link-icon-width: 60%;
-    
-    /* Bordes */
-    --nav-link-border: none;
-    --nav-link-border-radius: 0;
-}
-
-/* ============================================
-   ESTILOS BASE DEL NAV-LINK
-   ============================================ */
-.nav-link {
-    /* Layout */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: var(--nav-link-width);
-    aspect-ratio: var(--nav-link-aspect-ratio);
-    gap: var(--nav-link-gap);
-    
-    /* Apariencia */
-    background-color: var(--nav-link-bg);
-    color: var(--nav-link-color);
-    border: var(--nav-link-border);
-    border-radius: var(--nav-link-border-radius);
-    opacity: .8;
-    
-    /* Tipografía */
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    text-decoration: none;
-    text-align: center;
-    line-height: 1.1em;
-    
-    /* Comportamiento */
-    transition: all 350ms ease;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-/* ============================================
-   ELEMENTOS INTERNOS DEL NAV-LINK
-   ============================================ */
-.nav-link img {
-    width: var(--nav-link-icon-width);
-    height: auto;
-    object-fit: contain;
-    min-width: 60px;
-    max-width: var(--nav-link-icon-max-width);
-}
-
-.nav-link i {
-    font-size: var(--nav-link-icon-size);
-    min-width: var(--nav-link-icon-min-width);
-}
-
-.nav-text {
-    display: none;
-    font-size: inherit;
-}
-
-/* ============================================
-   ESTADOS DEL NAV-LINK
-   ============================================ */
-.nav-link.active,
-.nav-link:active,
-.nav-link:hover {
-    color: var(--nav-link-hover-color);
-    opacity: 1;
-}
-
-.nav-link:focus {
-    outline: 2px solid var(--color-white);
-    outline-offset: 0px;
-}
-
-/* ============================================
-   VARIANTES DE COLOR POR ENLACE
-   =========================================== */
-a.asfalto { --nav-link-bg: var(--color-asfalto); }
-a.metro { --nav-link-bg: var(--color-metro-naranja); }
-a.stop { --nav-link-bg: var(--color-stop-rojo); }
-a.taxi { --nav-link-bg: var(--color-taxi-rosa); }
-a.senal { --nav-link-bg: var(--color-senal-verde); }
-
-/* ============================================
-   RESPONSIVE NAV-LINK
-   ============================================ */
-
-/* Mobile: Solo iconos, texto oculto */
-.nav-link {
-    --nav-link-aspect-ratio: 1 / 1;
-    --nav-link-gap: 0.25em;
-    --nav-link-icon-size: 2.5rem;
-}
-
-.nav-text {
-    display: none;
 }
 
 /* Tablet: Mostrar texto con tamaño pequeño */
 @media (min-width: 768px) and (max-width: 1023px) {
     .nav-link {
-        --nav-link-aspect-ratio: 1 / 0.6;
-        --nav-link-gap: 0.35em;
-        --nav-link-icon-size: 2.5rem;
-    }
-    
-    .nav-text {
-        display: inline;
+        
     }
 }
 
 /* Desktop: Texto completo con tamaño grande */
 @media (min-width: 1024px) {
     .nav-link {
-        --nav-link-aspect-ratio: 1 / 0.3;
-        --nav-link-gap: 0.35em;
-        --nav-link-icon-size: inherit;
-        flex-direction: row;
-    }
-    
-    .nav-text {
-        display: inline;
+        
     }
 }
