@@ -1,0 +1,25 @@
+.hero {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero h1 small {
+    display: block;
+    font-stretch: 99%;
+    font-weight: 700;
+    text-align: center;
+    font-size: .272em;
+    line-height: 1em;
+}
+
+.hero p {
+    font-size: var(--font-size-lg);
+    text-align: center;
+    margin-top: 2em;
+}
