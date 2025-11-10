@@ -1,0 +1,23 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/* ============================================
+   ENLACES
+============================================ */
+a {
+    color: var(--color-white);
+    text-decoration: none;
+    font-stretch: 75%;
+    font-weight: 900;
+    font-size: 18px;
+    display: inline;
+}
+
+a:hover {
+    color: var(--color-taxi-rosa);
+}

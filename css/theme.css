@@ -1,42 +1,13 @@
 /* ============================================
    VARIABLES DE BREAKPOINTS Y COLORES BASE
-   ============================================ */
-   :root {
-    /* Colores base inspirados en tránsito urbano */
-    --color-metro-naranja: #F47C20;   /* Naranja del Metro CDMX */
-    --color-taxi-rosa: #EC407A;       /* Rosa de taxis */
-    --color-senal-verde: #2E7D32;     /* Verde de señalamientos */
-    --color-stop-rojo: #D32F2F;       /* Rojo de alto */
-    --color-asfalto: #212121;         /* Asfalto urbano */
-    --color-white: #f0f0f0;           /* Blanco puro */
-    --color-senal-azul: #0D47A1;      /* Azul de señalamientos */
-    
-    /* Variables semánticas que faltaban */
-    --color-text: var(--color-white);
-    --color-bg: var(--color-asfalto);
-    --color-primary: var(--color-stop-rojo);
-    --color-secondary: var(--color-metro-naranja);
-    --color-accent: var(--color-taxi-rosa);
-    --color-bg-secondary: #2a2a2a;
-    --color-bg-tertiary: #3a3a3a;
-    --color-text-secondary: #cccccc;
-    --color-text-muted: #999999;
-    --color-border: #E0E0E0;
-    --color-border-light: #F0F0F0;
-    
-    /* Variables de tipografía que faltaban */
-    --font-weight-regular: 400;
-    --line-height-normal: 1.5;
-    
-    /* Variables de borde que faltaban */
-    --border-radius-sm: 0.25rem;
-    --border-radius-md: 0.5rem;
-    --border-width-thin: 1px;
-    --border-width-medium: 2px;
-    --border-width-thick: 4px;
-    
-    /* Variables de transición que faltaban */
-    --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
- }
- 
+============================================ */
+:root {
+   /* Colores base inspirados en tránsito urbano */
+   --color-metro-naranja: #F47C20;   /* Naranja del Metro CDMX */
+   --color-taxi-rosa: #EC407A;       /* Rosa de taxis */
+   --color-senal-verde: #2E7D32;     /* Verde de señalamientos */
+   --color-stop-rojo: #D32F2F;       /* Rojo de alto */
+   --color-asfalto: #212121;         /* Asfalto urbano */
+   --color-white: #f0f0f0;           /* Blanco puro */
+   --color-senal-azul: #0D47A1;      /* Azul de señalamientos */
+}

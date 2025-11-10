@@ -1,0 +1,44 @@
+header#main-header {
+	position: fixed;
+	background-color: var(--color-bg);
+	color: var(--color-text);
+	width: 100%;
+	padding: .5em 1em;
+	left: 0;
+	top: 0;
+	z-index: 1;
+}
+
+header#main-header nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    align-items: center;
+}
+
+/* Tablet: Mostrar texto con tamaño pequeño */
+@media (min-width: 768px) and (max-width: 1023px) {
+    header#main-header nav {
+        font-size: 16px;
+    }
+}
+
+/* Desktop: Texto completo con tamaño grande */
+@media (min-width: 1024px) {
+    header#main-header nav {
+        font-size: 18px;
+    }
+}
+
+#logo {
+    width: 8vw;
+    height: auto;
+    display: block;
+    min-width: 78px;
+}

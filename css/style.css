@@ -3,6 +3,7 @@ SISTEMA DE COMPONENTES CSS
 ============================================ */
 /* Importar archivos base primero */
 
+@import url('./global.css');
 @import url('./theme.css');
 @import url('./scroll-bar.css');
 
@@ -11,6 +12,7 @@ SISTEMA DE COMPONENTES CSS
 @import url('./typography.css');
 @import url('./img.css');
 
+@import url('./projects.css');
+@import url('./container.css');
 @import url('./colors-backgrounds.css');
 @import url('./button.css');
-@import url('./nav-link.css');
