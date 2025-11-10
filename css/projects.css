@@ -2,18 +2,23 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     align-content: center;
-}
-.project-container article {
-    padding: 1em;
-    text-align: center;
+    border: 1px solid white;
+    flex-direction: column;
 }
 
-.project-container:nth-child(odd) {
-    text-align: left;
+.project-container article {
+    padding: 1em;
+    width: 80%;
+    margin: 0 auto;
+    max-width: 840px;
 }
-.project-container:nth-child(even) {
+
+.project-container:nth-child(odd) article {
     text-align: right;
+}
+.project-container:nth-child(even) article {
+    text-align: left;
 }
