@@ -52,22 +52,18 @@ h1 {
 }
 
 h2 {
-    font-size: 2.25rem;
+    font-size: 8vw;
     text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    margin-bottom: 1em;
-    margin-top: .5em;
+    font-weight: 900;
+    margin: 0;
+    font-stretch: 85%;
     line-height: 1em;
+    letter-spacing: -.025em;
+    text-wrap-style: balance;
 }
 
 h3 {
-    font-size: 1.75rem;
-    font-weight: 600;
-}
-
-h4 {
-    font-size: 1.25rem;
+    font-size: 3vw;
     font-weight: 600;
 }
 

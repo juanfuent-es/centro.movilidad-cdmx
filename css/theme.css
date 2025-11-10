@@ -11,3 +11,38 @@
    --color-red: #D32F2F;       /* Rojo de alto */
    --color-blue: #0D47A1;      /* Azul de señalamientos */
 }
+
+/* ============================================
+   CLASES DE FONDO PARA BODY (CON ANIMACIÓN)
+============================================ */
+body {
+   transition: background-color 0.6s ease-in-out;
+}
+
+body.bg-orange {
+   background-color: var(--color-orange);
+}
+
+body.bg-pink {
+   background-color: var(--color-pink);
+}
+
+body.bg-green {
+   background-color: var(--color-green);
+}
+
+body.bg-red {
+   background-color: var(--color-red);
+}
+
+body.bg-blue {
+   background-color: var(--color-blue);
+}
+
+body.bg-black {
+   background-color: var(--color-black);
+}
+
+body.bg-white {
+   background-color: var(--color-white);
+}
