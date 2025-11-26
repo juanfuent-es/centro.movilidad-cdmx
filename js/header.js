@@ -32,7 +32,7 @@ Header.prototype = {
      */
     get height() {
         var _rect = this.container.getBoundingClientRect();
-        // El operador ~~ es un truco común en JS para convertir a entero y es compatible con ES5.
+        // El operador ~~ es una función común en JS para convertir a entero redondeado para abajo y es compatible con ES5.
         return ~~_rect.height; 
     },
     
@@ -95,7 +95,7 @@ Header.prototype = {
      * o mejor dicho tenga posición relativa, fixed sólo cuando suba el scroll
      */
     scrollDown: function() {
-        if (window.scrollY > this.height) {
+        if (window.scrollY > window.innerHeight) {
             if (this.inTop) {
                 this.setFixed();
             } else {
