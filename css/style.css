@@ -9,7 +9,6 @@ SISTEMA DE COMPONENTES CSS
 
 @import url('./preloader.css');
 @import url('./header.css');
-@import url('./slideshow.css');
 @import url('./footer.css');
 @import url('./typography.css');
 @import url('./img.css');
@@ -17,4 +16,4 @@ SISTEMA DE COMPONENTES CSS
 @import url('./projects.css');
 @import url('./container.css');
 @import url('./colors-backgrounds.css');
-@import url('./button.css');
+@import url('./button-links.css');
