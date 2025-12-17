@@ -1,3 +1,19 @@
+<div id="main">
+	<h1 id="title">
+		<span>Andanza</span>
+        <span>¿Qué hay detrás del pasaje?</span>
+        <span>24hrs eje central</span>
+        <span>Desgaste</span>
+        <span>Moviliencia</span>
+        <span>Rastros de Jamaica</span>
+        <span>Línea 3.5</span>
+        <span>Estruendo Masculino</span>
+        <span>Ecos del anden</span>
+        <span>Pasos que no se ven</span>
+        <span>Embotellados</span>
+	</h1>
+</div>
+
 Título: Andanza
 Descripción: Visibilizar y concientizar cómo se vive la vejez a través de la movilidad interpretando el mismo cuerpo como método de transporte en un contexto urbano.
 link: https://mariasv1.github.io/andanza/
