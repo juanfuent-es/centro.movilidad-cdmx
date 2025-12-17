@@ -1,3 +1,6 @@
+import { Header } from './header.js';
+
+// Inicializar instancia de Header
 const headerInstance = new Header();
 const lenis = new Lenis({
     lerp: 0.1,
