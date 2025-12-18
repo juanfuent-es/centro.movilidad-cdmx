@@ -9,10 +9,10 @@ const rutaInstances = [];
  * Mantiene el core del código exclusivo para el ajuste tipográfico
  */
 function adjustTypographyOnResize() {
+    console.log("adjustTypographyOnResize")
     rutaInstances.forEach(instance => {
-        if (instance && typeof instance.fitTextToContainer === 'function') {
-            instance.fitTextToContainer();
-        }
+        console.log("adjusting typography on resize", instance)
+        instance.fitTextToContainer();
     });
 }
 
@@ -23,6 +23,8 @@ window.addEventListener('load', () => {
     // updateBodyBackgroundColor();
     rutaInstance = new Ruta(title);
     console.log("rutaInstance", rutaInstance)
+    // Registrar la instancia principal para que se reajuste en el resize
+    rutaInstances.push(rutaInstance);
     /* 
     const titles = document.querySelectorAll('.title-container');
     titles.forEach(title => {
@@ -37,4 +39,5 @@ window.addEventListener('load', () => {
 // Ajustar texto cuando se redimensiona la ventana usando debounce de lodash
 // lodash está disponible globalmente desde el CDN
 // const debouncedAdjustTypography = _.debounce(adjustTypographyOnResize, 100);
-window.addEventListener('resize', adjustTypographyOnResize);
+window.addEventListener('resize', () => adjustTypographyOnResize());
+adjustTypographyOnResize();

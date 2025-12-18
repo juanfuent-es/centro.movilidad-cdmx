@@ -1,36 +1,29 @@
 
 /**
- * Calcula el tamaño de fuente ajustado para que el texto quepa en el ancho disponible
- * @param {string} text - Texto a medir
- * @param {number} initialFontSize - Tamaño de fuente inicial
- * @param {number} maxWidth - Ancho máximo disponible en píxeles
- * @param {string} fontFamily - Familia de fuente
- * @param {string} fontWeight - Peso de fuente
- * @param {SVGElement} svg - Elemento SVG para medir
- * @returns {number} Tamaño de fuente ajustado
+ * Calcula los valores tipográficos (peso y ancho) a partir de una relevancia 0–1.
+ *
+ * Los límites corresponden a la fuente variable Mona Sans:
+ * - font-weight: 200 900
+ * - font-stretch: 75% 125%
+ *
+ * @param {number} relevance - Valor de relevancia entre 0 y 1
+ * @returns {{ wght: number, wdth: number }}
  */
+export function fitText(relevance = 1) {
+  // Límites fijos de la familia tipográfica (solo como indicadores de rango)
+  const minWght = 200;
+  const maxWght = 900;
+  const minWdth = 75;
+  const maxWdth = 125;
 
-export function fitText(text, initialFontSize, maxWidth, fontFamily, fontWeight, svg) {
-    if (!text || !svg) return initialFontSize
-    
-    // Crear elemento temporal para medir
-    const tempText = document.createElementNS('http://www.w3.org/2000/svg', 'text')
-    tempText.setAttribute('font-family', fontFamily || 'Arial, sans-serif')
-    tempText.setAttribute('font-weight', fontWeight || 'normal')
-    tempText.setAttribute('font-size', initialFontSize)
-    tempText.textContent = text
-    tempText.setAttribute('visibility', 'hidden')
-    
-    svg.appendChild(tempText)
-    const textWidth = tempText.getComputedTextLength()
-    svg.removeChild(tempText)
-    
-    // Si el texto ya cabe, usar el tamaño inicial
-    if (textWidth <= maxWidth) {
-      return initialFontSize
-    }
-    
-    // Calcular factor de escala
-    const scaleFactor = maxWidth / textWidth
-    return initialFontSize * scaleFactor
-  }
+  // Asegurar que relevance esté en el rango [0, 1]
+  const r = Math.min(1, Math.max(0, Number(relevance) || 0));
+
+  const lerp = (min, max, t) => min + (max - min) * t;
+
+  // Redondear siempre hacia abajo para obtener valores enteros estables
+  const wght = Math.floor(lerp(minWght, maxWght, r));
+  const wdth = Math.floor(lerp(minWdth, maxWdth, r));
+
+  return { wght, wdth };
+}

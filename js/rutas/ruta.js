@@ -1,82 +1,41 @@
+import { fitText } from '../../fit_text.js';
+
 export default class Ruta {
-  constructor(_element) {
+  constructor(_element, args = {}) {
     this.element = _element;
-    this.svg = this.element.querySelector("svg");
-    this.container = document.createElement("span");
-    this.min_wght = 200; /* 25-75 */
-    this.min_wdth = 75; /* 100-900 */
-    this.max_wght = 900;
-    this.max_wdth = 125;
     this.text = this.element.innerText.trim();
+    this.relevance = args.relevance || .9; /* 0-1 */
+    // Límites de la variable Mona Sans (sólo como referencia, los usa fitText):
+    // font-weight: 200 900;
+    // font-stretch: 75% 125%;
+    this.fontFamily = "'Mona Sans', sans-serif";
+    this.minFontSize = 16; // tamaño mínimo de tipografía en px
+    this.container = this.element.parentElement || this.element;
+
     this.setup();
     this.applyVariationAttributes();
     this.fitTextToContainer();
   }
 
-  setSVG() {
-    const tempText = document.createElementNS('http://www.w3.org/2000/svg', 'text')
-    tempText.setAttribute('font-family', fontFamily || 'Arial, sans-serif')
-    tempText.setAttribute('font-weight', fontWeight || 'normal')
-    tempText.setAttribute('font-size', initialFontSize)
-    tempText.textContent = text
-    tempText.setAttribute('visibility', 'hidden')
-    this.svg = tempText
+  get maxWidth() {
+    return this.element.getBoundingClientRect().width
   }
-
   /**
    * Setup inicial: convierte el texto en spans individuales para distribución con flexbox
    */
   setup() {
     // Limpiar el contenido del elemento
-    this.element.innerHTML = '';
-    
-    // Convertir cada carácter (incluyendo espacios) en un span
+    this.element.innerHTML = "";
+
+    this.span = document.createElement("span");
+    this.element.appendChild(this.span);
+    // Convertir cada carácter (incluyendo espacios) en un var
     const characters = this.text.split('');
     characters.forEach((char, index) => {
-      const span = document.createElement('var');
-      span.textContent = char === ' ' ? '\u00A0' : char; // Usar non-breaking space para espacios
-      span.className = 'char';
-      this.element.appendChild(span);
+      const char_var = document.createElement('var');
+      char_var.textContent = char === ' ' ? '\u00A0' : char; // Usar non-breaking space para espacios
+      this.span.appendChild(char_var);
     });
-    
-    // Aplicar flexbox al elemento para distribuir caracteres
-    this.element.style.display = 'flex';
-    this.element.style.flexWrap = 'nowrap'; // Forzar una sola línea
-    this.element.style.justifyContent = 'space-between'; // Distribuir espacio entre caracteres
-    this.element.style.alignItems = 'center';
-    this.element.style.width = '100%';
-    this.element.style.whiteSpace = 'nowrap'; // Prevenir saltos de línea
-  }
-
-  /**
-   * Calcula los valores de variación tipográfica para toda la línea
-   * @returns {Object} Objeto con valores wght, wdth, ital
-   */
-  getVariation() {
-    // Calcular variaciones basadas en el seeder único de esta instancia
-    const baseX = 0.1;
-    const baseY = 0.15;
-    
-    // Peso (weight): variación suave entre min y max
-    const wght = Math.floor(
-      Math.abs(Math.sin(baseX) * (this.max_wght - this.min_wght)) + this.min_wght
-    );
-    
-    // Ancho (width): variación suave entre min y max
-    const wdth = Math.floor(
-      Math.abs(Math.cos(baseY) * (this.max_wdth - this.min_wdth)) + this.min_wdth
-    );
-    
-    // Slant/Italic: variación entre 0 y 10
-    const ital = Math.floor(
-      Math.abs(Math.sin(baseX + baseY) * 10)
-    );
-    
-    return {
-      wght: Math.max(this.min_wght, Math.min(this.max_wght, wght)),
-      wdth: Math.max(this.min_wdth, Math.min(this.max_wdth, wdth)),
-      ital: Math.max(0, Math.min(10, ital))
-    };
   }
 
   /**
@@ -84,15 +43,17 @@ export default class Ruta {
    * y ajusta el ancho automáticamente
    */
   applyVariationAttributes() {
-    const variation = this.getVariation();
-    
-    // Aplicar variables CSS al elemento completo
-    this.element.style.setProperty("--wght", variation.wght);
-    this.element.style.setProperty("--wdth", variation.wdth);
-    this.element.style.setProperty("--ital", variation.ital);
-    
-    // Ajustar ancho automático basado en el valor de wdth
-    this.adjustWidthAutomatically(variation.wdth);
+    const variation = fitText(this.relevance);
+
+    // Usar SOLO variables CSS para tipografía; que el CSS se encargue de heredar
+    const wght = Math.floor(variation.wght);
+    const wdth = Math.floor(variation.wdth);
+
+    this.element.style.setProperty("--wght", wght);
+    this.element.style.setProperty("--wdth", wdth);
+
+    // Ajustar ancho automático basado en el valor de wdth vía variable CSS
+    this.adjustWidthAutomatically(wdth);
   }
 
   /**
@@ -104,11 +65,10 @@ export default class Ruta {
     // El valor base es 100, así que calculamos el factor relativo
     const baseWidth = 100;
     const widthFactor = wdth / baseWidth;
-    
-    // Aplicar el factor de ancho como transformación o font-stretch
-    // Usando font-stretch que es más semántico para variaciones de ancho
-    const stretchValue = Math.round(widthFactor * 100);
-    this.element.style.fontStretch = `${stretchValue}%`;
+
+    // Aplicar el factor de ancho como font-stretch, usando SOLO variable CSS
+    const stretchValue = Math.floor(widthFactor * 100);
+    this.element.style.setProperty("--stretch", `${stretchValue}%`);
   }
 
   /**
@@ -120,11 +80,14 @@ export default class Ruta {
   }
 
   /**
-   * Método para ajustar el tamaño del texto para que quepa en una sola línea
-   * dentro del contenedor padre, distribuyendo los caracteres con espacio entre ellos
+   * Método para ajustar el tamaño del texto para que QUEPA EN UNA SOLA LÍNEA
+   * dentro del contenedor padre, distribuyendo los caracteres con espacio entre ellos.
+   *
+   * Parte de un tamaño mínimo (this.minFontSize) y busca el tamaño máximo posible
+   * tal que el ancho del span de caracteres siga cabiendo en el ancho del contenedor.
    */
   fitTextToContainer() {
-    if (!this.container) return;
+    if (!this.container || !this.span) return;
 
     const container = this.container;
     const textElement = this.element;
@@ -141,24 +104,36 @@ export default class Ruta {
     
     // Asegurar que el elemento tenga el 100% del ancho del contenedor
     textElement.style.width = '100%';
-    textElement.style.maxWidth = `${containerWidth}px`;
     
-    // Obtener el tamaño de fuente inicial
-    let currentFontSize = parseFloat(window.getComputedStyle(textElement).fontSize) || 48;
+    // Obtener el tamaño de fuente inicial (mínimo)
+    let currentFontSize = parseFloat(window.getComputedStyle(textElement).fontSize) || this.minFontSize;
     
+    // Función para actualizar el tamaño de fuente vía variable CSS
+    const setFontSizeVar = (fontSize) => {
+      const size = Math.floor(fontSize);
+      textElement.style.setProperty("--font-size-dynamic", `${size}px`);
+    };
+
     // Función para calcular el ancho total del texto con el fontSize dado
-    const calculateTextWidth = (fontSize) => {
-      textElement.style.fontSize = `${fontSize}px`;
+    const updateFontSize = (fontSize) => {
+      setFontSizeVar(fontSize);
       // Forzar reflow para obtener medidas precisas
-      void textElement.offsetWidth;
-      const rect = textElement.getBoundingClientRect();
+      void this.span.offsetWidth;
+    };
+
+    const calculateTextWidth = (fontSize) => {
+      updateFontSize(fontSize);
+      const rect = this.span.getBoundingClientRect();
       return rect.width;
     };
     
     // Calcular el ancho máximo basado en el número de caracteres
     // Considerar que con space-between, el ancho será aproximadamente el ancho del contenedor
-    let minFontSize = 1;
-    let maxFontSize = Math.min(containerHeight * 0.9, containerWidth / Math.max(this.text.length, 1) * 3);
+    let minFontSize = this.minFontSize;
+    let maxFontSize = Math.min(
+      containerHeight * 0.9,
+      (containerWidth / Math.max(this.text.length, 1)) * 3
+    );
     let optimalFontSize = Math.min(currentFontSize, maxFontSize);
     const tolerance = 0.1; // Tolerancia en píxeles
     
@@ -178,29 +153,24 @@ export default class Ruta {
       }
       iterations++;
     }
-    
-    // Aplicar el fontSize óptimo
-    textElement.style.fontSize = `${optimalFontSize}px`;
+    // Aplicar el fontSize óptimo (redondeado hacia abajo) vía variable CSS
+    setFontSizeVar(optimalFontSize);
     
     // Asegurar que también quepa en altura
     const finalHeight = textElement.getBoundingClientRect().height;
     if (finalHeight > containerHeight) {
       const heightScale = containerHeight / finalHeight;
-      optimalFontSize = optimalFontSize * heightScale * 0.95; // 95% para dejar un poco de margen
-      textElement.style.fontSize = `${optimalFontSize}px`;
+      optimalFontSize = Math.floor(optimalFontSize * heightScale * 0.95); // 95% para dejar un poco de margen
+      setFontSizeVar(optimalFontSize);
     }
     
     // Verificación final: asegurar que el texto quepa
     const finalWidth = textElement.getBoundingClientRect().width;
     if (finalWidth > containerWidth) {
       const widthScale = containerWidth / finalWidth;
-      optimalFontSize = optimalFontSize * widthScale * 0.98; // 98% para dejar un pequeño margen
-      textElement.style.fontSize = `${optimalFontSize}px`;
+      optimalFontSize = Math.floor(optimalFontSize * widthScale * 0.98); // 98% para dejar un pequeño margen
+      setFontSizeVar(optimalFontSize);
     }
   }
 
-  getRandomColor() {
-    const COLORS = ["#0F0", "#FF0", "#F0F", "#0FF", "#FFF", "#F00"];
-    return COLORS[~~(Math.random() * COLORS.length)];
-  }
 }
