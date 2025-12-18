@@ -1,9 +1,21 @@
+@font-face {
+	src: url('./Hubot-Sans.woff2');
+	font-family:'Hubot Sans';
+	font-style: normal;
+}
+@font-face {
+	src: url('./MonaSans-VF.ttf');
+	font-family:'Mona Sans';
+	font-style: normal;
+}
 /* ============================================
    VARIABLES DE TIPOGRAFÍA
    ============================================ */
    :root {
-    /* Fuentes */
+    /* Fuentes 
     --font-base: 'Open Sans', Helvetica, Arial, Lucida, sans-serif;
+    */
+    --font-base: 'Mona Sans', 'Hubot', Helvetica, Arial, Lucida, sans-serif;
     
     /* Tamaños de fuente base (mobile first) - solo sm, base, lg */
     --font-size-sm: 14px;   /* 14px - mobile default */
@@ -14,6 +26,10 @@
     --font-weight-light: 200;
     --font-weight-normal: 400;
     --font-weight-bold: 800;
+
+    --wght: 400;
+    --wdth: 75; /* 25-75 */
+    --ital: 0;
 }
 
 /* ============================================
@@ -41,25 +57,24 @@ body {
    ============================================ */
 h1, h2, h3, h4 {
     font-family: var(--font-base);
+    font-variation-settings: 
+        'wght' var(--wght, 400),
+        'wdth' var(--wdth, 100),
+        'ital' var(--ital, 0);
+    text-transform: uppercase;
+    line-height: 1em;
     margin: 0;
+    padding: 0;
+    text-wrap-style: balance;
+    display: flex;
 }
 
 h1 {
     font-size: 10vw;
-    font-weight: 800;
-    line-height: 1em;
-    font-stretch: 90%;
 }
 
 h2 {
     font-size: 8vw;
-    text-transform: uppercase;
-    font-weight: 900;
-    margin: 0;
-    font-stretch: 85%;
-    line-height: 1em;
-    letter-spacing: -.025em;
-    text-wrap-style: balance;
 }
 
 h3 {
