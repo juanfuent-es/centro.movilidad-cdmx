@@ -4,7 +4,7 @@ export default class Ruta {
   constructor(_element, args = {}) {
     this.element = _element;
     this.text = this.element.innerText.trim();
-    this.relevance = args.relevance || .9; /* 0-1 */
+    this.relevance = this.element.dataset.relevance || .9; /* 0-1 */
     // Límites de la variable Mona Sans (sólo como referencia, los usa fitText):
     // font-weight: 200 900;
     // font-stretch: 75% 125%;
@@ -92,25 +92,56 @@ export default class Ruta {
     const container = this.container;
     const textElement = this.element;
     
-    // Asegurar que el contenedor tenga dimensiones válidas
-    const containerRect = container.getBoundingClientRect();
-    let containerWidth = containerRect.width;
-    const containerHeight = containerRect.height;
-    
-    // Si el contenedor no tiene ancho, usar el ancho del viewport o un valor por defecto
-    if (containerWidth === 0) {
-      containerWidth = container.offsetWidth || window.innerWidth * 0.8;
-    }
-    
     // Asegurar que el elemento tenga el 100% del ancho del contenedor
     textElement.style.width = '100%';
     
-    // Obtener el tamaño de fuente inicial (mínimo)
-    let currentFontSize = parseFloat(window.getComputedStyle(textElement).fontSize) || this.minFontSize;
+    // Forzar un reflow inicial para asegurar que el elemento tenga dimensiones válidas
+    void textElement.offsetWidth;
+    
+    // Obtener el ancho disponible del elemento mismo (no del contenedor padre)
+    // Esto asegura que cada elemento calcule su tamaño basado en su propio espacio disponible
+    // Usar getBoundingClientRect() para obtener el ancho real después del renderizado
+    const elementRect = textElement.getBoundingClientRect();
+    let containerWidth = elementRect.width;
+    let containerHeight = elementRect.height;
+    
+    // Si el elemento no tiene ancho aún, intentar obtenerlo del contenedor padre
+    // pero solo como fallback, ya que queremos usar el ancho del elemento mismo
+    if (containerWidth === 0 || containerWidth === null || isNaN(containerWidth)) {
+      const containerRect = container.getBoundingClientRect();
+      containerWidth = containerRect.width || textElement.offsetWidth || window.innerWidth * 0.8;
+      
+      // Si aún no hay ancho, forzar otro reflow y volver a intentar
+      if (containerWidth === 0) {
+        void textElement.offsetWidth; // Forzar reflow
+        const updatedRect = textElement.getBoundingClientRect();
+        containerWidth = updatedRect.width || window.innerWidth * 0.8;
+      }
+    }
+    
+    // Asegurar que tenemos valores válidos
+    if (containerWidth <= 0 || isNaN(containerWidth)) {
+      console.warn(`Ruta: No se pudo obtener ancho válido para elemento`, textElement);
+      containerWidth = window.innerWidth * 0.8; // Fallback seguro
+    }
+    
+    // Si no hay altura, usar la altura del contenedor o un valor por defecto
+    if (containerHeight === 0 || containerHeight === null || isNaN(containerHeight)) {
+      const containerRect = container.getBoundingClientRect();
+      containerHeight = containerRect.height || 100; // Fallback de altura
+    }
+    
+    // Obtener el tamaño de fuente inicial
+    // No usar el valor de la variable CSS global, sino calcular desde cero para cada instancia
+    // Esto asegura que cada elemento calcule su tamaño independientemente
+    let currentFontSize = this.minFontSize;
     
     // Función para actualizar el tamaño de fuente vía variable CSS
+    // Esta función establece la variable SOLO en este elemento específico
+    // Al establecer la variable en el elemento mismo, tiene mayor especificidad que la variable global
     const setFontSizeVar = (fontSize) => {
       const size = Math.floor(fontSize);
+      // Establecer la variable CSS solo en este elemento, no globalmente
       textElement.style.setProperty("--font-size-dynamic", `${size}px`);
     };
 
@@ -156,18 +187,24 @@ export default class Ruta {
     // Aplicar el fontSize óptimo (redondeado hacia abajo) vía variable CSS
     setFontSizeVar(optimalFontSize);
     
-    // Asegurar que también quepa en altura
+    // Forzar un reflow para obtener medidas actualizadas después de aplicar el tamaño
+    void textElement.offsetWidth;
+    
+    // Asegurar que también quepa en altura (usar el contenedor padre para altura si está disponible)
     const finalHeight = textElement.getBoundingClientRect().height;
-    if (finalHeight > containerHeight) {
-      const heightScale = containerHeight / finalHeight;
+    const availableHeight = containerHeight > 0 ? containerHeight : finalHeight;
+    if (finalHeight > availableHeight && availableHeight > 0) {
+      const heightScale = availableHeight / finalHeight;
       optimalFontSize = Math.floor(optimalFontSize * heightScale * 0.95); // 95% para dejar un poco de margen
       setFontSizeVar(optimalFontSize);
+      void textElement.offsetWidth; // Forzar reflow después del ajuste
     }
     
-    // Verificación final: asegurar que el texto quepa
+    // Verificación final: asegurar que el texto quepa en el ancho disponible del elemento
     const finalWidth = textElement.getBoundingClientRect().width;
-    if (finalWidth > containerWidth) {
-      const widthScale = containerWidth / finalWidth;
+    const availableWidth = containerWidth > 0 ? containerWidth : finalWidth;
+    if (finalWidth > availableWidth && availableWidth > 0) {
+      const widthScale = availableWidth / finalWidth;
       optimalFontSize = Math.floor(optimalFontSize * widthScale * 0.98); // 98% para dejar un pequeño margen
       setFontSizeVar(optimalFontSize);
     }

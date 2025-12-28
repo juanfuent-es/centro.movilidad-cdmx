@@ -1,19 +1,4 @@
-@font-face {
-	src: url('./Hubot-Sans.woff2');
-	font-family:'Hubot Sans';
-	font-style: normal;
-}
-@font-face {
-	src: url('./MonaSans-VF.ttf');
-	font-family:'Mona Sans';
-	font-style: normal;
-    src:
-        url('./MonaSans-VF.ttf') format('truetype supports variations'),
-        url('./MonaSans-VF.ttf') format('truetype-variations');
-    font-weight: 200 900;
-    font-stretch: 75% 125%;
-    font-optical-sizing: auto;
-}
+
 /* ============================================
    VARIABLES DE TIPOGRAFÍA
    ============================================ */
@@ -21,8 +6,8 @@
     /* Fuentes 
     --font-base: 'Open Sans', Helvetica, Arial, Lucida, sans-serif;
     */
-    --font-base: 'Mona Sans', 'Hubot', Helvetica, Arial, Lucida, sans-serif;
-    
+    --font-base: "Google Sans Flex", Helvetica, Arial, Lucida, sans-serif;
+
     /* Tamaños de fuente base (mobile first) - solo sm, base, lg */
     --font-size-sm: 14px;   /* 14px - mobile default */
     --font-size-base: 16px;     /* 16px - mobile default */
@@ -65,6 +50,28 @@ body {
     /* Hint global de renderizado de texto */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+/*  // <weight>: Use a value from 1 to 1000
+    // <grade>: Use a value from 0 to 100
+    // <slant>: Use a value from -10 to 0
+    // <width>: Use a value from 25 to 151
+    // <roundness>: Use a value from 0 to 100
+    // <uniquifier>: Use a unique and descriptive class name
+*/    
+    --weight: var(--font-weight-normal);
+    --grade: 0;
+    --slant: 0;
+    --width: 100;
+    --roundness: 100;
+    --uniquifier: "google-sans-flex";
+    font-family: var(--font-base);
+    font-optical-sizing: auto;
+    font-weight: var(--font-weight-normal);
+    font-style: normal;
+    font-variation-settings:
+      "slnt" var(--ital),
+      "wdth" var(--wdth),
+      "GRAD" var(--grad),
+      "ROND" var(--roundness);
 }
 
 /* ============================================
@@ -72,10 +79,6 @@ body {
    ============================================ */
 h1, h2, h3, h4 {
     font-family: var(--font-base);
-    font-variation-settings: 
-        'wght' var(--wght, 400),
-        'wdth' var(--wdth, 100),
-        'ital' var(--ital, 0);
     text-transform: uppercase;
     line-height: 1em;
     margin: 0;
@@ -91,12 +94,7 @@ h1, h2, h3, h4 {
     align-items: center;
     width: 100%;
     white-space: nowrap;
-
-    font-variation-settings: 
-        'wght' var(--wght, 400),
-        'wdth' var(--wdth, 100),
-        'ital' var(--ital, 0);
-
+    font-variation-settings: 'wght' var(--wght), 'wdth' var(--wdth), 'ital' var(--ital), 'stretch' var(--stretch);
     /* Estirar por variable CSS para no tocar estilos inline */
     font-stretch: var(--stretch, 100%);
 
@@ -108,8 +106,16 @@ h1, h2, h3, h4 {
     -webkit-font-smoothing: antialiased;
     backface-visibility: hidden;
     transform: translateZ(0); /* prepara el layer para futuras animaciones */
+    flex-direction: column;
+    align-content: space-between;
 }
 
+.ruta-variable span {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 /* Asegurar que los caracteres hijos hereden la tipografía de la línea */
 .ruta-variable span,
 .ruta-variable var {

@@ -5,3 +5,10 @@ html {
 *, *:before, *:after {
     box-sizing: inherit;
 }
+
+menu {
+    width: 100%;
+    display: block;
+    padding: 0;
+    margin: 0;
+}

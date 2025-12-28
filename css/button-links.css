@@ -8,9 +8,6 @@
 a {
     color: var(--color-white);
     text-decoration: none;
-    font-stretch: 75%;
-    font-weight: 900;
-    font-size: 18px;
     display: inline;
 }
 

@@ -16,15 +16,14 @@ function adjustTypographyOnResize() {
     });
 }
 
-const title = document.querySelector('.ruta-variable');
-let rutaInstance;
+const title = document.querySelectorAll('.ruta-variable');
+title.forEach(title => {
+    let rutaInstance = new Ruta(title);
+    rutaInstances.push(rutaInstance);
+});
 // También ejecutar después de que se cargue completamente la página
 window.addEventListener('load', () => {
     // updateBodyBackgroundColor();
-    rutaInstance = new Ruta(title);
-    console.log("rutaInstance", rutaInstance)
-    // Registrar la instancia principal para que se reajuste en el resize
-    rutaInstances.push(rutaInstance);
     /* 
     const titles = document.querySelectorAll('.title-container');
     titles.forEach(title => {
