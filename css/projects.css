@@ -43,6 +43,7 @@
 .title-container {
     text-align: center;
     width: 100%;
+    position: relative;
 }
 
 .title-container h2 {

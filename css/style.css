@@ -31,7 +31,7 @@ SISTEMA DE COMPONENTES CSS
         'slnt' var(--font-variation-slnt),
         'GRAD' var(--font-variation-GRAD),
         'ROND' var(--font-variation-ROND);
-    line-height: 1;
+    line-height: .85;
     white-space: nowrap;
     width: 100%;
     display: flex;
@@ -39,6 +39,8 @@ SISTEMA DE COMPONENTES CSS
     position: relative;
     justify-content: space-between;
     align-items: center;
+    shape-rendering: optimizespeed;
+    color-rendering: optimizeSpeed;
 }
 
 .ruta-variable.fit-text-flex {
