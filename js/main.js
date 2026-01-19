@@ -9,11 +9,11 @@ htmlElements.forEach((item, idx) => {
     fitTextElements.push(fitText)
 })
 
-/* // Manejar redimensionamiento de ventana
+// Manejar redimensionamiento de ventana
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-        fitText.fit();
+        fitTextElements.forEach(fitText =>  fitText.fit());
     }, 100);
-}); */
+});

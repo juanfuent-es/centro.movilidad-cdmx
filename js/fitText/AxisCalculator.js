@@ -47,35 +47,47 @@ export default class AxisCalculator {
 
   /**
    * Calcula el fontSize máximo que no desborda el ancho del contenedor
-   * @param {number} containerHeight - Altura del contenedor en px
+   * La altura se ajusta automáticamente según el font-size definido por CSS
    * @param {number} containerWidth - Ancho del contenedor en px
    * @param {Function} measureCallback - Función que mide el ancho del texto con fontSize y axes dados
    * @param {Object} initialAxes - Valores iniciales de ejes (sin fontSize)
    * @returns {number} FontSize óptimo
    */
-  calculateMaxFontSize(containerHeight, containerWidth, measureCallback, initialAxes = {}) {
-    // 1. Cálculo inicial basado en altura
-    let fontSize = Math.floor(containerHeight / this.lineHeightRatio);
+  calculateMaxFontSize(containerWidth, measureCallback, initialAxes = {}) {
+    // 1. Empezar con un fontSize grande y reducir hasta que quepa en el ancho
+    // Usamos búsqueda binaria para mayor eficiencia
+    let minSize = this.minFontSize;
+    let maxSize = this.maxFontSize;
+    let fontSize = Math.min(maxSize, containerWidth); // Estimación inicial razonable
     fontSize = this.clamp(fontSize, this.minFontSize, this.maxFontSize);
 
     // 2. Aplicar y medir con el fontSize inicial
     let textWidth = measureCallback(fontSize, initialAxes);
 
-    // 3. Iterar reduciendo fontSize si desborda ancho
-    const maxIterations = 100;
+    // 3. Búsqueda binaria para encontrar el fontSize óptimo
+    const maxIterations = 30; // Reducido para mayor velocidad
     let iterations = 0;
+    const tolerance = 1; // Tolerancia en píxeles
     
-    while (textWidth > containerWidth && fontSize > this.minFontSize && iterations < maxIterations) {
-      fontSize -= this.fontSizeStep;
-      fontSize = Math.max(fontSize, this.minFontSize);
+    while (iterations < maxIterations && (maxSize - minSize) > tolerance) {
+      if (textWidth > containerWidth) {
+        // Desborda, reducir fontSize
+        maxSize = fontSize;
+        fontSize = Math.floor((minSize + maxSize) / 2);
+      } else {
+        // Cabe, intentar aumentar fontSize
+        minSize = fontSize;
+        fontSize = Math.floor((minSize + maxSize) / 2);
+        // Si ya no podemos aumentar más, salir
+        if (fontSize === minSize) break;
+      }
+      
+      fontSize = this.clamp(fontSize, this.minFontSize, this.maxFontSize);
       textWidth = measureCallback(fontSize, initialAxes);
       iterations++;
       
-      // Si el ancho ya no desborda, salir
-      if (textWidth <= containerWidth) break;
-      
-      // Si el fontSize ya es el mínimo, salir
-      if (fontSize <= this.minFontSize) break;
+      // Si el ancho ya no desborda y estamos cerca del límite, salir
+      if (textWidth <= containerWidth && (maxSize - minSize) <= tolerance) break;
     }
 
     // 4. Asegurar que no sea menor que el mínimo
@@ -87,12 +99,11 @@ export default class AxisCalculator {
   /**
    * Calcula el valor óptimo de width mediante algoritmo iterativo
    * @param {number} containerWidth - Ancho del contenedor en px
-   * @param {Function} measureCallback - Función que mide el ancho del texto con wdth dado
-   * @param {number} fontSize - Tamaño de fuente actual
+   * @param {Function} measureCallback - Función que mide el ancho del texto con ejes dados
    * @param {Object} otherAxes - Otros ejes (wght, GRAD, slnt, ROND)
    * @returns {number} Valor óptimo de width (25-151)
    */
-  calculateOptimalWidth(containerWidth, measureCallback, fontSize, otherAxes = {}) {
+  calculateOptimalWidth(containerWidth, measureCallback, otherAxes = {}) {
     let currentWidth = this.axisRanges.wdth.default;
     const { min: minWidth, max: maxWidth } = this.axisRanges.wdth;
     let step = this.widthStep;
@@ -103,7 +114,7 @@ export default class AxisCalculator {
 
     do {
       const axes = { ...otherAxes, wdth: currentWidth };
-      textWidth = measureCallback(fontSize, axes);
+      textWidth = measureCallback(axes);
 
       if (textWidth < containerWidth * 0.95) {
         // Texto es más angosto, aumentar width

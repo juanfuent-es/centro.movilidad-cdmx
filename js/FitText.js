@@ -16,7 +16,7 @@ export default class FitText {
     this.element = element;
     this.options = {
       fontFamily: options.fontFamily || 'Google Sans Flex, sans-serif',
-      relevance: this.parseRelevance(element, options.relevance),
+      relevance: this.relevance,
       lineHeightRatio: options.lineHeightRatio || 1,
       minFontSize: options.minFontSize || 14,
       maxFontSize: options.maxFontSize || 1000,
@@ -61,12 +61,9 @@ export default class FitText {
    * @param {number|undefined} optionsRelevance - Relevance desde options
    * @returns {number} Valor de relevance (0-1)
    */
-  parseRelevance(element, optionsRelevance=1) {
-    if (typeof optionsRelevance === 'number') {
-      return Math.max(0, Math.min(1, optionsRelevance));
-    }
+  get relevance() {
 
-    const dataRelevance = element.dataset.relevance;
+    const dataRelevance = this.element.dataset.relevance;
     if (dataRelevance) {
       const parsed = parseFloat(dataRelevance);
       if (!isNaN(parsed)) {
@@ -115,29 +112,31 @@ export default class FitText {
 
     // Obtener dimensiones del contenedor padre (el que tiene dimensiones reales)
     const parentRect = parentContainer.getBoundingClientRect();
-    const computedStyle = getComputedStyle(parentContainer);
+    const parentComputedStyle = getComputedStyle(parentContainer);
     
-    // Calcular dimensiones disponibles restando padding y border
-    const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
-    const paddingRight = parseFloat(computedStyle.paddingRight) || 0;
-    const paddingTop = parseFloat(computedStyle.paddingTop) || 0;
-    const paddingBottom = parseFloat(computedStyle.paddingBottom) || 0;
-    const borderLeft = parseFloat(computedStyle.borderLeftWidth) || 0;
-    const borderRight = parseFloat(computedStyle.borderRightWidth) || 0;
-    const borderTop = parseFloat(computedStyle.borderTopWidth) || 0;
-    const borderBottom = parseFloat(computedStyle.borderBottomWidth) || 0;
+    // Obtener fontSize del CSS (no calcularlo)
+    const elementComputedStyle = getComputedStyle(this.element);
+    const fontSizeFromCSS = parseFloat(elementComputedStyle.fontSize);
+    
+    if (isNaN(fontSizeFromCSS) || fontSizeFromCSS <= 0) {
+      console.warn('FitText: fontSize inválido desde CSS', fontSizeFromCSS);
+      return;
+    }
+
+    // Calcular dimensiones disponibles restando padding y border (solo ancho necesario)
+    const paddingLeft = parseFloat(parentComputedStyle.paddingLeft) || 0;
+    const paddingRight = parseFloat(parentComputedStyle.paddingRight) || 0;
+    const borderLeft = parseFloat(parentComputedStyle.borderLeftWidth) || 0;
+    const borderRight = parseFloat(parentComputedStyle.borderRightWidth) || 0;
     
     const containerWidth = parentRect.width - paddingLeft - paddingRight - borderLeft - borderRight;
-    const containerHeight = parentRect.height - paddingTop - paddingBottom - borderTop - borderBottom;
 
-    if (containerWidth <= 0 || containerHeight <= 0) {
-      console.warn('FitText: dimensiones del contenedor inválidas', { 
-        containerWidth, 
-        containerHeight,
+    if (containerWidth <= 0) {
+      console.warn('FitText: ancho del contenedor inválido', { 
+        containerWidth,
         parentWidth: parentRect.width,
-        parentHeight: parentRect.height,
-        padding: { paddingLeft, paddingRight, paddingTop, paddingBottom },
-        border: { borderLeft, borderRight, borderTop, borderBottom }
+        padding: { paddingLeft, paddingRight },
+        border: { borderLeft, borderRight }
       });
       return;
     }
@@ -155,11 +154,9 @@ export default class FitText {
       ROND: this.currentAxes.ROND ?? this.calculator.axisRanges.ROND.default
     };
 
-    // 3. Calcular fontSize y ajustar weight/width adaptativamente si es necesario
-    // Función para medir el ancho real del contenido del elemento
-    const measureWidthCallback = (fontSize, axes) => {
-      // Aplicar estilos temporalmente
-      this.styleApplier.applyFontSize(this.element, fontSize);
+    // 3. Función para medir el ancho real del contenido usando fontSize del CSS
+    const measureWidthCallback = (axes) => {
+      // Aplicar solo los ejes (no fontSize, viene del CSS)
       this.styleApplier.applyAxisValues(this.element, axes);
       
       // Forzar reflow para que los cambios se apliquen
@@ -185,33 +182,12 @@ export default class FitText {
     let currentWeight = weight;
     let currentGrade = grade;
     let optimalWidth = this.calculator.axisRanges.wdth.default;
-    let fontSize;
     let textWidth;
     let iterations = 0;
     const maxIterations = 30;
     const widthTolerance = 2; // 2px de tolerancia
 
-    // Función helper para medir con ejes dados (igual que measureWidthCallback)
-    const measureWidthForWidthCalc = (fontSize, axes) => {
-      this.styleApplier.applyFontSize(this.element, fontSize);
-      this.styleApplier.applyAxisValues(this.element, axes);
-      void this.element.offsetWidth;
-      
-      // Medir el ancho real del contenido sumando los spans
-      let totalWidth = 0;
-      this.charSpans.forEach(span => {
-        const spanRect = span.getBoundingClientRect();
-        totalWidth += spanRect.width;
-      });
-      
-      if (totalWidth === 0) {
-        totalWidth = this.measurer.measureWidth(this.element);
-      }
-      
-      return totalWidth;
-    };
-
-    // Primera pasada: calcular fontSize y width con valores iniciales de relevance
+    // Primera pasada: calcular width óptimo con valores iniciales de relevance
     let currentAxes = {
       wght: currentWeight,
       GRAD: currentGrade,
@@ -220,17 +196,10 @@ export default class FitText {
       ROND: initialAxes.ROND
     };
 
-    fontSize = this.calculator.calculateMaxFontSize(
-      containerHeight,
-      containerWidth,
-      measureWidthCallback,
-      currentAxes
-    );
-
+    // Calcular width óptimo usando el fontSize del CSS
     optimalWidth = this.calculator.calculateOptimalWidth(
       containerWidth,
-      measureWidthForWidthCalc,
-      fontSize,
+      measureWidthCallback,
       {
         wght: currentWeight,
         GRAD: currentGrade,
@@ -241,7 +210,6 @@ export default class FitText {
 
     // Aplicar y medir resultado inicial (medir ancho real del contenido)
     currentAxes.wdth = optimalWidth;
-    this.styleApplier.applyFontSize(this.element, fontSize);
     this.styleApplier.applyAxisValues(this.element, currentAxes);
     void this.element.offsetWidth;
     
@@ -257,9 +225,6 @@ export default class FitText {
     }
 
     // Si desborda, reducir progresivamente weight, grade y width
-    // Guardar fontSize inicial como límite máximo para evitar que crezca demasiado
-    const maxAllowedFontSize = fontSize;
-    
     while (textWidth > containerWidth + widthTolerance && iterations < maxIterations) {
       const wghtRange = this.calculator.axisRanges.wght;
       const wdthRange = this.calculator.axisRanges.wdth;
@@ -287,7 +252,7 @@ export default class FitText {
         optimalWidth = Math.max(wdthRange.min, optimalWidth - widthStep);
       }
 
-      // Recalcular fontSize con los nuevos valores, pero limitado al máximo anterior
+      // Actualizar ejes con los nuevos valores
       currentAxes = {
         wght: currentWeight,
         GRAD: currentGrade,
@@ -296,21 +261,10 @@ export default class FitText {
         ROND: initialAxes.ROND
       };
 
-      // Calcular nuevo fontSize pero limitarlo al máximo anterior para evitar que crezca
-      const calculatedFontSize = this.calculator.calculateMaxFontSize(
-        containerHeight,
-        containerWidth,
-        measureWidthCallback,
-        currentAxes
-      );
-      // No permitir que fontSize sea mayor que el máximo inicial
-      fontSize = Math.min(calculatedFontSize, maxAllowedFontSize);
-
-      // Recalcular width óptimo con nuevo fontSize
+      // Recalcular width óptimo con los nuevos ejes
       optimalWidth = this.calculator.calculateOptimalWidth(
         containerWidth,
-        measureWidthForWidthCalc,
-        fontSize,
+        measureWidthCallback,
         {
           wght: currentWeight,
           GRAD: currentGrade,
@@ -321,7 +275,6 @@ export default class FitText {
 
       // Aplicar y medir el ancho real del contenido
       currentAxes.wdth = optimalWidth;
-      this.styleApplier.applyFontSize(this.element, fontSize);
       this.styleApplier.applyAxisValues(this.element, currentAxes);
       void this.element.offsetWidth;
       
@@ -336,27 +289,6 @@ export default class FitText {
         textWidth = this.measurer.measureWidth(this.element);
       }
 
-      // Si ya no podemos reducir más los ejes y sigue desbordando, reducir fontSize directamente
-      if (textWidth > containerWidth + widthTolerance && 
-          currentWeight <= wghtRange.min + 50 && 
-          currentGrade <= gradRange.min + 10 && 
-          optimalWidth <= wdthRange.min + 10) {
-        fontSize = Math.max(this.options.minFontSize, fontSize - 1);
-        this.styleApplier.applyFontSize(this.element, fontSize);
-        void this.element.offsetWidth;
-        
-        // Medir ancho real después de reducir fontSize
-        textWidth = 0;
-        this.charSpans.forEach(span => {
-          const spanRect = span.getBoundingClientRect();
-          textWidth += spanRect.width;
-        });
-        
-        if (textWidth === 0) {
-          textWidth = this.measurer.measureWidth(this.element);
-        }
-      }
-
       iterations++;
     }
 
@@ -369,8 +301,7 @@ export default class FitText {
       ROND: initialAxes.ROND
     };
 
-    // Aplicar estilos finales
-    this.styleApplier.applyFontSize(this.element, fontSize);
+    // Aplicar estilos finales (solo ejes, no fontSize)
     this.styleApplier.applyAxisValues(this.element, finalAxes);
     void this.element.offsetWidth;
 
@@ -391,7 +322,7 @@ export default class FitText {
 
     // Guardar estado final
     this.currentAxes = finalAxes;
-    this.currentFontSize = fontSize;
+    this.currentFontSize = fontSizeFromCSS; // Guardar el fontSize del CSS
     this.flexEnabled = needsFlex;
   }
 

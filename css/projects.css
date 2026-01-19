@@ -42,6 +42,7 @@
 
 .title-container {
     text-align: center;
+    width: 100%;
 }
 
 .title-container h2 {
@@ -49,6 +50,7 @@
     padding: 0;
     line-height: 1;
     overflow: hidden;
+    width: 100%;
 }
 
 .title-container h2 .char {

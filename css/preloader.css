@@ -23,7 +23,11 @@ body {
 #preloader p {
     font-size: var(--font-size-lg);
     text-align: center;
-    margin-top: 2em;
+    margin: 1em 0 2em 0;
+}
+
+#preloader .project {
+    text-align: center;
 }
 
 #enter-btn {
