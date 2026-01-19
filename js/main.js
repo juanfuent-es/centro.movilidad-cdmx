@@ -1,67 +1,43 @@
-const headerInstance = new Header();
-const lenis = new Lenis({
-    lerp: 0.1,
-    autoRaf: true,
-});
-
+import { Header } from './header.js';
+import Ruta from './rutas/ruta.js';
+// Inicializar instancia de Header
+// const headerInstance = new Header();
+// Almacenar instancias de Ruta para poder ajustarlas en resize
+const rutaInstances = [];
 /**
- * Función para obtener el elemento project-container que está más visible en el viewport
- * @returns {HTMLElement|null} - El elemento project-container más visible o null
+ * Función para ajustar el texto tipográfico de todas las instancias de Ruta
+ * Mantiene el core del código exclusivo para el ajuste tipográfico
  */
-function getCurrentProjectContainer() {
-    const projectContainers = document.querySelectorAll('.project-container');
-    let maxVisibleArea = 0;
-    let mostVisibleElement = null;
-    
-    projectContainers.forEach(container => {
-        const rect = container.getBoundingClientRect();
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-        
-        // Calcular el área visible del elemento
-        const visibleTop = Math.max(0, rect.top);
-        const visibleBottom = Math.min(windowHeight, rect.bottom);
-        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-        const visibleArea = visibleHeight * rect.width;
-        
-        // Si el elemento está visible y tiene más área visible que el anterior
-        if (visibleArea > 0 && visibleArea > maxVisibleArea) {
-            maxVisibleArea = visibleArea;
-            mostVisibleElement = container;
-        }
+function adjustTypographyOnResize() {
+    console.log("adjustTypographyOnResize")
+    rutaInstances.forEach(instance => {
+        console.log("adjusting typography on resize", instance)
+        instance.fitTextToContainer();
     });
-    
-    return mostVisibleElement;
 }
 
-/**
- * Función para actualizar el color de fondo del body basado en el project-container visible
- */
-function updateBodyBackgroundColor() {
-    const currentContainer = getCurrentProjectContainer();
-    const body = document.body;
-    
-    // Remover todas las clases de color anteriores
-    body.classList.remove('bg-orange', 'bg-pink', 'bg-green', 'bg-red', 'bg-blue', 'bg-black', 'bg-white');
-    
-    if (currentContainer) {
-        const color = currentContainer.getAttribute('data-color');
-        if (color) {
-            body.classList.add(`bg-${color}`);
-        }
-    }
-}
-
-// Agregar listener de scroll para actualizar el color de fondo usando Lenis
-lenis.on('scroll', () => {
-    updateBodyBackgroundColor();
-});
-
-// Ejecutar una vez al cargar la página para establecer el color inicial
-document.addEventListener('DOMContentLoaded', () => {
-    updateBodyBackgroundColor();
-});
-
+const title = document.querySelector('.ruta-variable');
+let rutaInstance;
 // También ejecutar después de que se cargue completamente la página
 window.addEventListener('load', () => {
-    updateBodyBackgroundColor();
+    // updateBodyBackgroundColor();
+    rutaInstance = new Ruta(title);
+    console.log("rutaInstance", rutaInstance)
+    // Registrar la instancia principal para que se reajuste en el resize
+    rutaInstances.push(rutaInstance);
+    /* 
+    const titles = document.querySelectorAll('.title-container');
+    titles.forEach(title => {
+        const h2 = title.querySelector('h2');
+        if (h2) {
+            const rutaInstance = new Ruta(h2);
+            rutaInstances.push(rutaInstance);
+        }
+    }); */
 });
+
+// Ajustar texto cuando se redimensiona la ventana usando debounce de lodash
+// lodash está disponible globalmente desde el CDN
+// const debouncedAdjustTypography = _.debounce(adjustTypographyOnResize, 100);
+window.addEventListener('resize', () => adjustTypographyOnResize());
+adjustTypographyOnResize();

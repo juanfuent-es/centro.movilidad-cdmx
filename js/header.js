@@ -1,43 +1,40 @@
 /**
- * Constructor de la clase Header en ES5.
- * @constructor
+ * Clase Header en ES6 para manejar el comportamiento del encabezado
+ * @class
  */
-var Header = function() {
-    // Propiedades
-    this.y = 0;
-    // Asume que 'window["main-header"]' es una forma de acceder al elemento DOM.
-    // Si se refiere a un ID, la forma más común es document.getElementById("main-header")
-    this.container = document.querySelector("#main-header"); 
-    if (!this.container) {
-        console.error("El elemento #main-header no existe");
-        return;
+export class Header {
+    /**
+     * Crea una instancia de Header
+     * @constructor
+     */
+    constructor() {
+        // Propiedades
+        this.y = 0;
+        this.container = document.querySelector("#main-header");
+        
+        if (!this.container) {
+            console.warn("No se encontró el elemento #main-header");
+            return;
+        }
+        
+        window.addEventListener("scroll", this.onScroll.bind(this));
+
+        // Ejecución inicial de onScroll
+        this.onScroll();
     }
-    // Enlace del evento con el contexto correcto de 'this'
-    // La función flecha (e) => this.onScroll() se reemplaza por .bind(this)
-    window.addEventListener("scroll", this.onScroll.bind(this));
-
-    // Ejecución inicial de onScroll
-    this.onScroll();
-};
-
-/**
- * Métodos y Getters definidos en el prototipo de Header
- */
-Header.prototype = {
-    // Es importante restaurar el constructor
-    constructor: Header, 
 
     /**
      * Getter: Calcula la altura del contenedor
+     * @returns {number} La altura del contenedor en píxeles
      */
     get height() {
-        var _rect = this.container.getBoundingClientRect();
-        // El operador ~~ es una función común en JS para convertir a entero redondeado para abajo y es compatible con ES5.
-        return ~~_rect.height; 
-    },
+        const rect = this.container.getBoundingClientRect();
+        return Math.floor(rect.height);
+    }
     
     /**
      * Getter: Determina la dirección del scroll
+     * @returns {string} "up" si el scroll es hacia arriba, "down" si es hacia abajo
      */
     get direction() {
         if (this.y > window.scrollY) {
@@ -45,114 +42,94 @@ Header.prototype = {
         } else {
             return "down";
         }
-    },
+    }
 
     /**
-     * Getter: Verifica si el encabezado es visible (tiene la clase 'visible')
+     * Getter: Verifica si el encabezado es visible (tiene la clase 'header-visible')
+     * @returns {boolean} true si el header es visible, false en caso contrario
      */
     get isVisible() {
-        // En ES5, acceder a classList es seguro, pero para máxima compatibilidad con navegadores muy antiguos,
-        // se usa la verificación de string, la cual es la lógica original.
-        return String(this.container.getAttribute("class")).indexOf("visible") >= 0;
-    },
+        return this.container.classList.contains("header-visible");
+    }
     
     /**
      * Getter: Verifica si el encabezado está en la posición superior (tiene la clase 'in-top')
+     * @returns {boolean} true si el header está en la parte superior, false en caso contrario
      */
     get inTop() {
-        return String(this.container.getAttribute("class")).indexOf("in-top") >= 0;
-    },
+        return this.container.classList.contains("in-top");
+    }
 
     /**
      * Asigna el valor actual del scroll a la propiedad 'y'
-     * @param {number} _y El valor de window.scrollY
+     * @param {number} y El valor de window.scrollY
      */
-    setY: function(_y) {
-        this.y = _y;
-    },
+    setY(y) {
+        this.y = y;
+    }
 
     /**
      * Manejador del evento scroll
      */
-    onScroll: function() {
-        // La lógica interna no cambia, pero se usa 'function' en lugar de un método de clase ES6
-        if (this.direction == "down") {
-            this.scrollDown();
+    onScroll() {
+        // Si está en el top (scrollY === 0), resetear a estado inicial
+        if (window.scrollY === 0) {
+            this.reset();
         } else {
-            this.show(); // Siempre que hagan scrollup debemos mostrar el header
+            // Si el scroll es hacia abajo, ocultar con posición absoluta
+            if (this.direction === "down") {
+                this.scrollDown();
+            } else {
+                // Si el scroll es hacia arriba, mostrar el header
+                this.show();
+            }
         }
         
-        if (window.scrollY === 0 && !this.inTop) {
-            this.reset(); // Si está en top 0 reseteamos
-        }
-        
-        return this.setY(window.scrollY); // Asignamos a y el valor de window.scrollY
-    },
+        // Asignamos a y el valor de window.scrollY
+        this.setY(window.scrollY);
+    }
     
     /**
      * Lógica al hacer scroll hacia abajo
-     * UPDATE: Actualizar a que se oculte al momento de pasar el 100% del scroll de la página,
-     * o mejor dicho tenga posición relativa, fixed sólo cuando suba el scroll
+     * El header debe tener posición absoluta e irse hacia arriba (ocultarse)
      */
-    scrollDown: function() {
-        if (window.scrollY > window.innerHeight) {
-            if (this.inTop) {
-                this.setFixed();
-            } else {
-                this.hide();
-            }
-        }
-    },
-    
-    /**
-     * Establece el estado "fijo" o inicial de oculto antes de la animación
-     */
-    setFixed: function() {
-        // Asumiendo que 'gsap' está disponible globalmente
-        gsap.set(this.container, {
-            y: "-100%"
-        });
-        this.container.classList.remove("visible");
-        this.container.classList.remove("in-top");
-    },
+    scrollDown() {
+        // Remover clases de visibilidad y fixed
+        this.container.classList.remove("header-visible");
+        this.container.classList.remove("header-fixed");
+        // Agregar clases para posición absoluta y oculto
+        this.container.classList.add("header-absolute");
+        this.container.classList.add("header-hidden");
+        // Establecer la posición top basada en el scroll actual para que se mueva con el scroll
+        this.container.style.top = `${window.scrollY}px`;
+    }
 
     /**
-     * Muestra el encabezado (con animación GSAP)
+     * Muestra el encabezado cuando el scroll es hacia arriba
      */
-    show: function() {
-        if (this.isVisible) return false;
-        
-        this.container.classList.add("visible");
-        gsap.to(this.container, {
-            duration: 0.5,
-            ease: Power2.easeOut,
-            y: "0%"
-        });
-    },
-
-    /**
-     * Oculta el encabezado (con animación GSAP)
-     */
-    hide: function() {
-        if (!this.isVisible) return false;
-        
-        this.container.classList.remove("visible");
-        gsap.to(this.container, {
-            duration: 0.5,
-            ease: Power2.easeOut,
-            y: "-100%"
-        });
-    },
+    show() {
+        // Remover clases de oculto y absoluto
+        this.container.classList.remove("header-hidden");
+        this.container.classList.remove("header-absolute");
+        // Limpiar el estilo top que se estableció con posición absoluta
+        this.container.style.top = "";
+        // Agregar clases para posición fixed y visible
+        this.container.classList.add("header-fixed");
+        this.container.classList.add("header-visible");
+    }
 
     /**
      * Restablece el encabezado a su estado inicial en la parte superior
      */
-    reset: function() {
-        this.container.removeAttribute("style");
-        this.container.classList.add("visible");
+    reset() {
+        // Remover todas las clases de animación
+        this.container.classList.remove("header-visible");
+        this.container.classList.remove("header-hidden");
+        this.container.classList.remove("header-fixed");
+        this.container.classList.remove("header-absolute");
+        // Limpiar estilos inline
+        this.container.style.top = "";
+        // Agregar clase de estado inicial
         this.container.classList.add("in-top");
     }
-};
-
-// Ejemplo de cómo se instanciaría:
-// var headerInstance = new Header();
+}

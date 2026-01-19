@@ -1,9 +1,27 @@
+@font-face {
+	src: url('./Hubot-Sans.woff2');
+	font-family:'Hubot Sans';
+	font-style: normal;
+}
+@font-face {
+	src: url('./MonaSans-VF.ttf');
+	font-family:'Mona Sans';
+	font-style: normal;
+    src:
+        url('./MonaSans-VF.ttf') format('truetype supports variations'),
+        url('./MonaSans-VF.ttf') format('truetype-variations');
+    font-weight: 200 900;
+    font-stretch: 75% 125%;
+    font-optical-sizing: auto;
+}
 /* ============================================
    VARIABLES DE TIPOGRAFÍA
    ============================================ */
    :root {
-    /* Fuentes */
+    /* Fuentes 
     --font-base: 'Open Sans', Helvetica, Arial, Lucida, sans-serif;
+    */
+    --font-base: 'Mona Sans', 'Hubot', Helvetica, Arial, Lucida, sans-serif;
     
     /* Tamaños de fuente base (mobile first) - solo sm, base, lg */
     --font-size-sm: 14px;   /* 14px - mobile default */
@@ -14,6 +32,15 @@
     --font-weight-light: 200;
     --font-weight-normal: 400;
     --font-weight-bold: 800;
+
+    /* Valores base de ejes tipográficos (variable font) */
+    --wght: 400;
+    --wdth: 75; /* 25-75 */
+    --ital: 0;
+    --stretch: 100%;
+
+    /* Tamaño dinámico por defecto para títulos variables */
+    --font-size-dynamic: 10vw;
 }
 
 /* ============================================
@@ -34,6 +61,10 @@ body {
     padding: 0;
     margin: 0;
     overflow-x: hidden;
+
+    /* Hint global de renderizado de texto */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* ============================================
@@ -41,25 +72,63 @@ body {
    ============================================ */
 h1, h2, h3, h4 {
     font-family: var(--font-base);
+    font-variation-settings: 
+        'wght' var(--wght, 400),
+        'wdth' var(--wdth, 100),
+        'ital' var(--ital, 0);
+    text-transform: uppercase;
+    line-height: 1em;
     margin: 0;
+    padding: 0;
+    text-wrap-style: balance;
+}
+
+/* Variante de tipografía aplicada a toda la línea de la ruta */
+.ruta-variable {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    white-space: nowrap;
+
+    font-variation-settings: 
+        'wght' var(--wght, 400),
+        'wdth' var(--wdth, 100),
+        'ital' var(--ital, 0);
+
+    /* Estirar por variable CSS para no tocar estilos inline */
+    font-stretch: var(--stretch, 100%);
+
+    /* Tamaño dinámico controlado por JS vía variable CSS */
+    font-size: var(--font-size-dynamic, 10vw);
+
+    /* Hints de renderizado y composición para mejor suavizado */
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    backface-visibility: hidden;
+    transform: translateZ(0); /* prepara el layer para futuras animaciones */
+}
+
+/* Asegurar que los caracteres hijos hereden la tipografía de la línea */
+.ruta-variable span,
+.ruta-variable var {
+    font: inherit;
+    font-variation-settings: inherit;
+}
+
+/* Preparar caracteres individuales para futuras animaciones de transform */
+.ruta-variable var {
+    display: inline-block;
+    will-change: transform;
 }
 
 h1 {
     font-size: 10vw;
-    font-weight: 800;
-    line-height: 1em;
-    font-stretch: 90%;
 }
 
 h2 {
     font-size: 8vw;
-    text-transform: uppercase;
-    font-weight: 900;
-    margin: 0;
-    font-stretch: 85%;
-    line-height: 1em;
-    letter-spacing: -.025em;
-    text-wrap-style: balance;
 }
 
 h3 {
@@ -67,6 +136,9 @@ h3 {
     font-weight: 600;
 }
 
+var {
+    font-style: normal;
+}
 /* ============================================
    PÁRRAFOS Y TEXTO
    ============================================ */

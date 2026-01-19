@@ -16,6 +16,22 @@
     max-width: 840px;
 }
 
+.title-container {
+    text-align: center;
+    background-color: var(--color-pink);
+}
+
+.title-container h2 {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    overflow: hidden;
+}
+
+.title-container h2 .char {
+    display: inline-block;
+}
+
 .project-container:nth-child(odd) article {
     text-align: right;
 }
