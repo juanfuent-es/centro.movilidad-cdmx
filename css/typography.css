@@ -46,6 +46,7 @@ body {
     padding: 0;
     margin: 0;
     overflow-x: hidden;
+    overflow-y: auto;
 
     /* Hint global de renderizado de texto */
     text-rendering: optimizeLegibility;
@@ -84,49 +85,6 @@ h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
     text-wrap-style: balance;
-}
-
-/* Variante de tipografía aplicada a toda la línea de la ruta */
-.ruta-variable {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    white-space: nowrap;
-    font-variation-settings: 'wght' var(--wght), 'wdth' var(--wdth), 'ital' var(--ital), 'stretch' var(--stretch);
-    /* Estirar por variable CSS para no tocar estilos inline */
-    font-stretch: var(--stretch, 100%);
-
-    /* Tamaño dinámico controlado por JS vía variable CSS */
-    font-size: var(--font-size-dynamic, 10vw);
-
-    /* Hints de renderizado y composición para mejor suavizado */
-    text-rendering: geometricPrecision;
-    -webkit-font-smoothing: antialiased;
-    backface-visibility: hidden;
-    transform: translateZ(0); /* prepara el layer para futuras animaciones */
-    flex-direction: column;
-    align-content: space-between;
-}
-
-.ruta-variable span {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-/* Asegurar que los caracteres hijos hereden la tipografía de la línea */
-.ruta-variable span,
-.ruta-variable var {
-    font: inherit;
-    font-variation-settings: inherit;
-}
-
-/* Preparar caracteres individuales para futuras animaciones de transform */
-.ruta-variable var {
-    display: inline-block;
-    will-change: transform;
 }
 
 h1 {

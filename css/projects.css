@@ -5,8 +5,10 @@
     justify-content: center;
     align-items: center;
     align-content: center;
-    border: 1px solid white;
     flex-direction: column;
+    position: relative;
+    /* background: var(--color-orange); */
+    background: black;
 }
 
 .project-container article {
@@ -14,11 +16,32 @@
     width: 80%;
     margin: 0 auto;
     max-width: 840px;
+    position: relative;
+    z-index: 1;
+}
+
+.project-container figure {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: .6;
+    filter: contrast(1.2) brightness(.6);
+}
+
+.project-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .title-container {
     text-align: center;
-    background-color: var(--color-pink);
 }
 
 .title-container h2 {
@@ -37,4 +60,43 @@
 }
 .project-container:nth-child(even) article {
     text-align: left;
+}
+
+
+
+#preloader figure {
+    background-color: var(--color-orange);
+}
+#andanza {
+    background-color: #cf4a29;
+}
+#que-hay-detras-del-pasaje {
+    background-color: var(--color-black);
+}
+#eje-central {
+    background-color: var(--color-black);
+}
+#desgaste {
+    background-color: #5B4732;
+}
+#moviliencia {
+    background-color: var(--color-black);
+}
+#rastros-de-jamaica {
+    background-color: #ec4342;
+}
+#linea-35 {
+    background-color: var(--color-black);
+}
+#estruendo-masculino {
+    background-color: var(--color-bg);
+}
+#ecos-del-anden {
+    background-color: var(--color-orange);
+}
+#pasos-que-no-se-ven {
+    background-color: var(--color-bg);
+}
+#embotellados {
+    background-color: #daa800;
 }

@@ -17,3 +17,39 @@ SISTEMA DE COMPONENTES CSS
 @import url('./container.css');
 @import url('./colors-backgrounds.css');
 @import url('./button-links.css');
+
+.ruta-variable {
+    font-family: 'Google Sans Flex', sans-serif;
+    --font-variation-wght: 500;
+    --font-variation-wdth: 100;
+    --font-variation-slnt: 0;
+    --font-variation-GRAD: 0;
+    --font-variation-ROND: 0;
+    font-variation-settings: 
+        'wght' var(--font-variation-wght),
+        'wdth' var(--font-variation-wdth),
+        'slnt' var(--font-variation-slnt),
+        'GRAD' var(--font-variation-GRAD),
+        'ROND' var(--font-variation-ROND);
+    line-height: 1;
+    white-space: nowrap;
+    width: auto;
+    max-width: 100%;
+    height: 100px;
+    max-height: 100%;
+    display: flex;
+    overflow: visible;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ruta-variable.fit-text-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ruta-variable > span {
+    display: inline-block;
+}
