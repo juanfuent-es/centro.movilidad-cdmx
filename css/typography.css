@@ -89,9 +89,19 @@ h1, h2, h3, h4 {
 
 h1 {
     font-size: 14vw;
+    --font-variation-wght: 500;
+    --font-variation-GRAD: 50;
+    --font-variation-wdth: 50;
+    --font-variation-slnt: 0;
+    --font-variation-ROND: 0;
 }
 
 h2 {
+    --font-variation-wght: 500;
+    --font-variation-GRAD: 50;
+    --font-variation-wdth: 50;
+    --font-variation-slnt: 0;
+    --font-variation-ROND: 0;
     font-size: 12vw;
 }
 
@@ -107,10 +117,12 @@ var {
    PÁRRAFOS Y TEXTO
    ============================================ */
 p {
-    font-size: 1.125em;
+    font-size: 1.5em;
     line-height: 1.5em;
     font-stretch: 90%;
     font-weight: 400;
+    text-wrap-style: balance;
+    margin-bottom: 1.75em;
 }
 
 /* ============================================
@@ -140,10 +152,6 @@ li {
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
-.uppercase { text-transform: uppercase; }
-.lowercase { text-transform: lowercase; }
-.capitalize { text-transform: capitalize; }
-
 /* ============================================
    RESPONSIVE TIPOGRAFÍA SIMPLIFICADA
    ============================================ */
@@ -155,9 +163,6 @@ li {
     html {
         font-size: var(--font-size-base);
     }
-    h1 {
-        /* font-size: 4rem; */
-    }
 }
 
 /* Desktop: Texto completo con tamaño grande */
@@ -165,8 +170,5 @@ li {
     /* Escalado de tipografía para desktop */
     html {
         font-size: var(--font-size-lg);
-    }
-    h1 {
-        /* font-size: 5rem; */
     }
 }

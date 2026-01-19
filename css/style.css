@@ -18,13 +18,20 @@ SISTEMA DE COMPONENTES CSS
 @import url('./colors-backgrounds.css');
 @import url('./button-links.css');
 
-.ruta-variable {
-    font-family: 'Google Sans Flex', sans-serif;
+:root {
     --font-variation-wght: 500;
     --font-variation-wdth: 100;
     --font-variation-slnt: 0;
     --font-variation-GRAD: 0;
     --font-variation-ROND: 0;
+}
+
+body {
+    font-family: 'Google Sans Flex', sans-serif;
+}
+
+.ruta-variable {
+    font-family: 'Google Sans Flex', sans-serif;
     font-variation-settings: 
         'wght' var(--font-variation-wght),
         'wdth' var(--font-variation-wdth),

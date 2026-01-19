@@ -13,21 +13,27 @@ footer#main-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 9;
 }
 
 footer#main-footer p {
-  background-color: var(--color-bg);
   margin: 0;
   text-align: left;
   font-size: inherit;
   font-stretch: inherit;
+  mix-blend-mode: exclusion;
+  background: white;
+  color: black;
+  padding: .25em .5em;
+  line-height: 1em;
 }
 
 footer#main-footer a {
-  background-color: var(--color-bg);
   transition: color .3s ease;
   display: inline-flex;
-  font-stretch: inherit;
-  font-weight: inherit;
-  font-size: inherit;
+  font-weight: 400;
+  background: white;
+  color: black;
+  padding: .25em .5em;
+  line-height: 1em;
 }
