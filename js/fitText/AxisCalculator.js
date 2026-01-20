@@ -52,17 +52,20 @@ export default class AxisCalculator {
    */
   calculateOptimalWidth(containerWidth, measureCallback, otherAxes = {}) {
     const { min: minWidth, max: maxWidth } = this.axisRanges.wdth;
+    // Convertir containerWidth a entero para evitar problemas de precisión con flotantes
+    const containerWidthInt = Math.floor(containerWidth);
     // Más conservador: 95% del contenedor + margen de seguridad de 3px para compensar
     // diferencias entre medición (texto continuo) y renderizado real (múltiples spans)
+    // Todos los cálculos con enteros para evitar problemas de precisión con valores grandes (ej: 14vw)
     const safetyMargin = 3; // Píxeles de margen de seguridad
     const maxPercent = 0.95; // Máximo 95% del contenedor para evitar desbordamientos
-    const targetWidth = containerWidth * maxPercent - safetyMargin;
+    const targetWidth = Math.floor(containerWidthInt * maxPercent - safetyMargin);
     const maxIterations = 50; // Prevenir loops infinitos
     let iterations = 0;
 
     // Verificar primero el mínimo: si ni siquiera el mínimo cabe, retornar mínimo
     let axes = { ...otherAxes, wdth: minWidth };
-    let textWidth = measureCallback(axes);
+    let textWidth = Math.round(measureCallback(axes));
     if (textWidth > targetWidth) {
       // Ni siquiera con width mínimo cabe, retornar mínimo (se manejará con weight/grade en FitText.js)
       return minWidth;
@@ -70,7 +73,7 @@ export default class AxisCalculator {
 
     // Verificar el máximo: si el máximo cabe, retornar máximo (pero verificar nuevamente después)
     axes = { ...otherAxes, wdth: maxWidth };
-    textWidth = measureCallback(axes);
+    textWidth = Math.round(measureCallback(axes));
     if (textWidth <= targetWidth) {
       // Verificar una vez más con un margen adicional antes de retornar máximo
       // para asegurar que realmente no desbordará en el renderizado real
@@ -88,7 +91,7 @@ export default class AxisCalculator {
     while (currentWidth < maxWidth && iterations < maxIterations) {
       const nextWidth = Math.min(currentWidth + step, maxWidth);
       axes = { ...otherAxes, wdth: nextWidth };
-      textWidth = measureCallback(axes);
+      textWidth = Math.round(measureCallback(axes));
 
       if (textWidth <= targetWidth) {
         // Este width cabe, actualizar bestWidth y low
@@ -109,7 +112,7 @@ export default class AxisCalculator {
     while (high - low > 1 && iterations < maxIterations) {
       const mid = Math.floor((low + high) / 2);
       axes = { ...otherAxes, wdth: mid };
-      textWidth = measureCallback(axes);
+      textWidth = Math.round(measureCallback(axes));
 
       if (textWidth <= targetWidth) {
         // Este width cabe, intentar uno más alto
@@ -125,15 +128,16 @@ export default class AxisCalculator {
 
     // Verificación final obligatoria: asegurar que bestWidth realmente no desborda
     // Verificar múltiples veces con diferentes ejes para mayor precisión
+    // Todos los cálculos con enteros redondeados
     axes = { ...otherAxes, wdth: bestWidth };
-    textWidth = measureCallback(axes);
+    textWidth = Math.round(measureCallback(axes));
 
     // Si por alguna razón aún desborda (caso extremo), reducir hasta que quepa
     // Esto no debería pasar con la búsqueda binaria correcta, pero es una medida de seguridad
     while (textWidth > targetWidth && bestWidth > minWidth && iterations < maxIterations) {
       bestWidth = Math.max(bestWidth - 1, minWidth);
       axes = { ...otherAxes, wdth: bestWidth };
-      textWidth = measureCallback(axes);
+      textWidth = Math.round(measureCallback(axes));
       iterations++;
     }
 
@@ -144,12 +148,14 @@ export default class AxisCalculator {
 
     // Verificación adicional: reducir un poco más para tener un margen extra
     // Esto compensa las diferencias entre medición (texto continuo) y renderizado (spans separados)
-    const finalWidth = this.clamp(bestWidth, minWidth, maxWidth);
+    const finalWidth = Math.round(this.clamp(bestWidth, minWidth, maxWidth));
     axes = { ...otherAxes, wdth: finalWidth };
-    textWidth = measureCallback(axes);
+    textWidth = Math.round(measureCallback(axes));
     
     // Si está muy cerca del límite (menos de 5px de margen), reducir un paso más
-    if (textWidth > targetWidth - 5 && finalWidth > minWidth) {
+    // Usar enteros para todas las comparaciones
+    const marginThreshold = 5;
+    if (textWidth > targetWidth - marginThreshold && finalWidth > minWidth) {
       return Math.max(finalWidth - 1, minWidth);
     }
 

@@ -135,27 +135,29 @@ export default class FitText {
   fit() {
     // Obtener dimensiones del contenedor (el propio elemento)
     // Usamos getBoundingClientRect() para precisión, pero confiamos en que CSS width: 100% lo restringe
+    // Todos los cálculos con enteros para evitar problemas de precisión con flotantes en valores grandes (ej: 14vw)
     const containerRect = this.element.getBoundingClientRect();
     const containerComputedStyle = window.getComputedStyle(this.element);
-    const fontSizeFromCSS = parseFloat(containerComputedStyle.fontSize);
+    const fontSizeFromCSS = Math.round(parseFloat(containerComputedStyle.fontSize));
 
     if (isNaN(fontSizeFromCSS) || fontSizeFromCSS <= 0) {
       console.warn("FitText: fontSize inválido desde CSS", fontSizeFromCSS);
       return;
     }
 
-    // Calcular ancho disponible (content box)
-    const paddingLeft = parseFloat(containerComputedStyle.paddingLeft) || 0;
-    const paddingRight = parseFloat(containerComputedStyle.paddingRight) || 0;
-    const borderLeft = parseFloat(containerComputedStyle.borderLeftWidth) || 0;
-    const borderRight = parseFloat(containerComputedStyle.borderRightWidth) || 0;
+    // Calcular ancho disponible (content box) - todos los valores redondeados a enteros
+    const paddingLeft = Math.round(parseFloat(containerComputedStyle.paddingLeft) || 0);
+    const paddingRight = Math.round(parseFloat(containerComputedStyle.paddingRight) || 0);
+    const borderLeft = Math.round(parseFloat(containerComputedStyle.borderLeftWidth) || 0);
+    const borderRight = Math.round(parseFloat(containerComputedStyle.borderRightWidth) || 0);
 
-    const containerWidth =
-      containerRect.width -
+    const containerWidth = Math.floor(
+      Math.round(containerRect.width) -
       paddingLeft -
       paddingRight -
       borderLeft -
-      borderRight;
+      borderRight
+    );
     if (containerWidth <= 0) {
       // Si el ancho es 0, puede ser que el elemento esté oculto o no renderizado aún.
       return;
@@ -201,26 +203,28 @@ export default class FitText {
 
     let currentWeight = weight;
     let currentGrade = grade;
-    let textWidth = measureWidthCallback({
+    let textWidth = Math.round(measureWidthCallback({
       ...initialAxes,
       wdth: optimalWidth,
-    });
+    }));
 
     // Solo si el texto es mucho más grande que el contenedor a pesar del width mínimo
     // intentamos reducir otros ejes.
-    // Iteramos puramente en JS/Canvas
+    // Iteramos puramente en JS/Canvas - todos los cálculos con enteros
     let iterations = 0;
     const maxIterations = 15; // Reducido pues Canvas es rápido pero no queremos bloquear hilo principal
+    const containerWidthInt = Math.floor(containerWidth);
 
-    while (textWidth > containerWidth && iterations < maxIterations) {
+    while (textWidth > containerWidthInt && iterations < maxIterations) {
       // Lógica de reducción similar a la original
       const wghtRange = this.calculator.axisRanges.wght;
       const gradRange = this.calculator.axisRanges.GRAD;
       const wdthRange = this.calculator.axisRanges.wdth;
 
+      // Cálculos con enteros para evitar problemas de precisión
       const overflowRatio = Math.min(
         1,
-        (textWidth - containerWidth) / containerWidth,
+        Math.floor((textWidth - containerWidthInt) * 100) / (containerWidthInt * 100),
       );
 
       let changed = false;
@@ -267,13 +271,13 @@ export default class FitText {
         },
       );
 
-      textWidth = measureWidthCallback({
+      textWidth = Math.round(measureWidthCallback({
         wght: currentWeight,
         GRAD: currentGrade,
         wdth: optimalWidth,
         slnt: initialAxes.slnt,
         ROND: initialAxes.ROND,
-      });
+      }));
 
       iterations++;
     }
@@ -297,15 +301,17 @@ export default class FitText {
       void this.element.offsetWidth;
       
       // Calcular el ancho real del texto sumando el ancho de todos los spans
+      // Redondear a enteros para evitar problemas de precisión con flotantes
       let actualTextWidth = 0;
       for (const span of this.charSpans) {
         const rect = span.getBoundingClientRect();
-        actualTextWidth += rect.width;
+        actualTextWidth += Math.round(rect.width);
       }
+      actualTextWidth = Math.floor(actualTextWidth);
       
       // Si aún desborda en el DOM real, reducir width progresivamente hasta que quepa
-      // Usar 95% del contenedor como margen de seguridad
-      const safetyMargin = containerWidth * 0.95;
+      // Usar 95% del contenedor como margen de seguridad - cálculos con enteros
+      const safetyMargin = Math.floor(containerWidth * 0.95);
       let finalOptimalWidth = optimalWidth;
       let safetyIterations = 0;
       
@@ -319,8 +325,9 @@ export default class FitText {
         actualTextWidth = 0;
         for (const span of this.charSpans) {
           const rect = span.getBoundingClientRect();
-          actualTextWidth += rect.width;
+          actualTextWidth += Math.round(rect.width);
         }
+        actualTextWidth = Math.floor(actualTextWidth);
         
         if (actualTextWidth <= safetyMargin) {
           break;

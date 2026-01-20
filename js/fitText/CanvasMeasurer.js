@@ -109,8 +109,9 @@ export default class CanvasMeasurer {
     void this.tempElement.offsetWidth;
 
     // Obtener el ancho preciso usando getBoundingClientRect (más preciso que offsetWidth)
+    // Redondear a entero para evitar problemas de precisión con flotantes en valores grandes
     const rect = this.tempElement.getBoundingClientRect();
-    return rect.width;
+    return Math.round(rect.width);
   }
 
   /**
