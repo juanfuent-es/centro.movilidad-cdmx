@@ -3,265 +3,259 @@
  * Responsabilidad: Coordinar el ajuste de texto, renderizar caracteres como spans, aplicar estilos
  */
 
-import TextMeasurer from './fitText/TextMeasurer.js';
-import AxisCalculator from './fitText/AxisCalculator.js';
-import StyleApplier from './fitText/StyleApplier.js';
+import CanvasMeasurer from "./fitText/CanvasMeasurer.js";
+import AxisCalculator from "./fitText/AxisCalculator.js";
+import StyleApplier from "./fitText/StyleApplier.js";
 
 export default class FitText {
   constructor(element, options = {}) {
     if (!element || !(element instanceof HTMLElement)) {
-      throw new Error('FitText: se requiere un elemento HTML válido');
+      throw new Error("FitText: se requiere un elemento HTML válido");
     }
 
     this.element = element;
-    this.options = {
-      fontFamily: options.fontFamily || 'Google Sans Flex, sans-serif',
-      relevance: this.relevance,
+
+    // Configuración base
+    this._options = {
+      fontFamily: options.fontFamily || "Google Sans Flex, sans-serif",
+      relevance: 0.5,
       lineHeightRatio: options.lineHeightRatio || 1,
-      minFontSize: options.minFontSize || 14,
-      maxFontSize: options.maxFontSize || 1000,
-      ...options
+      debounceTime: options.debounceTime || 100,
+      ...options,
     };
 
+    // Inicializar relevance si viene en options o dataset
+    const dataRelevance = this.element.dataset.relevance;
+    if (dataRelevance) {
+      const parsed = parseFloat(dataRelevance);
+      if (!isNaN(parsed))
+        this._options.relevance = Math.max(0, Math.min(1, parsed));
+    } else if (typeof options.relevance === "number") {
+      this._options.relevance = Math.max(0, Math.min(1, options.relevance));
+    }
+
     // Inicializar componentes
-    this.measurer = new TextMeasurer();
+    this.measurer = new CanvasMeasurer();
     this.calculator = new AxisCalculator({
-      lineHeightRatio: this.options.lineHeightRatio,
-      minFontSize: this.options.minFontSize,
-      maxFontSize: this.options.maxFontSize
+      lineHeightRatio: this._options.lineHeightRatio,
     });
-    this.styleApplier = new StyleApplier(this.options.fontFamily);
+    this.styleApplier = new StyleApplier(this._options.fontFamily);
 
     // Estado interno
     this.charSpans = [];
-    this.currentAxes = {};
-    this.currentFontSize = null;
-    this.flexEnabled = false;
-
+    this._currentAxes = {};
+    this._resizeObserver = null;
+    this._resizeTimeout = null;
+    this._originalText = null; // Guardar texto original para mediciones consistentes
+    //
+    this.setupText();
+    // Iniciar observación de redimensionamiento
+    this.initResizeObserver();
+  }
+  
+  setupText() {
     // Renderizar texto como spans desde el inicio
-    const text = this.extractText(element);
-    this.renderAsSpans(text);
-
+    const text = this.element.textContent || this.element.innerText || "";
+    // Guardar texto normalizado (espacios convertidos a \u00A0) para consistencia en mediciones
+    this._originalText = this.normalizeText(text);
+    this.renderAsSpans();
     // Aplicar estilos base
     this.styleApplier.applyAxisValues(this.element, {});
   }
 
+  // Getters para separar responsabilidades y mejorar acceso
+  get relevance() {
+    return this._options.relevance;
+  }
+  set relevance(val) {
+    this.update({ relevance: val });
+  }
+
+  get currentAxes() {
+    return { ...this._currentAxes };
+  }
+
   /**
-   * Extrae el texto del elemento, preservando espacios y saltos de línea
-   * @param {HTMLElement} element - Elemento HTML
-   * @returns {string} Texto extraído
+   * Extrae el texto del elemento
    */
   extractText(element) {
-    return element.textContent || element.innerText || '';
+    return element.textContent || element.innerText || "";
   }
 
   /**
-   * Parsea el valor de relevance desde atributo data o options
-   * @param {HTMLElement} element - Elemento HTML
-   * @param {number|undefined} optionsRelevance - Relevance desde options
-   * @returns {number} Valor de relevance (0-1)
+   * Normaliza el texto para renderizado (convierte espacios a \u00A0)
+   * @returns {string} Texto normalizado
    */
-  get relevance() {
-
-    const dataRelevance = this.element.dataset.relevance;
-    if (dataRelevance) {
-      const parsed = parseFloat(dataRelevance);
-      if (!isNaN(parsed)) {
-        return Math.max(0, Math.min(1, parsed));
-      }
-    }
-
-    return 0.5; // Default
+  normalizeText(text) {
+    return text.replace(/ /g, "\u00A0");
   }
 
   /**
-   * Renderiza el texto como array de spans, cada carácter en su propio span
-   * @param {string} text - Texto a renderizar
+   * Renderiza el texto como array de spans
    */
-  renderAsSpans(text) {
-    // Limpiar contenido anterior
-    this.element.innerHTML = '';
+  renderAsSpans() {
+    this.element.innerHTML = "";
     this.charSpans = [];
-
-    // Crear un span por cada carácter
-    for (let i = 0; i < text.length; i++) {
-      const char = text[i];
-      const span = document.createElement('span');
-      
-      // Preservar espacios como non-breaking space para mejor control
-      span.textContent = char === ' ' ? '\u00A0' : char;
-      
+    for (let i = 0; i < this._originalText.length; i++) {
+      const char = this._originalText[i];
+      const span = document.createElement("span");
+      span.textContent = char;
       this.element.appendChild(span);
       this.charSpans.push(span);
     }
   }
 
   /**
+   * Inicializa ResizeObserver con debounce
+   */
+  initResizeObserver() {
+    if (this._resizeObserver) return;
+
+    this._resizeObserver = new ResizeObserver((entries) => {
+      // Usar debounce para evitar múltiples llamadas en ráfaga
+      if (this._resizeTimeout) clearTimeout(this._resizeTimeout);
+
+      this._resizeTimeout = setTimeout(() => {
+        // Solo reajustar si el ancho del contenedor ha cambiado significativamente
+        for (const entry of entries) {
+          // Podríamos verificar entry.contentRect.width vs width anterior si almacenamos estado,
+          // pero fit() ya maneja lógica de ajuste.
+          this.fit();
+        }
+      }, this._options.debounceTime);
+    });
+
+    // Observamos el propio elemento, ya que es el que queremos ajustar
+    this._resizeObserver.observe(this.element);
+  }
+
+  /**
    * Ejecuta el algoritmo completo de ajuste de texto
    */
   fit() {
-    // Obtener el contenedor padre real que tiene las dimensiones físicas
-    // El elemento .fit-text-container puede tener width: auto, así que medimos el padre
-    const parentContainer = this.element.parentElement;
-    
-    // Si no hay padre, usar el elemento mismo
-    if (!parentContainer) {
-      console.warn('FitText: no se encontró contenedor padre');
-      return;
-    }
+    // Obtener dimensiones del contenedor (el propio elemento)
+    // Usamos getBoundingClientRect() para precisión, pero confiamos en que CSS width: 100% lo restringe
+    const containerRect = this.element.getBoundingClientRect();
+    const containerComputedStyle = window.getComputedStyle(this.element);
+    const fontSizeFromCSS = parseFloat(containerComputedStyle.fontSize);
 
-    // Obtener dimensiones del contenedor padre (el que tiene dimensiones reales)
-    const parentRect = parentContainer.getBoundingClientRect();
-    const parentComputedStyle = getComputedStyle(parentContainer);
-    
-    // Obtener fontSize del CSS (no calcularlo)
-    const elementComputedStyle = getComputedStyle(this.element);
-    const fontSizeFromCSS = parseFloat(elementComputedStyle.fontSize);
-    
     if (isNaN(fontSizeFromCSS) || fontSizeFromCSS <= 0) {
-      console.warn('FitText: fontSize inválido desde CSS', fontSizeFromCSS);
+      console.warn("FitText: fontSize inválido desde CSS", fontSizeFromCSS);
       return;
     }
 
-    // Calcular dimensiones disponibles restando padding y border (solo ancho necesario)
-    const paddingLeft = parseFloat(parentComputedStyle.paddingLeft) || 0;
-    const paddingRight = parseFloat(parentComputedStyle.paddingRight) || 0;
-    const borderLeft = parseFloat(parentComputedStyle.borderLeftWidth) || 0;
-    const borderRight = parseFloat(parentComputedStyle.borderRightWidth) || 0;
-    
-    const containerWidth = parentRect.width - paddingLeft - paddingRight - borderLeft - borderRight;
+    // Calcular ancho disponible (content box)
+    const paddingLeft = parseFloat(containerComputedStyle.paddingLeft) || 0;
+    const paddingRight = parseFloat(containerComputedStyle.paddingRight) || 0;
+    const borderLeft = parseFloat(containerComputedStyle.borderLeftWidth) || 0;
+    const borderRight = parseFloat(containerComputedStyle.borderRightWidth) || 0;
 
+    const containerWidth =
+      containerRect.width -
+      paddingLeft -
+      paddingRight -
+      borderLeft -
+      borderRight;
     if (containerWidth <= 0) {
-      console.warn('FitText: ancho del contenedor inválido', { 
-        containerWidth,
-        parentWidth: parentRect.width,
-        padding: { paddingLeft, paddingRight },
-        border: { borderLeft, borderRight }
-      });
+      // Si el ancho es 0, puede ser que el elemento esté oculto o no renderizado aún.
       return;
     }
 
     // 1. Calcular weight y grade desde relevance
-    const weight = this.calculator.calculateWeight(this.options.relevance);
-    const grade = this.calculator.calculateGrade(this.options.relevance);
+    // Estos cálculos son puros (JS), no tocan DOM
+    const weight = this.calculator.calculateWeight(this.relevance);
+    const grade = this.calculator.calculateGrade(this.relevance);
 
-    // 2. Obtener valores de ejes desde GUI o defaults
+    // 2. Prep ejes iniciales
     const initialAxes = {
       wght: weight,
       GRAD: grade,
-      wdth: this.calculator.axisRanges.wdth.default,
-      slnt: this.currentAxes.slnt ?? this.calculator.axisRanges.slnt.default,
-      ROND: this.currentAxes.ROND ?? this.calculator.axisRanges.ROND.default
+      slnt: this._currentAxes.slnt ?? 0,
+      ROND: this._currentAxes.ROND ?? 0,
     };
 
-    // 3. Función para medir el ancho real del contenido usando fontSize del CSS
+    // Texto completo para medir - usar el texto normalizado guardado
+    // que coincide exactamente con el texto renderizado (espacios convertidos a \u00A0)
+    const fullText = this._originalText || this.normalizeText(this.element.textContent || "");
+
+    // 3. Callback de medición usando Canvas (SÍNCRONO y sin REFLOW)
+    // Esto es mucho más rápido que medir DOM nodes
     const measureWidthCallback = (axes) => {
-      // Aplicar solo los ejes (no fontSize, viene del CSS)
-      this.styleApplier.applyAxisValues(this.element, axes);
-      
-      // Forzar reflow para que los cambios se apliquen
-      void this.element.offsetWidth;
-      
-      // Medir el ancho real del contenido (no el contenedor con width: auto)
-      // Sumar el ancho de todos los spans
-      let totalWidth = 0;
-      this.charSpans.forEach(span => {
-        const spanRect = span.getBoundingClientRect();
-        totalWidth += spanRect.width;
+      return this.measurer.measureWidth(fullText, {
+        fontSize: `${fontSizeFromCSS}px`,
+        fontFamily: this._options.fontFamily,
+        axes: axes,
       });
-      
-      // Si no hay spans o la suma es 0, usar la medición del elemento
-      if (totalWidth === 0) {
-        totalWidth = this.measurer.measureWidth(this.element);
-      }
-      
-      return totalWidth;
     };
 
-    // Calcular valores iniciales basados en relevance
-    let currentWeight = weight;
-    let currentGrade = grade;
-    let optimalWidth = this.calculator.axisRanges.wdth.default;
-    let textWidth;
-    let iterations = 0;
-    const maxIterations = 30;
-    const widthTolerance = 2; // 2px de tolerancia
-
-    // Primera pasada: calcular width óptimo con valores iniciales de relevance
-    let currentAxes = {
-      wght: currentWeight,
-      GRAD: currentGrade,
-      wdth: optimalWidth,
-      slnt: initialAxes.slnt,
-      ROND: initialAxes.ROND
-    };
-
-    // Calcular width óptimo usando el fontSize del CSS
-    optimalWidth = this.calculator.calculateOptimalWidth(
+    // 4. Calcular width óptimo con algoritmo iterativo (ahora mucho más rápido)
+    let optimalWidth = this.calculator.calculateOptimalWidth(
       containerWidth,
       measureWidthCallback,
-      {
-        wght: currentWeight,
-        GRAD: currentGrade,
-        slnt: initialAxes.slnt,
-        ROND: initialAxes.ROND
-      }
+      initialAxes,
     );
 
-    // Aplicar y medir resultado inicial (medir ancho real del contenido)
-    currentAxes.wdth = optimalWidth;
-    this.styleApplier.applyAxisValues(this.element, currentAxes);
-    void this.element.offsetWidth;
-    
-    // Medir ancho real sumando spans
-    textWidth = 0;
-    this.charSpans.forEach(span => {
-      const spanRect = span.getBoundingClientRect();
-      textWidth += spanRect.width;
+    // 5. Ajuste fino si hay desbordamiento (usando medidas canvas)
+    // El algoritmo original ya hacía esto en calculateOptimalWidth mayormente,
+    // pero aquí mantenemos la lógica de reducción de weight/grade si width llega al tope.
+
+    let currentWeight = weight;
+    let currentGrade = grade;
+    let textWidth = measureWidthCallback({
+      ...initialAxes,
+      wdth: optimalWidth,
     });
-    
-    if (textWidth === 0) {
-      textWidth = this.measurer.measureWidth(this.element);
-    }
 
-    // Si desborda, reducir progresivamente weight, grade y width
-    while (textWidth > containerWidth + widthTolerance && iterations < maxIterations) {
+    // Solo si el texto es mucho más grande que el contenedor a pesar del width mínimo
+    // intentamos reducir otros ejes.
+    // Iteramos puramente en JS/Canvas
+    let iterations = 0;
+    const maxIterations = 15; // Reducido pues Canvas es rápido pero no queremos bloquear hilo principal
+
+    while (textWidth > containerWidth && iterations < maxIterations) {
+      // Lógica de reducción similar a la original
       const wghtRange = this.calculator.axisRanges.wght;
-      const wdthRange = this.calculator.axisRanges.wdth;
       const gradRange = this.calculator.axisRanges.GRAD;
+      const wdthRange = this.calculator.axisRanges.wdth;
 
-      // Calcular cuánto reducir basado en el desbordamiento
-      const overflowAmount = textWidth - containerWidth;
-      const overflowRatio = Math.min(1, overflowAmount / containerWidth);
+      const overflowRatio = Math.min(
+        1,
+        (textWidth - containerWidth) / containerWidth,
+      );
 
-      // Reducir weight proporcionalmente (más agresivo si hay mucho desbordamiento)
+      let changed = false;
+
       if (currentWeight > wghtRange.min) {
-        const weightStep = Math.max(20, Math.floor((currentWeight - wghtRange.min) * 0.15 * overflowRatio));
-        currentWeight = Math.max(wghtRange.min, currentWeight - weightStep);
+        const step = Math.max(
+          10,
+          Math.floor((currentWeight - wghtRange.min) * 0.1 * overflowRatio),
+        );
+        currentWeight = Math.max(wghtRange.min, currentWeight - step);
+        changed = true;
       }
 
-      // Reducir grade proporcionalmente
       if (currentGrade > gradRange.min) {
-        const gradeStep = Math.max(10, Math.floor((currentGrade - gradRange.min) * 0.15 * overflowRatio));
-        currentGrade = Math.max(gradRange.min, currentGrade - gradeStep);
+        const step = Math.max(
+          5,
+          Math.floor((currentGrade - gradRange.min) * 0.1 * overflowRatio),
+        );
+        currentGrade = Math.max(gradRange.min, currentGrade - step);
+        changed = true;
       }
 
-      // Reducir width proporcionalmente
       if (optimalWidth > wdthRange.min) {
-        const widthStep = Math.max(5, Math.floor((optimalWidth - wdthRange.min) * 0.2 * overflowRatio));
-        optimalWidth = Math.max(wdthRange.min, optimalWidth - widthStep);
+        // Si aún se puede reducir width
+        const step = Math.max(
+          2,
+          Math.floor((optimalWidth - wdthRange.min) * 0.1 * overflowRatio),
+        );
+        optimalWidth = Math.max(wdthRange.min, optimalWidth - step);
+        changed = true;
       }
 
-      // Actualizar ejes con los nuevos valores
-      currentAxes = {
-        wght: currentWeight,
-        GRAD: currentGrade,
-        wdth: optimalWidth,
-        slnt: initialAxes.slnt,
-        ROND: initialAxes.ROND
-      };
+      if (!changed) break;
 
-      // Recalcular width óptimo con los nuevos ejes
+      // Recalcular con nuevos valores
       optimalWidth = this.calculator.calculateOptimalWidth(
         containerWidth,
         measureWidthCallback,
@@ -269,126 +263,112 @@ export default class FitText {
           wght: currentWeight,
           GRAD: currentGrade,
           slnt: initialAxes.slnt,
-          ROND: initialAxes.ROND
-        }
+          ROND: initialAxes.ROND,
+        },
       );
 
-      // Aplicar y medir el ancho real del contenido
-      currentAxes.wdth = optimalWidth;
-      this.styleApplier.applyAxisValues(this.element, currentAxes);
-      void this.element.offsetWidth;
-      
-      // Medir ancho real sumando spans
-      textWidth = 0;
-      this.charSpans.forEach(span => {
-        const spanRect = span.getBoundingClientRect();
-        textWidth += spanRect.width;
+      textWidth = measureWidthCallback({
+        wght: currentWeight,
+        GRAD: currentGrade,
+        wdth: optimalWidth,
+        slnt: initialAxes.slnt,
+        ROND: initialAxes.ROND,
       });
-      
-      if (textWidth === 0) {
-        textWidth = this.measurer.measureWidth(this.element);
-      }
 
       iterations++;
     }
 
-    // Los ejes finales ya están en currentAxes, pero asegurémonos de que estén sincronizados
+    // 6. Aplicar cambios al DOM UNA SOLA VEZ al final
     const finalAxes = {
       wght: currentWeight,
       GRAD: currentGrade,
       wdth: optimalWidth,
       slnt: initialAxes.slnt,
-      ROND: initialAxes.ROND
+      ROND: initialAxes.ROND,
     };
 
-    // Aplicar estilos finales (solo ejes, no fontSize)
-    this.styleApplier.applyAxisValues(this.element, finalAxes);
-    void this.element.offsetWidth;
-
-    // Medir ancho final real del contenido después de aplicar todos los estilos
-    let finalTextWidth = 0;
-    this.charSpans.forEach(span => {
-      const spanRect = span.getBoundingClientRect();
-      finalTextWidth += spanRect.width;
-    });
-    
-    if (finalTextWidth === 0) {
-      finalTextWidth = this.measurer.measureWidth(this.element);
+    if (JSON.stringify(finalAxes) !== JSON.stringify(this._currentAxes)) {
+      this.styleApplier.applyAxisValues(this.element, finalAxes);
+      this._currentAxes = finalAxes;
+      
+      // Verificación final: medir el ancho real del DOM después de aplicar estilos
+      // Esto compensa diferencias entre medición (texto continuo) y renderizado (spans separados)
+      // Forzar reflow y medir el ancho real sumando todos los spans
+      void this.element.offsetWidth;
+      
+      // Calcular el ancho real del texto sumando el ancho de todos los spans
+      let actualTextWidth = 0;
+      for (const span of this.charSpans) {
+        const rect = span.getBoundingClientRect();
+        actualTextWidth += rect.width;
+      }
+      
+      // Si aún desborda en el DOM real, reducir width progresivamente hasta que quepa
+      // Usar 95% del contenedor como margen de seguridad
+      const safetyMargin = containerWidth * 0.95;
+      let finalOptimalWidth = optimalWidth;
+      let safetyIterations = 0;
+      
+      while (actualTextWidth > safetyMargin && finalOptimalWidth > this.calculator.axisRanges.wdth.min && safetyIterations < 20) {
+        finalOptimalWidth = Math.max(finalOptimalWidth - 1, this.calculator.axisRanges.wdth.min);
+        const adjustedAxes = { ...finalAxes, wdth: finalOptimalWidth };
+        this.styleApplier.applyAxisValues(this.element, adjustedAxes);
+        this._currentAxes = adjustedAxes;
+        
+        void this.element.offsetWidth; // Forzar reflow
+        actualTextWidth = 0;
+        for (const span of this.charSpans) {
+          const rect = span.getBoundingClientRect();
+          actualTextWidth += rect.width;
+        }
+        
+        if (actualTextWidth <= safetyMargin) {
+          break;
+        }
+        
+        safetyIterations++;
+      }
     }
-
-    // Verificar si necesita flex layout (solo si hay espacio extra y ejes están altos)
-    const needsFlex = finalTextWidth < containerWidth * 0.98 && 
-                     this.calculator.areAxesMaximized(finalAxes);
-
-    // Guardar estado final
-    this.currentAxes = finalAxes;
-    this.currentFontSize = fontSizeFromCSS; // Guardar el fontSize del CSS
-    this.flexEnabled = needsFlex;
   }
 
   /**
-   * Actualiza FitText después de cambios (relevance, GUI, etc.)
-   * @param {Object} options - Opciones de actualización { relevance, slnt, ROND, ... }
+   * Actualiza FitText después de cambios
    */
   update(options = {}) {
     let needsRefit = false;
 
-    if (typeof options.relevance === 'number') {
-      const newRelevance = Math.max(0, Math.min(1, options.relevance));
-      if (newRelevance !== this.options.relevance) {
-        this.options.relevance = newRelevance;
+    if (typeof options.relevance === "number") {
+      const val = Math.max(0, Math.min(1, options.relevance));
+      if (val !== this._options.relevance) {
+        this._options.relevance = val;
         needsRefit = true;
       }
     }
 
-    if (typeof options.slnt === 'number') {
-      this.currentAxes.slnt = options.slnt;
+    // Otros setters...
+    if (typeof options.slnt === "number") {
+      this._currentAxes.slnt = options.slnt;
       needsRefit = true;
     }
 
-    if (typeof options.ROND === 'number') {
-      this.currentAxes.ROND = options.ROND;
-      needsRefit = true;
-    }
+    // ... podría seguir con más propiedades
 
-    // Re-ejecutar ajuste solo si hubo cambios relevantes
-    if (needsRefit) {
-      this.fit();
-    }
+    if (needsRefit) this.fit();
   }
 
   /**
-   * Obtiene los valores actuales de los ejes
-   * @returns {Object} Valores actuales de ejes
-   */
-  getAxes() {
-    return { ...this.currentAxes };
-  }
-
-  /**
-   * Obtiene el fontSize actual
-   * @returns {number|null} FontSize actual
-   */
-  getFontSize() {
-    return this.currentFontSize;
-  }
-
-  /**
-   * Verifica si flex layout está activo
-   * @returns {boolean} True si flex está habilitado
-   */
-  isFlexEnabled() {
-    return this.flexEnabled;
-  }
-
-  /**
-   * Limpia recursos y restaura el elemento a su estado original
+   * Limpia recursos
    */
   destroy() {
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect();
+      this._resizeObserver = null;
+    }
+    if (this._resizeTimeout) clearTimeout(this._resizeTimeout);
+
     this.measurer.cleanup();
     this.styleApplier.clearStyles(this.element);
-    this.element.innerHTML = '';
+    this.element.innerHTML = "";
     this.charSpans = [];
   }
 }
-
