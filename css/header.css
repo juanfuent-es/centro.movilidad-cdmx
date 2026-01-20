@@ -7,25 +7,7 @@ header#main-header {
 	top: 0;
 	z-index: 1;
 	transition: transform 0.5s ease-out;
-}
-
-/* Estado inicial: en el top de la página */
-header#main-header.in-top {
-	position: fixed;
-	transform: translateY(0);
-}
-
-/* Estado cuando el scroll es hacia arriba: mostrar header */
-header#main-header.header-fixed.header-visible {
-	position: fixed;
-	transform: translateY(0);
-}
-
-/* Estado cuando el scroll es hacia abajo: ocultar header con posición absoluta */
-header#main-header.header-absolute.header-hidden {
-	position: absolute;
-	transform: translateY(-100%);
-	top: 0;
+    position: fixed;
 }
 
 header#main-header nav {

@@ -1,5 +1,16 @@
 html {
     box-sizing: border-box;
+    /* Scroll snap: habilitar scroll snap vertical para alinear secciones al top */
+    scroll-snap-type: y mandatory;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* Aplicar scroll snap también al body para compatibilidad */
+body {
+    scroll-snap-type: y mandatory;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 *, *:before, *:after {

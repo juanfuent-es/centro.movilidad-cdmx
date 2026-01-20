@@ -1,6 +1,7 @@
 .project-container {
     width: 100%;
     height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,6 +10,10 @@
     position: relative;
     background-color: black;
     overflow: hidden;
+    /* Scroll snap: alinear al top del elemento */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    scroll-margin-top: 0;
 }
 
 .project-container article {

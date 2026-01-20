@@ -27,6 +27,16 @@ SISTEMA DE COMPONENTES CSS
 
 body {
   font-family: "Google Sans Flex", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  /* Asegurar que main no interfiera con scroll snap */
+  position: relative;
+  width: 100%;
 }
 
 .ruta-variable {
