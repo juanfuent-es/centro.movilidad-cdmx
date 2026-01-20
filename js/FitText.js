@@ -6,6 +6,7 @@
 import CanvasMeasurer from "./fitText/CanvasMeasurer.js";
 import AxisCalculator from "./fitText/AxisCalculator.js";
 import StyleApplier from "./fitText/StyleApplier.js";
+import CharacterAnimator from "./fitText/CharacterAnimator.js";
 
 export default class FitText {
   constructor(element, options = {}) {
@@ -14,12 +15,16 @@ export default class FitText {
     }
 
     this.element = element;
+    // Solo animar caracteres cuando el atributo data-motion="true"
+    // (o se pasa motion: true en options). Ahorra creación de animadores
+    // y actualizaciones por frame en elementos estáticos.
+    this._motionEnabled =
+      options.motion === true || this.element.dataset.motion === "true";
 
     // Configuración base
     this._options = {
       fontFamily: options.fontFamily || "Google Sans Flex, sans-serif",
       relevance: 0.5,
-      lineHeightRatio: options.lineHeightRatio || 1,
       debounceTime: options.debounceTime || 100,
       ...options,
     };
@@ -36,9 +41,7 @@ export default class FitText {
 
     // Inicializar componentes
     this.measurer = new CanvasMeasurer();
-    this.calculator = new AxisCalculator({
-      lineHeightRatio: this._options.lineHeightRatio,
-    });
+    this.calculator = new AxisCalculator();
     this.styleApplier = new StyleApplier(this._options.fontFamily);
 
     // Estado interno
@@ -47,6 +50,13 @@ export default class FitText {
     this._resizeObserver = null;
     this._resizeTimeout = null;
     this._originalText = null; // Guardar texto original para mediciones consistentes
+    this._characterAnimators = [];
+    this._characterAnimConfig = options.characterAnimConfig || {
+      radius: 240,
+      lerp: 0.18,
+      influence: { wght: 100, GRAD: 35, slnt: -10, ROND: 45 },
+      opacity: { min: 0.65, max: 1 },
+    };
     //
     this.setupText();
     // Iniciar observación de redimensionamiento
@@ -102,6 +112,70 @@ export default class FitText {
       span.textContent = char;
       this.element.appendChild(span);
       this.charSpans.push(span);
+    }
+
+    // (Re)crear animadores por caracter para los spans actuales
+    this.initCharacterAnimators();
+  }
+
+  /**
+   * Inicializa (o reinicializa) la lista de CharacterAnimator, uno por span.
+   * Se llama tras renderAsSpans() y cuando cambian los ejes base por fit().
+   */
+  initCharacterAnimators() {
+    if (!this._motionEnabled) {
+      this._characterAnimators = [];
+      return;
+    }
+
+    const baseAxes = this.getBaseAxesForCharacters();
+    // Obtener rangos de ejes del calculator para interpolación completa
+    const axisRanges = {
+      wght: this.calculator.axisRanges.wght,
+      GRAD: this.calculator.axisRanges.GRAD,
+      slnt: this.calculator.axisRanges.slnt,
+      ROND: this.calculator.axisRanges.ROND,
+    };
+    
+    const config = {
+      ...this._characterAnimConfig,
+      axisRanges,
+    };
+    
+    this._characterAnimators = this.charSpans.map(
+      (span) => new CharacterAnimator(span, baseAxes, config),
+    );
+  }
+
+  /**
+   * Ejes base para caracteres:
+   * - wdth se mantiene fijo (define ancho)
+   * - el resto sale del estado actual de FitText (si existe), o defaults razonables
+   */
+  getBaseAxesForCharacters() {
+    const fallback = { wght: 400, GRAD: 0, wdth: 100, slnt: 0, ROND: 0 };
+    return {
+      wght: this._currentAxes.wght ?? fallback.wght,
+      GRAD: this._currentAxes.GRAD ?? fallback.GRAD,
+      wdth: this._currentAxes.wdth ?? fallback.wdth,
+      slnt: this._currentAxes.slnt ?? fallback.slnt,
+      ROND: this._currentAxes.ROND ?? fallback.ROND,
+    };
+  }
+
+  /**
+   * Aplica update por caracter en cascada.
+   * @param {{x:number,y:number,active:boolean}} pointer
+   */
+  updateCharacters(pointer) {
+    if (!this._motionEnabled) return;
+
+    // Si aún no hay spans (o se re-renderizaron), asegurar animadores
+    if (!this._characterAnimators.length || this._characterAnimators.length !== this.charSpans.length) {
+      this.initCharacterAnimators();
+    }
+    for (const anim of this._characterAnimators) {
+      anim.update(pointer);
     }
   }
 
@@ -336,6 +410,16 @@ export default class FitText {
         safetyIterations++;
       }
     }
+
+    // Sincronizar ejes base para animación por caracter tras cualquier ajuste
+    if (this._motionEnabled && this._characterAnimators.length) {
+      const baseAxes = this.getBaseAxesForCharacters();
+      for (const anim of this._characterAnimators) {
+        anim.setBaseAxes(baseAxes);
+      }
+    } else if (this._motionEnabled && this.charSpans.length) {
+      this.initCharacterAnimators();
+    }
   }
 
   /**
@@ -361,6 +445,11 @@ export default class FitText {
     // ... podría seguir con más propiedades
 
     if (needsRefit) this.fit();
+
+    // Cascada de animación por frame (si viene pointer)
+    if (options.pointer) {
+      this.updateCharacters(options.pointer);
+    }
   }
 
   /**

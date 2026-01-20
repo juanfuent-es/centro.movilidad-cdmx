@@ -96,13 +96,20 @@ h1 {
     --font-variation-ROND: 0;
 }
 
+h1 .var-text {
+    
+}
+h1 .var-text:first-child {
+    line-height: .95em;
+}
+
 h2 {
     --font-variation-wght: 500;
     --font-variation-GRAD: 50;
     --font-variation-wdth: 50;
     --font-variation-slnt: 0;
     --font-variation-ROND: 0;
-    font-size: 12vw;
+    font-size: 14vw;
 }
 
 h3 {
