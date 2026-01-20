@@ -7,7 +7,6 @@ SISTEMA DE COMPONENTES CSS
 @import url("./theme.css");
 @import url("./scroll-bar.css");
 
-@import url("./preloader.css");
 @import url("./header.css");
 @import url("./footer.css");
 @import url("./typography.css");
@@ -38,7 +37,6 @@ body {
     "slnt" var(--font-variation-slnt),
     "GRAD" var(--font-variation-GRAD),
     "ROND" var(--font-variation-ROND);
-    background-color: var(--color-orange);
   will-change: font-variation-settings;
   line-height: 0.85;
   white-space: nowrap;
