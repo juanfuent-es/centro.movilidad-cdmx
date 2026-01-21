@@ -16,7 +16,6 @@ export default class AxisCalculator {
     };
 
     // Configuración
-    this.lineHeightRatio = options.lineHeightRatio || 1.2;
     this.widthStep = options.widthStep || 5;
   }
 

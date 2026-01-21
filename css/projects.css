@@ -1,4 +1,4 @@
-.project-container {
+.project {
     width: 100%;
     height: 100vh;
     min-height: 100vh;
@@ -8,7 +8,6 @@
     align-content: center;
     flex-direction: column;
     position: relative;
-    background-color: black;
     overflow: hidden;
     /* Scroll snap: alinear al top del elemento */
     scroll-snap-align: start;
@@ -16,19 +15,100 @@
     scroll-margin-top: 0;
 }
 
-.project-container article {
+#intro {
+    background-color: var(--bg);
+    text-align: center;
+    /* color: var(--h1); */
+}
+#intro header p {
+    opacity: .5;
+}
+#intro header p {
+    opacity: 1;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: .5em auto;
+    text-align: center;
+    text-wrap-style: balance;
+    max-width: 60ch;
+}
+#intro header p:nth-child(2) {
+    font-size: 6vw;
+    margin: .2em 0;
+    /* color: var(--h2); */
+}
+#intro header p:nth-child(3) {
+    font-size: 4vw;
+    /* color: var(--h3); */
+    margin: .1em 0;
+}
+#intro header p:nth-child(4) {
+    font-size: 3vw;
+    /* color: var(--h2); */
+    opacity: .6;
+    margin: .35em 0;
+}
+#intro header p:nth-child(5) {
+    font-size: 2vw;
+    /* color: var(--h1); */
+    opacity: .5;
+    margin-top: .2em;
+}
+
+:root {
+    --bg: #0B0D10;
+    --h1: #39FF14;
+    --h2: #FF7A00;
+    --h3: #E4007C;
+    --p: #F2F2F2;
+  }
+  
+  :root[data-theme="light"] {
+    --bg: #F5F4F1;
+    --h1: #0057FF;
+    --h2: #A6FF00;
+    --h3: #FF5C00;
+    --p: #111111;
+  }
+
+.project article {
     padding: 1em;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     position: relative;
     z-index: 1;
     text-align: center;
-    mix-blend-mode: lighten;
-    max-width: 960px;
+    max-width: 1024px;
+}
+.authors {
+    font-size: 3vw;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+}
+.project header {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
 }
 
-.project-container img,
-.project-container video {
+.project header p {
+    text-transform: uppercase;
+    font-size: 3em;
+    margin: .5em 0;
+    width: 100%;
+    text-align: center;
+}
+
+.project img,
+.project video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -61,10 +141,10 @@
     background-color: #000;
     color: #f9ed53;
 }
-#que-hay-detras-del-pasaje .ruta-variable:nth-child(1) {
+#que-hay-detras-del-pasaje .var-text:nth-child(1) {
     transform: translateX(-.2em);
 }
-#que-hay-detras-del-pasaje .ruta-variable:nth-child(2) {
+#que-hay-detras-del-pasaje .var-text:nth-child(2) {
     transform: translateX(.2em);
 }
 

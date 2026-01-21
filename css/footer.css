@@ -2,16 +2,16 @@ footer#main-footer {
   position: fixed;
   bottom: 0;
   text-align: center;
-  padding: 0;
+  padding: .5em 1em;
   color: var(--color-text);
   font-size: .875em;
   font-weight: 400;
-  line-height: 1em;
+  line-height: .8em;
   font-stretch: 85%;
   text-transform: uppercase;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   z-index: 9;
 }
@@ -21,19 +21,19 @@ footer#main-footer p {
   text-align: left;
   font-size: inherit;
   font-stretch: inherit;
-  mix-blend-mode: exclusion;
-  background: white;
-  color: black;
-  padding: .25em .5em;
-  line-height: 1em;
+  line-height: .8em;
+  font-weight: 300;
+}
+
+footer#main-footer strong {
+  font-weight: 500;
 }
 
 footer#main-footer a {
   transition: color .3s ease;
-  display: inline-flex;
-  font-weight: 400;
-  background: white;
-  color: black;
-  padding: .25em .5em;
-  line-height: 1em;
+  display: flex;
+  line-height: .6em;
+  align-items: flex-end;
+  font-weight: 500;
+  gap: .235em;
 }

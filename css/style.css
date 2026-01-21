@@ -39,7 +39,7 @@ main {
   width: 100%;
 }
 
-.ruta-variable {
+.var-text {
   font-family: "Google Sans Flex", sans-serif;
   font-variation-settings:
     "wght" var(--font-variation-wght),
@@ -57,5 +57,6 @@ main {
   justify-content: space-between;
   align-items: center;
   shape-rendering: optimizespeed;
-  
+  text-rendering: optimizeSpeed;
+  text-align: center;
 }
