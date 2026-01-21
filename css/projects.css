@@ -80,7 +80,7 @@
     position: relative;
     z-index: 1;
     text-align: center;
-    max-width: 1024px;
+    max-width: 840px;
 }
 .authors {
     font-size: 3vw;

@@ -54,7 +54,7 @@ export default class FitText {
     this._characterAnimConfig = options.characterAnimConfig || {
       radius: 240,
       lerp: 0.18,
-      influence: { wght: 100, GRAD: 35, slnt: -10, ROND: 45 },
+      influence: { wght: 200, GRAD: 35, slnt: -10, ROND: 45 },
       opacity: { min: 0.65, max: 1 },
     };
     //
@@ -130,10 +130,12 @@ export default class FitText {
 
     const baseAxes = this.getBaseAxesForCharacters();
     // Obtener rangos de ejes del calculator para interpolación completa
+    // slnt invertido: punto de partida 0, al acercarse cursor va a -10
+    const slntRange = this.calculator.axisRanges.slnt;
     const axisRanges = {
-      wght: { min: 400, max: 1000, default: 400 },
+      wght: { min: 500, max: 1000, default: 500 },
       GRAD: this.calculator.axisRanges.GRAD,
-      slnt: this.calculator.axisRanges.slnt,
+      slnt: { min: slntRange.max, max: slntRange.min }, // Invertido para animación
       ROND: this.calculator.axisRanges.ROND,
     };
     

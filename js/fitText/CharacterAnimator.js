@@ -17,9 +17,9 @@ export default class CharacterAnimator {
     
     // Rangos de ejes para interpolación completa (min -> max según cercanía)
     this.axisRanges = config.axisRanges || {
-      wght: { min: 100, max: 1000 },
+      wght: { min: 200, max: 1000 },
       GRAD: { min: 0, max: 100 },
-      slnt: { min: -10, max: 0 },
+      slnt: { min: 0, max: -10 }, // Invertido: punto de partida 0, al acercarse cursor va a -10
       ROND: { min: 0, max: 100 },
     };
     
@@ -62,8 +62,9 @@ export default class CharacterAnimator {
       wdth: this.base.wdth, // no se anima
     };
 
+    // Opacidad invertida: más lejano = más opaco, más cercano = más transparente
     const tOpacity =
-      this.opacityRange.min +
+      this.opacityRange.max -
       (this.opacityRange.max - this.opacityRange.min) * influence;
 
     // Interpolación suave
