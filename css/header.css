@@ -1,13 +1,9 @@
 header#main-header {
-	background-color: var(--color-bg);
-	color: var(--color-text);
-	width: 100%;
-	padding: .5em 1em;
+	padding: 1em;
 	left: 0;
 	top: 0;
 	z-index: 1;
-	transition: transform 0.5s ease-out;
-    position: fixed;
+	position: fixed;
 }
 
 header#main-header nav {
@@ -41,7 +37,6 @@ header#main-header nav {
 
 #logo {
     width: auto;
-    height: 18px;
     display: block;
     min-width: 78px;
 }

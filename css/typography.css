@@ -88,7 +88,7 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 14vw;
+    font-size: clamp(36px, 8em, 14vw);
     --font-variation-wght: 500;
     --font-variation-GRAD: 50;
     --font-variation-wdth: 50;
@@ -96,9 +96,6 @@ h1 {
     --font-variation-ROND: 0;
 }
 
-h1 .var-text {
-    
-}
 h1 .var-text:first-child {
     line-height: .95em;
 }
@@ -109,7 +106,7 @@ h2 {
     --font-variation-wdth: 50;
     --font-variation-slnt: 0;
     --font-variation-ROND: 0;
-    font-size: 14vw;
+    font-size: clamp(36px, 8em, 10vw);
 }
 
 h3 {
@@ -124,7 +121,7 @@ var {
    PÁRRAFOS Y TEXTO
    ============================================ */
 p {
-    font-size: 1.5em;
+    font-size: clamp(14px, 1.25em, 2vw);
     line-height: 1.5em;
     font-stretch: 90%;
     font-weight: 400;

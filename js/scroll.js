@@ -14,34 +14,6 @@ export default class MotionScroll {
     //
 
     scrollTrigger() {
-        gsap.set(".var-text", {
-            transformOrigin: "center center",
-            force3D: true
-        });
-
-        let object = {
-            y: 0
-        }
-
-        let ySetter = gsap.quickSetter(".var-text", "y", "px")
-        let clamp = gsap.utils.clamp(-600, 600)
-
-        ScrollTrigger.create({
-            onUpdate: (self) => {
-                let y = clamp(self.getVelocity() / -100)
-                if (Math.abs(y) > Math.abs(object.y)) {
-                    object.y = y
-                    gsap.to(object, {
-                        y: 0,
-                        duration: 1.2,
-                        ease: Back.easeOut,
-                        overwrite: true,
-                        onUpdate: () => ySetter(object.y)
-                    })
-                }
-            }
-        })
-
         const getRatio = (el) => window.innerHeight / (window.innerHeight + el.offsetHeight)
         const sections = document.querySelectorAll(".project")
         sections.forEach((section, i) => {
