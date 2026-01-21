@@ -26,7 +26,12 @@
     mix-blend-mode: lighten;
     max-width: 960px;
 }
-
+.authors {
+    font-size: 3vw;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+}
 .project header {
     width: 100%;
     text-align: center;

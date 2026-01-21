@@ -57,5 +57,5 @@ main {
   justify-content: space-between;
   align-items: center;
   shape-rendering: optimizespeed;
-  
+  text-rendering: optimizeSpeed;
 }

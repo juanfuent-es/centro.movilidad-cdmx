@@ -131,7 +131,7 @@ export default class FitText {
     const baseAxes = this.getBaseAxesForCharacters();
     // Obtener rangos de ejes del calculator para interpolación completa
     const axisRanges = {
-      wght: this.calculator.axisRanges.wght,
+      wght: { min: 400, max: 1000, default: 400 },
       GRAD: this.calculator.axisRanges.GRAD,
       slnt: this.calculator.axisRanges.slnt,
       ROND: this.calculator.axisRanges.ROND,
