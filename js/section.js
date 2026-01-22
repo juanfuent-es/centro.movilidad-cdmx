@@ -17,6 +17,8 @@ export default class Section {
   constructor(element, index = 0) {
     this.element = element
     this.index = index
+    this.figure = element.querySelector('figure')
+    this.img = element.querySelector('img')
     this.video = element.querySelector('video')
     this.fitTextInstances = []
     this.animationController = null
@@ -29,9 +31,18 @@ export default class Section {
   init() {
     // Inicializar FitText para todos los títulos dentro de la sección
     this.initTitles()
-
+    this.setupVideo()
     // Configurar ScrollTrigger para video y control de activación
     this.initScrollTrigger()
+  }
+
+  setupVideo() {
+    if (!this.video) {
+      return
+    }
+    this.video.muted = true
+    this.video.loop = true
+    this.video.playsInline = true
   }
 
   /**
@@ -60,17 +71,11 @@ export default class Section {
    * - Control de activación de la sección (play/pause video, RAF)
    */
   initScrollTrigger() {
-    if (!this.video) {
-      // Si no hay video, solo configuramos la activación de la sección
-      this.setupSectionActivation()
+    if (!this.figure) {
       return
     }
-
-    // Asegurar que el video tenga los atributos necesarios para autoplay
-    this.video.muted = true
-    this.video.loop = true
-    this.video.playsInline = true
-
+    this.setupSectionActivation()
+    
     const getRatio = (el) => window.innerHeight / (window.innerHeight + el.offsetHeight)
     const maxOffset = window.innerHeight * 0.3
 
@@ -88,7 +93,7 @@ export default class Section {
       end: 'bottom center',
       scrub: true,
       onUpdate: () => {
-        gsap.to(this.video, {
+        gsap.to(this.figure, {
           // filter: `contrast(${obj.contrast}) brightness(${obj.brightness})`,
           duration: 0.15,
           ease: 'none',
@@ -145,7 +150,7 @@ export default class Section {
     if (this.isActive) return
     
     this.isActive = true
-
+    this.figure.classList.add('active')
     // Reproducir video
     if (this.video) {
       this.video.play().catch(err => {
@@ -168,7 +173,7 @@ export default class Section {
     if (!this.isActive) return
     
     this.isActive = false
-
+    this.figure.classList.remove('active')
     // Pausar video
     if (this.video) {
       this.video.pause()
