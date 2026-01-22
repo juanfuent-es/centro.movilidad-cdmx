@@ -142,9 +142,10 @@
 }
 
 #andanza {
-    color: #cf4a29;
-    background: #eeeed8;
+    color: #eeeed8;
+    background: #cf4a29;
 }
+
 #andanza img {
     filter: contrast(1.2) brightness(.8);
 }
@@ -227,6 +228,6 @@
     background-color: var(--color-black);
 }
 #moviliencia img {
-    filter: contrast(1) brightness(.9);
-    opacity: .5;
+    filter: contrast(1.2) brightness(.8);
+    opacity: .6;
 }
