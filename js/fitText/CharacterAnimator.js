@@ -11,25 +11,36 @@ export default class CharacterAnimator {
     
     // Rangos de ejes para interpolación completa
     this.axisRanges = config.axisRanges || {
-      wght: { min: 100, max: 1000 },
+      wght: { min: 1, max: 1000 },
       GRAD: { min: 0, max: 100 },
       slnt: { min: 0, max: -10 }, // Invertido: punto de partida 0, al acercarse cursor va a -10
       ROND: { min: 0, max: 100 },
     };
     
     // Inicializar valores actuales y objetivo:
-    // - wght: usa el valor base (desde data-relevance)
-    // - slnt, GRAD, ROND: empiezan en 0 (valores cuando el mouse está lejos)
+    // IMPORTANTE: Los valores iniciales deben coincidir exactamente con los aplicados en fit()
+    // para evitar saltos cuando se activa la animación.
+    // - wght: usa el valor base (desde data-relevance) - este es el MÁXIMO permitido
+    // - slnt: empieza en 0 (valor cuando el mouse está lejos) - este es el MÁXIMO permitido
+    // - GRAD, ROND: usar valores de baseAxes si existen, sino 0
+    //   Estos valores son los que se aplicaron en fit(), y la animación solo puede
+    //   aumentar desde estos valores (nunca disminuir por debajo)
     // - wdth: usa el valor base (calculado, no se anima)
     this.current = {
       wght: baseAxes.wght ?? this.axisRanges.wght.max,
-      GRAD: 0, // Empieza en 0 (mouse lejos)
-      slnt: 0, // Empieza en 0 (mouse lejos)
-      ROND: 0, // Empieza en 0 (mouse lejos)
+      // Usar valores de baseAxes para GRAD y ROND si existen (valores aplicados en fit())
+      // Si no existen, usar 0 (valores cuando el mouse está lejos)
+      GRAD: baseAxes.GRAD ?? 0,
+      slnt: baseAxes.slnt ?? 0, // Empieza en 0 (mouse lejos) - máximo (invertido)
+      ROND: baseAxes.ROND ?? 0,
       wdth: baseAxes.wdth ?? 100,
     };
     this.target = { ...this.current };
     this.opacity = config.opacity?.max ?? 1;
+    
+    // Aplicar valores iniciales inmediatamente para evitar saltos
+    // Esto asegura que los spans tengan los mismos valores que el elemento padre
+    this.apply();
 
     this.radius = config.radius ?? 220;
     this.lerp = config.lerp ?? 0.1;
@@ -66,18 +77,26 @@ export default class CharacterAnimator {
     const slntRange = this.axisRanges.slnt;
     const rondRange = this.axisRanges.ROND;
 
+    // Calcular valores objetivo asegurando que nunca excedan los valores base calculados
+    // Esto previene desbordamientos cuando se activa la animación
+    const targetWght = wghtRange.max - (wghtRange.max - wghtRange.min) * influence;
+    const targetGRAD = gradRange.min + (gradRange.max - gradRange.min) * influence;
+    const targetSlnt = slntRange.max - (slntRange.max - slntRange.min) * influence;
+    const targetROND = rondRange.min + (rondRange.max - rondRange.min) * influence;
+    
     this.target = {
       // wght invertido: disminuye cuando el mouse se acerca para evitar desbordamientos
-      wght: wghtRange.max - (wghtRange.max - wghtRange.min) * influence,
+      // Asegurar que nunca exceda el valor base (máximo permitido)
+      wght: Math.min(targetWght, this.base.wght ?? wghtRange.max),
       // GRAD normal: aumenta cuando el mouse se acerca
-      GRAD: gradRange.min + (gradRange.max - gradRange.min) * influence,
+      // Asegurar que nunca sea menor que el valor base (si existe)
+      GRAD: Math.max(targetGRAD, this.base.GRAD ?? 0),
       // slnt invertido: punto de partida 0 (max), al acercarse cursor va a -10 (min)
-      // Con rango { min: -10, max: 0 }, la fórmula invertida es: max - (max - min) * influence
-      // Cuando influence = 0: 0 - (0 - (-10)) * 0 = 0 ✓
-      // Cuando influence = 1: 0 - (0 - (-10)) * 1 = 0 - 10 = -10 ✓
-      slnt: slntRange.max - (slntRange.max - slntRange.min) * influence,
+      // Asegurar que nunca exceda 0 (máximo permitido)
+      slnt: Math.max(targetSlnt, slntRange.min),
       // ROND normal: aumenta cuando el mouse se acerca
-      ROND: rondRange.min + (rondRange.max - rondRange.min) * influence,
+      // Asegurar que nunca sea menor que el valor base (si existe)
+      ROND: Math.max(targetROND, this.base.ROND ?? 0),
       wdth: this.base.wdth, // no se anima
     };
 
@@ -111,19 +130,24 @@ export default class CharacterAnimator {
 
   /**
    * Cuando FitText cambia ejes base, sincronizamos el baseline.
-   * wght se actualiza al nuevo valor base, pero slnt, GRAD y ROND se mantienen en 0
-   * (valores cuando el mouse está lejos).
+   * wght se actualiza al nuevo valor base (que es el MÁXIMO permitido),
+   * pero slnt, GRAD y ROND se mantienen en 0 (valores cuando el mouse está lejos).
+   * IMPORTANTE: Asegurar que wght nunca exceda el valor base calculado.
    */
   setBaseAxes(newBase) {
     this.base = { ...newBase };
-    // Actualizar wght al nuevo valor base, mantener slnt, GRAD y ROND en 0
-    this.current.wght = newBase.wght ?? this.axisRanges.wght.max;
+    // Actualizar wght al nuevo valor base (máximo permitido), pero nunca excederlo
+    const newWght = newBase.wght ?? this.axisRanges.wght.max;
+    this.current.wght = Math.min(newWght, this.axisRanges.wght.max);
     this.current.wdth = newBase.wdth ?? this.current.wdth;
     // slnt, GRAD y ROND se mantienen en 0 (valores iniciales cuando mouse está lejos)
+    // Estos son los valores "base" para la animación (máximo para slnt, mínimo para GRAD/ROND)
     this.current.GRAD = 0;
     this.current.slnt = 0;
     this.current.ROND = 0;
     this.target = { ...this.current };
+    // Aplicar inmediatamente para evitar saltos
+    this.apply();
   }
 }
 

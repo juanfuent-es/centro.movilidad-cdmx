@@ -144,22 +144,29 @@ export default class FitText {
     // Para wght: reducir hasta 300 unidades desde el base, pero mínimo 200 (o el mínimo del eje si el base es muy bajo)
     const wghtReduction = 300;
     const wghtMinAbsolute = this.calculator.axisRanges.wght.min;
-    const wghtMin = Math.max(wghtMinAbsolute, Math.min(200, wghtBase - wghtReduction));
+    const wghtMin = Math.max(wghtMinAbsolute, Math.min(10, wghtBase - wghtReduction));
+    
+    // Obtener valores base aplicados en fit() para GRAD y ROND
+    // Estos son los valores mínimos permitidos (valores cuando el mouse está lejos)
+    const gradBase = baseAxes.GRAD ?? 0;
+    const rondBase = baseAxes.ROND ?? 0;
     
     const axisRanges = {
       // wght: INVERTIDO - máximo es el valor base (desde data-relevance), mínimo es reducido
       // Mouse lejos = valor base, mouse cerca = valor reducido
       wght: { min: wghtMin, max: wghtBase },
-      // GRAD: NORMAL - usa límites completos del calculator (min=0, max=100)
-      // Mouse lejos = 0, mouse cerca = 100
-      GRAD: { min: gradRange.min, max: gradRange.max },
+      // GRAD: NORMAL - mínimo es el valor base aplicado en fit(), máximo es 100
+      // Mouse lejos = valor base (puede ser > 0), mouse cerca = 100
+      // IMPORTANTE: Nunca debe ser menor que el valor base para evitar saltos
+      GRAD: { min: gradBase, max: gradRange.max },
       // slnt: INVERTIDO - normal en 0, decrementa a -10 cuando el mouse se acerca
       // Mouse lejos = 0, mouse cerca = -10
       // El rango debe ser { min: -10, max: 0 } para que la fórmula invertida funcione correctamente
       slnt: { min: slntRange.min, max: slntRange.max },
-      // ROND: NORMAL - usa límites completos del calculator (min=0, max=100)
-      // Mouse lejos = 0, mouse cerca = 100
-      ROND: { min: rondRange.min, max: rondRange.max },
+      // ROND: NORMAL - mínimo es el valor base aplicado en fit(), máximo es 100
+      // Mouse lejos = valor base (puede ser > 0), mouse cerca = 100
+      // IMPORTANTE: Nunca debe ser menor que el valor base para evitar saltos
+      ROND: { min: rondBase, max: rondRange.max },
     };
     
     const config = {
@@ -402,14 +409,25 @@ export default class FitText {
       };
 
       if (JSON.stringify(finalAxes) !== JSON.stringify(this._currentAxes)) {
+        // IMPORTANTE: Antes de aplicar estilos, asegurar que los spans no tengan valores diferentes
+        // Si hay animadores activos, resetearlos temporalmente para la verificación
+        // Esto evita que los spans tengan valores diferentes al elemento padre durante la medición
+        const hadAnimators = this._characterAnimators.length > 0;
+        if (hadAnimators) {
+          // Resetear temporalmente los spans para que hereden los valores del padre
+          for (const span of this.charSpans) {
+            span.style.fontVariationSettings = '';
+          }
+        }
+        
         this.styleApplier.applyAxisValues(this.element, finalAxes);
         this._currentAxes = finalAxes;
         
-        // Verificación final: medir el ancho real del DOM después de aplicar estilos
-        // Esto compensa diferencias entre medición (texto continuo) y renderizado (spans separados)
-        // Forzar reflow y medir el ancho real sumando todos los spans
+        // Forzar reflow para asegurar que los estilos se apliquen
         void this.element.offsetWidth;
         
+        // Verificación final: medir el ancho real del DOM después de aplicar estilos
+        // Esto compensa diferencias entre medición (texto continuo) y renderizado (spans separados)
         // Calcular el ancho real del texto sumando el ancho de todos los spans
         // Redondear a enteros para evitar problemas de precisión con flotantes
         let actualTextWidth = 0;
@@ -420,13 +438,15 @@ export default class FitText {
         actualTextWidth = Math.floor(actualTextWidth);
         
         // Si aún desborda en el DOM real, reducir width progresivamente hasta que quepa
-        // Usar 95% del contenedor como margen de seguridad - cálculos con enteros
-        const safetyMargin = Math.floor(containerWidth * 0.95);
+        // Usar 98% del contenedor como margen de seguridad (más conservador que 95%)
+        const safetyMargin = Math.floor(containerWidth * 0.98);
         let finalOptimalWidth = optimalWidth;
         let safetyIterations = 0;
         
-        while (actualTextWidth > safetyMargin && finalOptimalWidth > this.calculator.axisRanges.wdth.min && safetyIterations < 20) {
-          finalOptimalWidth = Math.max(finalOptimalWidth - 1, this.calculator.axisRanges.wdth.min);
+        // Solo ajustar si realmente hay desbordamiento significativo
+        // Reducir el número máximo de iteraciones para evitar ajustes excesivos
+        while (actualTextWidth > safetyMargin && finalOptimalWidth > this.calculator.axisRanges.wdth.min && safetyIterations < 5) {
+          finalOptimalWidth = Math.max(finalOptimalWidth - 3, this.calculator.axisRanges.wdth.min);
           const adjustedAxes = { ...finalAxes, wdth: finalOptimalWidth };
           this.styleApplier.applyAxisValues(this.element, adjustedAxes);
           this._currentAxes = adjustedAxes;
@@ -444,6 +464,14 @@ export default class FitText {
           }
           
           safetyIterations++;
+        }
+        
+        // Si se ajustaron los valores o si había animadores, reinicializar animadores
+        if (hadAnimators) {
+          const baseAxes = this.getBaseAxesForCharacters();
+          for (const anim of this._characterAnimators) {
+            anim.setBaseAxes(baseAxes);
+          }
         }
         }
 

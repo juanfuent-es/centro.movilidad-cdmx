@@ -38,7 +38,7 @@
     margin: .5em auto;
     text-align: center;
     text-wrap-style: balance;
-    max-width: 60ch;
+    width: 100%;
 }
 #intro header p:nth-child(2) {
     font-size: 10vw;
