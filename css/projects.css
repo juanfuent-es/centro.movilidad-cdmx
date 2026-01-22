@@ -145,15 +145,18 @@
     color: #cf4a29;
     background: #eeeed8;
 }
+#andanza img {
+    filter: contrast(1.2) brightness(.8);
+}
+
 #que-hay-detras-del-pasaje {
     background-color: #000;
     color: #f9ed53;
 }
 #que-hay-detras-del-pasaje .var-text:nth-child(1) {
-    /* transform: translateX(-.2em); */
+    padding-right: .4em;
 }
 #que-hay-detras-del-pasaje .var-text:nth-child(2) {
-    /* transform: translateX(.2em); */
     padding-left: .4em;
 }
 #que-hay-detras-del-pasaje video {
@@ -216,6 +219,14 @@
 #desgaste {
     background-color: #5B4732;
 }
+#desgaste img {
+    filter: contrast(1) brightness(.9);
+    opacity: .5;
+}
 #moviliencia {
     background-color: var(--color-black);
+}
+#moviliencia img {
+    filter: contrast(1) brightness(.9);
+    opacity: .5;
 }
