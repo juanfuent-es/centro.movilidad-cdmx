@@ -54,7 +54,7 @@ export default class FitText {
     this._characterAnimConfig = options.characterAnimConfig || {
       radius: 240,
       lerp: 0.18,
-      influence: { wght: 200, GRAD: 35, slnt: -10, ROND: 45 },
+      influence: { wght: 100, GRAD: 35, slnt: 0, ROND: 45 },
       opacity: { min: 0.65, max: 1 },
     };
     this._isCalculating = false; // Flag para deshabilitar motion durante cálculos
@@ -130,14 +130,36 @@ export default class FitText {
     }
 
     const baseAxes = this.getBaseAxesForCharacters();
-    // Obtener rangos de ejes del calculator para interpolación completa
-    // slnt invertido: punto de partida 0, al acercarse cursor va a -10
+    // Configuración de rangos de animación:
+    // - slnt: Normal en 0, decrementa a -10 cuando el mouse se acerca (invertido)
+    // - wght: Valor base desde data-relevance, decrementa cuando el mouse se acerca (invertido)
+    // - GRAD y ROND: Aumentan cuando el mouse se acerca, usando límites completos del calculator (normal)
+    // - wdth: Se respeta el valor calculado (no se anima)
     const slntRange = this.calculator.axisRanges.slnt;
+    const gradRange = this.calculator.axisRanges.GRAD;
+    const rondRange = this.calculator.axisRanges.ROND;
+    const wghtBase = baseAxes.wght || 400;
+    
+    // Calcular mínimo de wght: reducir desde el valor base, pero nunca menor que el mínimo absoluto del eje
+    // Para wght: reducir hasta 300 unidades desde el base, pero mínimo 200 (o el mínimo del eje si el base es muy bajo)
+    const wghtReduction = 300;
+    const wghtMinAbsolute = this.calculator.axisRanges.wght.min;
+    const wghtMin = Math.max(wghtMinAbsolute, Math.min(200, wghtBase - wghtReduction));
+    
     const axisRanges = {
-      wght: { min: 500, max: 1000, default: 500 },
-      GRAD: this.calculator.axisRanges.GRAD,
-      slnt: { min: slntRange.max, max: slntRange.min }, // Invertido para animación
-      ROND: this.calculator.axisRanges.ROND,
+      // wght: INVERTIDO - máximo es el valor base (desde data-relevance), mínimo es reducido
+      // Mouse lejos = valor base, mouse cerca = valor reducido
+      wght: { min: wghtMin, max: wghtBase },
+      // GRAD: NORMAL - usa límites completos del calculator (min=0, max=100)
+      // Mouse lejos = 0, mouse cerca = 100
+      GRAD: { min: gradRange.min, max: gradRange.max },
+      // slnt: INVERTIDO - normal en 0, decrementa a -10 cuando el mouse se acerca
+      // Mouse lejos = 0, mouse cerca = -10
+      // El rango debe ser { min: -10, max: 0 } para que la fórmula invertida funcione correctamente
+      slnt: { min: slntRange.min, max: slntRange.max },
+      // ROND: NORMAL - usa límites completos del calculator (min=0, max=100)
+      // Mouse lejos = 0, mouse cerca = 100
+      ROND: { min: rondRange.min, max: rondRange.max },
     };
     
     const config = {
@@ -152,14 +174,19 @@ export default class FitText {
 
   /**
    * Ejes base para caracteres:
-   * - wdth se mantiene fijo (define ancho)
-   * - el resto sale del estado actual de FitText (si existe), o defaults razonables
+   * - wght se calcula desde data-relevance usando calculateWeight
+   * - wdth se mantiene fijo (define ancho, viene del estado actual)
+   * - GRAD, slnt, ROND: valores del estado actual o defaults
    */
   getBaseAxesForCharacters() {
-    const fallback = { wght: 400, GRAD: 0, wdth: 100, slnt: 0, ROND: 0 };
+    // Calcular wght desde relevance (igual que en fit())
+    const weight = this.calculator.calculateWeight(this.relevance);
+    const grade = this.calculator.calculateGrade(this.relevance);
+    
+    const fallback = { GRAD: 0, wdth: 100, slnt: 0, ROND: 0 };
     return {
-      wght: this._currentAxes.wght ?? fallback.wght,
-      GRAD: this._currentAxes.GRAD ?? fallback.GRAD,
+      wght: this._currentAxes.wght ?? weight,
+      GRAD: this._currentAxes.GRAD ?? grade ?? fallback.GRAD,
       wdth: this._currentAxes.wdth ?? fallback.wdth,
       slnt: this._currentAxes.slnt ?? fallback.slnt,
       ROND: this._currentAxes.ROND ?? fallback.ROND,
