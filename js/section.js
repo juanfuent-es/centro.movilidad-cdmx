@@ -34,6 +34,8 @@ export default class Section {
     this.setupVideo()
     // Configurar ScrollTrigger para video y control de activación
     this.initScrollTrigger()
+    // Configurar activación de sección (siempre, incluso sin video)
+    this.setupSectionActivation()
   }
 
   setupVideo() {
@@ -74,7 +76,6 @@ export default class Section {
     if (!this.figure) {
       return
     }
-    this.setupSectionActivation()
     
     const getRatio = (el) => window.innerHeight / (window.innerHeight + el.offsetHeight)
     const maxOffset = window.innerHeight * 0.3
@@ -86,7 +87,7 @@ export default class Section {
       brightness: 1
     }
 
-    // Configurar animación del video
+    // Configurar animación del video (sin callbacks de activación, ya se manejan en setupSectionActivation)
     const scrollTriggerConfig = {
       trigger: this.element,
       start: () => this.index ? 'top bottom' : 'top top',
@@ -102,10 +103,6 @@ export default class Section {
           scaleY: obj.scale
         })
       },
-      onEnter: () => this.activate(),
-      onLeave: () => this.deactivate(),
-      onEnterBack: () => this.activate(),
-      onLeaveBack: () => this.deactivate(),
       invalidateOnRefresh: true
     }
 
@@ -126,10 +123,16 @@ export default class Section {
   }
 
   /**
-   * Configura la activación de la sección cuando no hay video
-   * Solo controla el RAF para animaciones de títulos
+   * Configura la activación de la sección
+   * Controla el RAF para animaciones de títulos y play/pause de video
+   * Se llama siempre, incluso si no hay video
    */
   setupSectionActivation() {
+    // Si ya existe un ScrollTrigger de activación, no crear otro
+    if (this.scrollTriggerInstance) {
+      return
+    }
+    
     this.scrollTriggerInstance = ScrollTrigger.create({
       trigger: this.element,
       start: 'top center',
@@ -138,6 +141,31 @@ export default class Section {
       onLeave: () => this.deactivate(),
       onEnterBack: () => this.activate(),
       onLeaveBack: () => this.deactivate()
+    })
+    
+    // Verificar si la sección ya está en el viewport al inicializar
+    // Usar múltiples requestAnimationFrame para asegurar que ScrollTrigger esté completamente inicializado
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        // Para la primera sección (index 0), siempre activar al cargar
+        // ya que está en la parte superior de la página
+        if (this.index === 0) {
+          this.activate()
+          return
+        }
+        
+        // Para otras secciones, verificar si están visibles en el viewport
+        const rect = this.element.getBoundingClientRect()
+        const viewportHeight = window.innerHeight
+        const viewportCenter = viewportHeight * 0.5
+        const elementTop = rect.top
+        const elementBottom = rect.bottom
+        
+        // Activar si el centro del viewport está dentro del elemento
+        if (elementTop < viewportCenter && elementBottom > viewportCenter) {
+          this.activate()
+        }
+      })
     })
   }
 
@@ -150,7 +178,9 @@ export default class Section {
     if (this.isActive) return
     
     this.isActive = true
-    this.figure.classList.add('active')
+    if (this.figure) {
+      this.figure.classList.add('active')
+    }
     // Reproducir video
     if (this.video) {
       this.video.play().catch(err => {
@@ -173,7 +203,9 @@ export default class Section {
     if (!this.isActive) return
     
     this.isActive = false
-    this.figure.classList.remove('active')
+    if (this.figure) {
+      this.figure.classList.remove('active')
+    }
     // Pausar video
     if (this.video) {
       this.video.pause()
@@ -192,11 +224,7 @@ export default class Section {
     this.deactivate()
 
     // Destruir instancias de FitText
-    this.fitTextInstances.forEach((ft) => {
-      if (typeof ft.destroy === 'function') {
-        ft.destroy()
-      }
-    })
+    this.fitTextInstances.forEach((ft) => ft.destroy())
     this.fitTextInstances = []
 
     // Destruir AnimationController

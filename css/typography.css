@@ -89,9 +89,9 @@ h1, h2, h3 {
 
 h1 {
     font-size: 20vw;
-    --font-variation-wght: 500;
-    --font-variation-GRAD: 50;
-    --font-variation-wdth: 50;
+    --font-variation-wght: 550;
+    --font-variation-GRAD: 55;
+    --font-variation-wdth: 35;
     --font-variation-slnt: 0;
     --font-variation-ROND: 0;
 }
@@ -106,7 +106,7 @@ h2 {
     --font-variation-wdth: 50;
     --font-variation-slnt: 0;
     --font-variation-ROND: 0;
-    font-size: clamp(36px, 12em, 14vw);
+    font-size: 14vw;
 }
 
 h3 {
