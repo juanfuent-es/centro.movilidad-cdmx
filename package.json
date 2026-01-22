@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "fontkit": "^2.0.4"
+  }
+}
