@@ -1,19 +1,21 @@
-import FitText from "./FitText.js";
-import AnimationController from "./AnimationController.js";
-import MotionScroll from "./scroll.js";
+import Section from "./section.js";
+import ScrollTrigger from 'https://cdn.jsdelivr.net/npm/gsap@3.14.2/ScrollTrigger.min.js'
 
-// Inicializar FitText en todos los elementos con clase .var-text
-const textNodes = document.querySelectorAll(".var-text");
-const fitTextInstances = [];
+// Inicializar cada sección del proyecto
+// Cada sección maneja sus propios títulos, video y animaciones
+const sections = document.querySelectorAll(".project");
+const sectionInstances = [];
 
-textNodes.forEach((node) => {
-  const instance = new FitText(node);
-  instance.fit();
-  fitTextInstances.push(instance);
+sections.forEach((section, index) => {
+  const instance = new Section(section, index);
+  sectionInstances.push(instance);
 });
 
-// Un solo RAF para todas las instancias: llama fitText.update({ pointer }) en cascada
-const animationController = new AnimationController();
-fitTextInstances.forEach((ft) => animationController.register(ft));
-
-const motionScroll = new MotionScroll();
+// Refrescar ScrollTrigger después de inicializar todas las secciones
+// Esto asegura que los triggers se evalúen correctamente y las secciones visibles se activen
+// Usar múltiples requestAnimationFrame para asegurar que todo esté completamente inicializado
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    ScrollTrigger.refresh()
+  })
+});
