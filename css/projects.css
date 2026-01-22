@@ -3,22 +3,28 @@
     height: 100vh;
     min-height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    align-content: center;
     flex-direction: column;
-    position: relative;
     overflow: hidden;
     /* Scroll snap: alinear al top del elemento */
     scroll-snap-align: start;
     scroll-snap-stop: always;
     scroll-margin-top: 0;
+    padding: 1em;
+    position: relative;
+    z-index: 0;
+}
+
+.project p {
+    margin: 0;
+    margin-bottom: 1em;
 }
 
 #intro {
-    background-color: var(--bg);
+    background-color: var(--h3);
     text-align: center;
-    /* color: var(--h1); */
+    color: var(--p);
 }
 #intro header p {
     opacity: .5;
@@ -35,28 +41,20 @@
     max-width: 60ch;
 }
 #intro header p:nth-child(2) {
-    font-size: 6vw;
-    margin: .2em 0;
-    /* color: var(--h2); */
+    font-size: 10vw;
+    margin: .1em 0;
 }
 #intro header p:nth-child(3) {
     font-size: 4vw;
     /* color: var(--h3); */
     margin: .1em 0;
 }
-#intro header p:nth-child(4) {
-    font-size: 3vw;
-    /* color: var(--h2); */
-    opacity: .6;
-    margin: .35em 0;
+#intro .description {
+    margin: 2em 0;
 }
-#intro header p:nth-child(5) {
-    font-size: 2vw;
-    /* color: var(--h1); */
-    opacity: .5;
-    margin-top: .2em;
+#intro .description p {
+    margin-bottom: 0;
 }
-
 :root {
     --bg: #0B0D10;
     --h1: #39FF14;
@@ -75,18 +73,27 @@
 
 .project article {
     padding: 1em;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     position: relative;
     z-index: 1;
     text-align: center;
-    max-width: 840px;
 }
-.authors {
-    font-size: 3vw;
+.project .authors {
+    font-size: 3.5vw;
     width: 100%;
     text-align: center;
     text-transform: uppercase;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    font-style: normal;
+}
+.authors a {
+    display: flex;
+    width: 50%;
+    margin: .5em 0;
 }
 .project header {
     width: 100%;
@@ -118,6 +125,7 @@
     top: 0;
     opacity: .6;
     filter: contrast(1.4) brightness(.6);
+    z-index: -1;
 }
 
 .title-container {
@@ -142,10 +150,14 @@
     color: #f9ed53;
 }
 #que-hay-detras-del-pasaje .var-text:nth-child(1) {
-    transform: translateX(-.2em);
+    /* transform: translateX(-.2em); */
 }
 #que-hay-detras-del-pasaje .var-text:nth-child(2) {
-    transform: translateX(.2em);
+    /* transform: translateX(.2em); */
+    padding-left: .4em;
+}
+#que-hay-detras-del-pasaje video {
+    filter: contrast(1.2) brightness(.8);
 }
 
 #eje-central {

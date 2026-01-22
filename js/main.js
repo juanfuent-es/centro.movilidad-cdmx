@@ -1,19 +1,11 @@
-import FitText from "./FitText.js";
-import AnimationController from "./AnimationController.js";
-import MotionScroll from "./scroll.js";
+import Section from "./section.js";
 
-// Inicializar FitText en todos los elementos con clase .var-text
-const textNodes = document.querySelectorAll(".var-text");
-const fitTextInstances = [];
+// Inicializar cada sección del proyecto
+// Cada sección maneja sus propios títulos, video y animaciones
+const sections = document.querySelectorAll(".project");
+const sectionInstances = [];
 
-textNodes.forEach((node) => {
-  const instance = new FitText(node);
-  instance.fit();
-  fitTextInstances.push(instance);
+sections.forEach((section, index) => {
+  const instance = new Section(section, index);
+  sectionInstances.push(instance);
 });
-
-// Un solo RAF para todas las instancias: llama fitText.update({ pointer }) en cascada
-const animationController = new AnimationController();
-fitTextInstances.forEach((ft) => animationController.register(ft));
-
-const motionScroll = new MotionScroll();

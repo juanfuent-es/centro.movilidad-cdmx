@@ -78,17 +78,17 @@ body {
 /* ============================================
    TÍTULOS Y ENCABEZADOS
    ============================================ */
-h1, h2, h3, h4 {
+h1, h2, h3 {
     font-family: var(--font-base);
     text-transform: uppercase;
     line-height: 1em;
     margin: 0;
     padding: 0;
-    text-wrap-style: balance;
+    width: 100%;
 }
 
 h1 {
-    font-size: clamp(36px, 8em, 14vw);
+    font-size: 20vw;
     --font-variation-wght: 500;
     --font-variation-GRAD: 50;
     --font-variation-wdth: 50;
@@ -106,7 +106,7 @@ h2 {
     --font-variation-wdth: 50;
     --font-variation-slnt: 0;
     --font-variation-ROND: 0;
-    font-size: clamp(36px, 8em, 10vw);
+    font-size: clamp(36px, 12em, 14vw);
 }
 
 h3 {
