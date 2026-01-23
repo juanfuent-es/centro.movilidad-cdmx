@@ -3,6 +3,7 @@
  * Anima ejes variables por carácter según cercanía del cursor.
  * No modifica wdth para no alterar el ancho total calculado por FitText.
  * Interpola entre valores mínimos y máximos de cada eje según cercanía.
+ * Interpola entre colores según cercanía del cursor.
  */
 export default class CharacterAnimator {
   constructor(span, baseAxes, config = {}) {
@@ -36,7 +37,19 @@ export default class CharacterAnimator {
       wdth: baseAxes.wdth ?? 100,
     };
     this.target = { ...this.current };
-    this.opacity = config.opacity?.max ?? 1;
+    
+    // Configuración de colores
+    // Obtener el elemento padre (el elemento .var-text)
+    const parentElement = span.parentElement;
+    // Obtener el color por defecto del CSS
+    const defaultColor = this.getComputedColor(parentElement);
+    // Obtener el color hover desde data-hover o usar blanco por defecto
+    const hoverColor = parentElement?.dataset.hover || '#ffffff';
+    
+    // Convertir colores a RGB para interpolación
+    this.baseColor = this.parseColor(defaultColor);
+    this.hoverColor = this.parseColor(hoverColor);
+    this.currentColor = { ...this.baseColor };
     
     // Aplicar valores iniciales inmediatamente para evitar saltos
     // Esto asegura que los spans tengan los mismos valores que el elemento padre
@@ -44,11 +57,68 @@ export default class CharacterAnimator {
 
     this.radius = config.radius ?? 220;
     this.lerp = config.lerp ?? 0.1;
+  }
+  
+  /**
+   * Obtiene el color computado del elemento
+   */
+  getComputedColor(element) {
+    if (!element) return '#ffffff';
+    const computed = window.getComputedStyle(element);
+    return computed.color || '#ffffff';
+  }
+  
+  /**
+   * Parsea un color en cualquier formato (hex, rgb, rgba, nombre) a RGB
+   */
+  parseColor(color) {
+    if (!color) return { r: 255, g: 255, b: 255 };
     
-    this.opacityRange = {
-      min: config.opacity?.min ?? 0.5,
-      max: config.opacity?.max ?? 1,
+    // Si es un nombre de color, usar un canvas temporal para obtener RGB
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.fillStyle = color;
+    const hex = ctx.fillStyle;
+    
+    // Convertir hex a RGB
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (result) {
+      return {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      };
+    }
+    
+    // Si es rgb/rgba, extraer valores
+    const rgbMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (rgbMatch) {
+      return {
+        r: parseInt(rgbMatch[1], 10),
+        g: parseInt(rgbMatch[2], 10),
+        b: parseInt(rgbMatch[3], 10),
+      };
+    }
+    
+    // Fallback a blanco
+    return { r: 255, g: 255, b: 255 };
+  }
+  
+  /**
+   * Interpola entre dos colores RGB
+   */
+  interpolateColor(color1, color2, t) {
+    return {
+      r: Math.round(color1.r + (color2.r - color1.r) * t),
+      g: Math.round(color1.g + (color2.g - color1.g) * t),
+      b: Math.round(color1.b + (color2.b - color1.b) * t),
     };
+  }
+  
+  /**
+   * Convierte RGB a string CSS
+   */
+  rgbToString(rgb) {
+    return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
   }
 
   /**
@@ -100,10 +170,8 @@ export default class CharacterAnimator {
       wdth: this.base.wdth, // no se anima
     };
 
-    // Opacidad invertida: más lejano = más opaco, más cercano = más transparente
-    const tOpacity =
-      this.opacityRange.max -
-      (this.opacityRange.max - this.opacityRange.min) * influence;
+    // Interpolación de color: más lejano = color base, más cercano = color hover
+    const targetColor = this.interpolateColor(this.baseColor, this.hoverColor, influence);
 
     // Interpolación suave
     this.current.wght += (this.target.wght - this.current.wght) * this.lerp;
@@ -111,8 +179,11 @@ export default class CharacterAnimator {
     this.current.slnt += (this.target.slnt - this.current.slnt) * this.lerp;
     this.current.ROND += (this.target.ROND - this.current.ROND) * this.lerp;
     this.current.wdth = this.target.wdth;
-
-    this.opacity += (tOpacity - this.opacity) * this.lerp;
+    
+    // Interpolación suave del color
+    this.currentColor.r += (targetColor.r - this.currentColor.r) * this.lerp;
+    this.currentColor.g += (targetColor.g - this.currentColor.g) * this.lerp;
+    this.currentColor.b += (targetColor.b - this.currentColor.b) * this.lerp;
 
     this.apply();
   }
@@ -125,7 +196,8 @@ export default class CharacterAnimator {
     )}, "slnt" ${Math.round(this.current.slnt)}, "ROND" ${Math.round(
       this.current.ROND,
     )}`;
-    this.span.style.opacity = this.opacity.toFixed(3);
+    // Aplicar color interpolado
+    this.span.style.color = this.rgbToString(this.currentColor);
   }
 
   /**
@@ -146,6 +218,16 @@ export default class CharacterAnimator {
     this.current.slnt = 0;
     this.current.ROND = 0;
     this.target = { ...this.current };
+    
+    // Actualizar color base si el elemento padre cambió
+    const parentElement = this.span.parentElement;
+    if (parentElement) {
+      const newBaseColor = this.getComputedColor(parentElement);
+      this.baseColor = this.parseColor(newBaseColor);
+      // Resetear color actual al base (cuando no hay influencia del mouse)
+      this.currentColor = { ...this.baseColor };
+    }
+    
     // Aplicar inmediatamente para evitar saltos
     this.apply();
   }

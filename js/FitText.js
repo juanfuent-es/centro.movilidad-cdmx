@@ -52,7 +52,7 @@ export default class FitText {
     this._originalText = null; // Guardar texto original para mediciones consistentes
     this._characterAnimators = [];
     this._characterAnimConfig = options.characterAnimConfig || {
-      radius: 240,
+      radius: 500,
       lerp: 0.18,
       influence: { wght: 100, GRAD: 35, slnt: 0, ROND: 45 },
       opacity: { min: 0.65, max: 1 },
@@ -111,6 +111,7 @@ export default class FitText {
       const char = this._originalText[i];
       const span = document.createElement("span");
       span.textContent = char;
+      span.dataset.char = char;
       this.element.appendChild(span);
       this.charSpans.push(span);
     }

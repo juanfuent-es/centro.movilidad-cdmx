@@ -19,6 +19,7 @@
 .project p {
     margin: 0;
     margin-bottom: 1em;
+    --over-color: #000;
 }
 
 #intro {
@@ -94,7 +95,25 @@
     display: flex;
     width: 50%;
     margin: .5em 0;
+    transition: color 250ms ease;
 }
+.authors a span {
+    position: relative;
+    z-index: 0;
+}
+.authors a span:before {
+    content: attr(data-char);
+    position: absolute;
+    -webkit-text-stroke: 1px transparent;
+    z-index: -1;
+}
+.authors a:hover {
+    color: var(--over-color);
+}
+.authors a:hover span:before {
+    -webkit-text-stroke: 2px #FFF;
+}
+
 .project header {
     width: 100%;
     text-align: center;
@@ -161,6 +180,7 @@ figure.active video {
 #andanza {
     color: #eeeed8;
     background: #cf4a29;
+    --over-color: #cf4a29;
 }
 
 #andanza img {
@@ -170,6 +190,7 @@ figure.active video {
 #que-hay-detras-del-pasaje {
     background-color: #000;
     color: #f9ed53;
+    --over-color: #FFF;
 }
 #que-hay-detras-del-pasaje .var-text:nth-child(1) {
     padding-right: .4em;
@@ -183,6 +204,7 @@ figure.active video {
 
 #eje-central {
     background-color: #000;
+    --over-color: #000;
 }
 #eje-central video {
     filter: contrast(1.2) brightness(1.2);
@@ -191,13 +213,15 @@ figure.active video {
 
 #rastros-de-jamaica {
     background-color: #000000;
-    color: #ec4342;
+    /* color: #ec4342; */
+    --over-color: #ec4342;
 }
 #rastros-de-jamaica video {
     filter: contrast(1.2) brightness(.8);
 }
 #linea-35 {
     background-color: #000;
+    --over-color: #000000;
 }
 #linea-35 video {
     filter: contrast(1.4) brightness(.4);
@@ -205,6 +229,7 @@ figure.active video {
 }
 #estruendo-masculino {
     background-color: #000;
+    --over-color: #000;
 }
 #estruendo-masculino video {
     filter: contrast(1.2) brightness(.8);
@@ -213,6 +238,7 @@ figure.active video {
 #ecos-del-anden {
     background-color: #000;
     color: var(--color-orange);
+    --over-color: #FFF;
 }
 #ecos-del-anden video {
     filter: contrast(1) brightness(1);
@@ -220,6 +246,7 @@ figure.active video {
 }
 #pasos-que-no-se-ven {
     background-color: #000;
+    --over-color: #000;
 }
 #pasos-que-no-se-ven video {
     filter: contrast(1.4) brightness(1);
@@ -229,6 +256,7 @@ figure.active video {
 #embotellados {
     background-color: #000;
     color: #daa800;
+    --over-color: #FFF;
 }
 #embotellados video {
     filter: contrast(1) brightness(.9);
@@ -236,6 +264,7 @@ figure.active video {
 }
 #desgaste {
     background-color: #5B4732;
+    --over-color: #5B4732;
 }
 #desgaste img {
     filter: contrast(1) brightness(.9);
@@ -243,6 +272,7 @@ figure.active video {
 }
 #moviliencia {
     background-color: var(--color-black);
+    --over-color: var(--color-black);
 }
 #moviliencia img {
     filter: contrast(1.2) brightness(.8);
