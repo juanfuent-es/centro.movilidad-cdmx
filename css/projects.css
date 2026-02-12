@@ -3,7 +3,7 @@
     height: 100vh;
     min-height: 100vh;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     overflow: hidden;
@@ -123,6 +123,9 @@
     align-items: center;
     align-content: center;
     justify-content: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    color: #f1ce00;
 }
 
 .project header p {

@@ -5,6 +5,7 @@ header#main-header {
 	z-index: 1;
 	position: absolute;
 	width: calc(100% - var(--scroll-size));
+	display: none;
 }
 
 header#main-header nav {

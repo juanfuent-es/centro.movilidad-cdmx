@@ -59,4 +59,6 @@ main {
   shape-rendering: optimizespeed;
   text-rendering: optimizeSpeed;
   text-align: center;
+  color: #ecce00;
+  text-shadow: -0.025em 0.025em #dc4808;
 }
