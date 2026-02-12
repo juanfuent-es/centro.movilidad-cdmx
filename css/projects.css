@@ -1,6 +1,8 @@
 .project-container {
     width: 100%;
-    height: 80vh;
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 .project-container article {
     height: 100%;
